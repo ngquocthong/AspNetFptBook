@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BusinessObjects.Migrations
 {
-    public partial class FPTBook : Migration
+    public partial class mi : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,6 +72,29 @@ namespace BusinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    book_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    book_author = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    book_price = table.Column<double>(type: "float", nullable: false),
+                    quantity = table.Column<int>(type: "int", nullable: false),
+                    cate_id = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Books_Categories_cate_id",
+                        column: x => x.cate_id,
+                        principalTable: "Categories",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Carts",
                 columns: table => new
                 {
@@ -116,36 +139,6 @@ namespace BusinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Books",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    book_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    book_author = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    book_price = table.Column<double>(type: "float", nullable: false),
-                    quantity = table.Column<int>(type: "int", nullable: false),
-                    cate_id = table.Column<int>(type: "int", nullable: false),
-                    owner_id = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Books", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Books_Categories_cate_id",
-                        column: x => x.cate_id,
-                        principalTable: "Categories",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Books_StoreOwners_owner_id",
-                        column: x => x.owner_id,
-                        principalTable: "StoreOwners",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OrderDetails",
                 columns: table => new
                 {
@@ -169,15 +162,32 @@ namespace BusinessObjects.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "ID", "cate_des", "cate_name" },
+                values: new object[] { 1, "Related to unrealistic storey", "Fiction" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "ID", "cate_des", "cate_name" },
+                values: new object[] { 2, "Related to financial", "Finance" });
+
+            migrationBuilder.InsertData(
+                table: "Books",
+                columns: new[] { "ID", "book_author", "book_name", "book_price", "cate_id", "quantity" },
+                values: new object[,]
+                {
+                    { 1, "F. Scott Fitzgerald", "The Great Gatsby", 10.99, 1, 50 },
+                    { 2, "Harper Lee", "To Kill a Mockingbird", 8.9900000000000002, 1, 30 },
+                    { 3, "Paulo Coelho", "The Alchemist", 12.99, 1, 20 },
+                    { 4, "Robert Kiyosaki", "Rich Dad Poor Dad", 15.99, 2, 40 },
+                    { 5, "Benjamin Graham", "The Intelligent Investor", 20.989999999999998, 2, 10 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Books_cate_id",
                 table: "Books",
                 column: "cate_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_owner_id",
-                table: "Books",
-                column: "owner_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_cus_id",
@@ -208,6 +218,9 @@ namespace BusinessObjects.Migrations
                 name: "OrderDetails");
 
             migrationBuilder.DropTable(
+                name: "StoreOwners");
+
+            migrationBuilder.DropTable(
                 name: "Books");
 
             migrationBuilder.DropTable(
@@ -215,9 +228,6 @@ namespace BusinessObjects.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "StoreOwners");
 
             migrationBuilder.DropTable(
                 name: "Customers");

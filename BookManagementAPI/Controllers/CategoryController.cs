@@ -1,5 +1,6 @@
 ﻿using BusinessObjects;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -18,7 +19,7 @@ namespace BookManagementAPI.Controllers
 
         // GET api/<CategoryController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string GetCateByID(int id)
         {
             return "value";
         }
