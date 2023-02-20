@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using WebClient.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,12 +30,21 @@ else
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
+
 
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "customer",
+      pattern: "{Customer:exists}/{controller=Book}/{action=Index}/{id?}"
+    );
+});
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
