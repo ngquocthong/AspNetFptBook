@@ -19,10 +19,10 @@ namespace BusinessObjects
         public int quantity { get; set; }
         public int cate_id { get; set; }
         [ForeignKey("cate_id")]
-        public virtual Category Category { get; set; }
+        public virtual Category? Category { get; set; }
 
-        public int owner_id { get; set; }
+/*        public int owner_id { get; set; }
         [ForeignKey("owner_id")]
-        public virtual StoreOwner StoreOwner { get; set; }
+        public virtual StoreOwner? StoreOwner { get; set; }*/
     }
 }

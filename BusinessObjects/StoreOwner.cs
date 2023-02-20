@@ -17,7 +17,7 @@ namespace BusinessObjects
         public string own_pass { get; set; }
         public string own_name { get; set; }
         public string store_name { get; set; }
-        public virtual ICollection<Book> Books { get; set; }
+//        public virtual ICollection<Book>? Books { get; set; }
 
     }
 }

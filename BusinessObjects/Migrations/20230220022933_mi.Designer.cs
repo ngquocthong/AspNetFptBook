@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230219081238_mi")]
+    [Migration("20230220022933_mi")]
     partial class mi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,9 +66,6 @@ namespace BusinessObjects.Migrations
                     b.Property<int>("cate_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("owner_id")
-                        .HasColumnType("int");
-
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
@@ -76,9 +73,54 @@ namespace BusinessObjects.Migrations
 
                     b.HasIndex("cate_id");
 
-                    b.HasIndex("owner_id");
-
                     b.ToTable("Books");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            book_author = "F. Scott Fitzgerald",
+                            book_name = "The Great Gatsby",
+                            book_price = 10.99,
+                            cate_id = 1,
+                            quantity = 50
+                        },
+                        new
+                        {
+                            ID = 2,
+                            book_author = "Harper Lee",
+                            book_name = "To Kill a Mockingbird",
+                            book_price = 8.9900000000000002,
+                            cate_id = 1,
+                            quantity = 30
+                        },
+                        new
+                        {
+                            ID = 3,
+                            book_author = "Paulo Coelho",
+                            book_name = "The Alchemist",
+                            book_price = 12.99,
+                            cate_id = 1,
+                            quantity = 20
+                        },
+                        new
+                        {
+                            ID = 4,
+                            book_author = "Robert Kiyosaki",
+                            book_name = "Rich Dad Poor Dad",
+                            book_price = 15.99,
+                            cate_id = 2,
+                            quantity = 40
+                        },
+                        new
+                        {
+                            ID = 5,
+                            book_author = "Benjamin Graham",
+                            book_name = "The Intelligent Investor",
+                            book_price = 20.989999999999998,
+                            cate_id = 2,
+                            quantity = 10
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Cart", b =>
@@ -259,15 +301,7 @@ namespace BusinessObjects.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BusinessObjects.StoreOwner", "StoreOwner")
-                        .WithMany("Books")
-                        .HasForeignKey("owner_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Category");
-
-                    b.Navigation("StoreOwner");
                 });
 
             modelBuilder.Entity("BusinessObjects.Cart", b =>
@@ -323,11 +357,6 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Order", b =>
                 {
                     b.Navigation("OrderDetails");
-                });
-
-            modelBuilder.Entity("BusinessObjects.StoreOwner", b =>
-                {
-                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }
