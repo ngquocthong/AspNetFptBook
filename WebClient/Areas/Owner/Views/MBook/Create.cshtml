@@ -1,0 +1,114 @@
+﻿<div class="container-fluid">
+    <h3 class="text-dark mb-4">Add New Book</h3>
+    <div class="row mb-3">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow mb-3">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Book Information</p>
+                        </div>
+                        <div class="card-body">
+                            <form id="book-form">
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label" for="book_name"><strong>Book Name</strong></label>
+                                        <input class="form-control" type="text" id="book_name" name="book_name" placeholder="Enter book name" required>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label" for="book_author"><strong>Author</strong></label>
+                                        <input class="form-control" type="text" id="book_author" name="book_author" placeholder="Enter author name" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label" for="book_price"><strong>Price</strong></label>
+                                        <input class="form-control" type="number" id="book_price" name="book_price" placeholder="Enter book price" min="0" step="0.01" required>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label" for="quantity"><strong>Quantity</strong></label>
+                                        <input class="form-control" type="number" id="quantity" name="quantity" placeholder="Enter book quantity" min="0" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label" for="cate_id"><strong>Category</strong></label>
+                                        <select class="form-select" id="cate_id" name="cate_id" required>
+                                            <option>Select category</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label"><strong>Picture</strong></label>
+                                        <div class="mb-3">
+                                            <input type="file" name="book_img" accept="image/*" class="form-control">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="mb-3">
+                                    <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col text-center align-self-center"><img /></div>
+    </div>
+    <div class="card shadow mb-5"></div>
+</div>
+<script>
+    const categorySelect = document.querySelector('#cate_id');
+    fetch('https://localhost:7186/api/Category')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.text = category.cate_name;
+                categorySelect.appendChild(option);
+            });
+        });
+    const form = document.getElementById('book-form');
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formDataTmp = new FormData(form);
+        const formData = new FormData();
+        const jsonObject = {};
+        formDataTmp.forEach(function (value, key) {
+            if (key === 'cate_id') {
+                // Replace category value with the selected option value
+                jsonObject[key] = Number(categorySelect.options[categorySelect.selectedIndex].value);
+            }
+            else if (key === 'quantity' || key === 'book_price') {
+                // Parse quantity and price values as numbers
+                jsonObject[key] = Number(value);
+            }
+            else {
+                jsonObject[key] = value;
+            }
+        });
+        jsonObject['book_img'] = "";
+        const fileImage = document.querySelector('input[type=file][name=book_img]').files[0];
+        formData.append('datajson', JSON.stringify(jsonObject));
+        formData.append('fileImage', fileImage);
+        const requestObject = {
+            method: 'POST',
+            body: formData
+        };
+        try {
+            const response = await fetch('https://localhost:7186/api/Book/uploadfile', requestObject);
+            if (!response.ok) {
+                throw new Error('Failed to submit form');
+            }
+            alert('Form submitted successfully');
+        } catch (error) {
+            console.error(error);
+            alert('Failed to submit form');
+        }
+    });
+
+</script>
+
+</script>

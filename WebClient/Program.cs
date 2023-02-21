@@ -48,8 +48,16 @@ app.UseEndpoints(endpoints =>
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
+      name: "owner",
+      pattern: "{Owner:exists}/{controller=Book}/{action=Index}/{id?}"
+    );
+});
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
       name: "admin",
-      pattern: "{Admin:exists}/{controller=MCategory}/{action=Index}/{id?}"
+      pattern: "{Admin:exists}/{controller:exists}/{action=Index}/{id?}"
     );
 });
 app.MapControllerRoute(

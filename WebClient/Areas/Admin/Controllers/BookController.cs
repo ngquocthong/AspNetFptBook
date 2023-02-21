@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebClient.Areas.Customer.Controllers
+namespace WebClient.Areas.Admin.Controllers
 {
-    [Area("Customer")]
-    [Route("Customer/[controller]/[action]")]
+    [Area("Admin")]
+    [Route("admin/[controller]/[action]")]
     public class BookController : Controller
     {
         // GET: BookController
-
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
@@ -21,7 +21,7 @@ namespace WebClient.Areas.Customer.Controllers
         }
 
         // GET: BookController/Create
-        [HttpGet]
+  
         public ActionResult Create()
         {
             return View();

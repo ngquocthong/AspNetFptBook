@@ -21,11 +21,10 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Customer\Data\" />
     <Folder Include="Areas\Customer\Models\" />
-    <Folder Include="Areas\Owner\Controllers\" />
     <Folder Include="Areas\Owner\Data\" />
     <Folder Include="Areas\Owner\Models\" />
-    <Folder Include="Areas\Owner\Views\" />
     <Folder Include="wwwroot\assets\" />
+    <Folder Include="wwwroot\assetsOwner\" />
   </ItemGroup>
 
 </Project>
