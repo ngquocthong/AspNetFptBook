@@ -1,4 +1,6 @@
-﻿<main class="page catalog-page">
+﻿@using BusinessObjects;
+@model IEnumerable<Book>
+<main class="page catalog-page">
     <section class="clean-block clean-catalog dark">
         <div class="container">
             <div class="content">
@@ -55,19 +57,25 @@
                     <div class="col-md-9">
                         <div class="products">
 
+
                             <div class="row g-0" id="containBook">
-                                <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="clean-product-item">
-                                        <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="assets/img/tech/image2.jpg"></a></div>
-                                        <div class="product-name"><a href="#">Lorem ipsum dolor sit amet</a></div>
-                                        <div class="about">
-                                            <div class="rating"><img src="assets/img/star.svg"><img src="assets/img/star.svg"><img src="assets/img/star.svg"><img src="assets/img/star-half-empty.svg"><img src="assets/img/star-empty.svg"></div>
-                                            <div class="price">
-                                                <h3>$100</h3>
+                                @foreach (var book in Model)
+                                {
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <div class="clean-product-item">
+                                            <div class="image"><a href=""><img class="img-fluid d-block mx-auto" src="https://localhost:7186/api/Book/image/@book.ID"></a></div>
+                                            <div class="product-name"><a asp-action ="Details" asp-route-id="@book.ID">@book.book_name</a>
+
+                                    </div>
+                                            <div class="about">
+                                                <div class="rating"><img src="assets/img/star.svg"><img src="assets/img/star.svg"><img src="assets/img/star.svg"><img src="assets/img/star-half-empty.svg"><img src="assets/img/star-empty.svg"></div>
+                                                <div class="price">
+                                                    <h3>@book.book_price</h3>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             </div>
                             <nav>
                                 <ul class="pagination">
@@ -87,7 +95,7 @@
 </main>
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@*<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var productsContainer = $("#containBook");
@@ -101,7 +109,9 @@
                             <div class="col-12 col-md-6 col-lg-4">
                                 <div class="clean-product-item">
                                             <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src='https://localhost:7186/api/Book/image/${product.id}'"></a></div>
-                                    <div class="product-name"><a href="#">${product.book_name}</a></div>
+                                        <div class="product-name">
+                                            <a asp-controller="Book" asp-action="Details" asp-route-id="${product.id}">Details</a>
+                                                    ${product.book_name}</a></div>
                                     <div class="about">
                                         <div class="rating"><img src="assets/img/star.svg"><img src="assets/img/star.svg"><img src="assets/img/star.svg"><img src="assets/img/star-half-empty.svg"><img src="assets/img/star-empty.svg"></div>
                                         <div class="price">
@@ -122,3 +132,4 @@
     });
 </script>
 
+*@
