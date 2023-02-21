@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebClient.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("admin/[controller]/[action]")]
     public class BookController : Controller
     {
         // GET: BookController
