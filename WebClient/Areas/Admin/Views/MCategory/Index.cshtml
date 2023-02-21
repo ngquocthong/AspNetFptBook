@@ -43,7 +43,7 @@
 		$("table").on("click", "img.delete", function () {
 			var productId = $(this).parents("tr").find("td:nth-child(1)").text();
 			$.ajax({
-				url: "https://localhost:7186/api/Category/" + productId,
+				url: "https://localhost:7186/api/Book/" + productId,
 				type: "delete",
 				contentType: "application/json",
 				dataType: "json",

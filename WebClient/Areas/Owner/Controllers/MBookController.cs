@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebClient.Areas.Customer.Controllers
 {
-    [Area("Customer")]
-    [Route("Customer/[controller]/[action]")]
-    public class BookController : Controller
+    [Area("Owner")]
+    [Route("Owner/[controller]/[action]")]
+    public class MBookController : Controller
     {
         // GET: BookController
 
