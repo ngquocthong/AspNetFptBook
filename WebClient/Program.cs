@@ -41,29 +41,10 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
-      name: "customer",
-      pattern: "{Customer:exists}/{controller=Book}/{action=Index}/{id?}"
-    );
+        name: "areas",
+        pattern: "{area=Customer}/{controller=Book}/{action=Index}/{id?}");
+    endpoints.MapRazorPages();
 });
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-      name: "owner",
-      pattern: "{Owner:exists}/{controller=Book}/{action=Index}/{id?}"
-    );
-});
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-      name: "admin",
-      pattern: "{Admin:exists}/{controller:exists}/{action=Index}/{id?}"
-    );
-});
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
 app.MapRazorPages();
 
 app.Run();
