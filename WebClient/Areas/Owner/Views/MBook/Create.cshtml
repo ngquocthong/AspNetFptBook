@@ -76,6 +76,7 @@
         const formDataTmp = new FormData(form);
         const formData = new FormData();
         const jsonObject = {};
+        console.log(jsonObject);
         formDataTmp.forEach(function (value, key) {
             if (key === 'cate_id') {
                 // Replace category value with the selected option value

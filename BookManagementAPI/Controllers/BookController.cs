@@ -1,7 +1,9 @@
 ﻿using BusinessObjects;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Repositories;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,49 +23,29 @@ namespace BookManagementAPI.Controllers
         // GET: api/<BookController>
         [HttpGet]
         public ActionResult<IEnumerable<Book>> Get() => repository.GetBooks();
+        [HttpGet("image/{bookId}")]
+        public IActionResult GetBookImage(int bookId)
+        {
+            try { 
+            var book = repository.GetBookByID(bookId);
+            string imagePath = book.book_img;
+            string imageName = Path.GetFileName(imagePath); // imageName is "tong-thong-nga-311222.jpg"
+            string root = Path.Combine(_environment.WebRootPath, "images", imageName);
+            var image = System.IO.File.OpenRead(root);
+            return File(image, "image/jpg");
+            } catch (Exception e)
+            {
+                return null;
+            }
+        }
 
-        // GET api/<BookController>/5
         [HttpGet("{id}")]
         public Book Get(int id) => repository.GetBookByID(id);
         // POST api/<BookController>
         [HttpPost]
         public IActionResult Post(Book b)
         {
-           /* bool Results = false;
-            try
-            {
-                var _uploadedfiles = Request.Form.Files;
-                foreach (IFormFile source in _uploadedfiles)
-                {
-                    string Filename = source.FileName;
-                    string Filepath = GetFilePath(Filename);
-
-                    if (!System.IO.Directory.Exists(Filepath))
-                    {
-                        System.IO.Directory.CreateDirectory(Filepath);
-                    }
-
-                    string imagepath = Filepath + "\\image.png";
-
-                    if (System.IO.File.Exists(imagepath))
-                    {
-                        System.IO.File.Delete(imagepath);
-                    }
-                    using (FileStream stream = System.IO.File.Create(imagepath))
-                    {
-                        source.CopyTo(stream);
-                        Results = true;
-                    }
-
-
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return Ok(Results);*/
-
+           
             repository.AddBook(b);
             return NoContent();
         }
@@ -91,20 +73,7 @@ namespace BookManagementAPI.Controllers
         }
 
 
-        [NonAction]
-        private string GetFilePath(string ProductCode)
-        {
-            return this._environment.WebRootPath + "\\Uploads\\Product\\" + ProductCode;
-        }
-        // PUT api/<BookController>/5
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, Book b)
-        {
-            var temp = repository.GetBookByID(id);
-            if (b == null) return NotFound();
-            repository.UpdateBook(b);
-            return NoContent();
-        }
+      
 
         // DELETE api/<BookController>/5
         [HttpDelete("{id}")]
