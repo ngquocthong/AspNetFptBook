@@ -23,7 +23,6 @@
     <Folder Include="Areas\Customer\Models\" />
     <Folder Include="Areas\Owner\Data\" />
     <Folder Include="Areas\Owner\Models\" />
-    <Folder Include="wwwroot\assets\" />
     <Folder Include="wwwroot\assetsOwner\" />
   </ItemGroup>
 
