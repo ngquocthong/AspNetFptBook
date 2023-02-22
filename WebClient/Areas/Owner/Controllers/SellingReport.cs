@@ -1,32 +1,31 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebClient.Areas.Customer.Controllers
+namespace WebClient.Areas.Owner.Controllers
 {
     [Area("Owner")]
-    public class MBookController : Controller
-    {
-        // GET: BookController
 
+    public class SellingReport : Controller
+    {
+        // GET: SellingReport
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: BookController/Details/5
+        // GET: SellingReport/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: BookController/Create
-        [HttpGet]
+        // GET: SellingReport/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: BookController/Create
+        // POST: SellingReport/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -41,13 +40,13 @@ namespace WebClient.Areas.Customer.Controllers
             }
         }
 
-        // GET: BookController/Edit/5
+        // GET: SellingReport/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: BookController/Edit/5
+        // POST: SellingReport/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -62,13 +61,13 @@ namespace WebClient.Areas.Customer.Controllers
             }
         }
 
-        // GET: BookController/Delete/5
+        // GET: SellingReport/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: BookController/Delete/5
+        // POST: SellingReport/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
