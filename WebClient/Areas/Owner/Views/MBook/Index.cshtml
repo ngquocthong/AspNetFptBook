@@ -1,115 +1,62 @@
 ﻿<div class="container-fluid">
-    <h3 class="text-dark mb-4">Add New Book</h3>
-    <div class="row mb-3">
-        <div class="col-lg-8">
-            <div class="row">
-                <div class="col">
-                    <div class="card shadow mb-3">
+                    <h3 class="text-dark mb-4"></h3>
+                    <div class="card shadow">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Book Information</p>
+                            <p class="text-primary m-0 fw-bold">Manage Book</p>
                         </div>
                         <div class="card-body">
-                            <form id="book-form">
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <label class="form-label" for="book_name"><strong>Book Name</strong></label>
-                                        <input class="form-control" type="text" id="book_name" name="book_name" placeholder="Enter book name" required>
-                                    </div>
-                                    <div class="col">
-                                        <label class="form-label" for="book_author"><strong>Author</strong></label>
-                                        <input class="form-control" type="text" id="book_author" name="book_author" placeholder="Enter author name" required>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;<select class="d-inline-block form-select form-select-sm">
+                                                <option value="10" selected="">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>&nbsp;</label></div>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <label class="form-label" for="book_price"><strong>Price</strong></label>
-                                        <input class="form-control" type="number" id="book_price" name="book_price" placeholder="Enter book price" min="0" step="0.01" required>
-                                    </div>
-                                    <div class="col">
-                                        <label class="form-label" for="quantity"><strong>Quantity</strong></label>
-                                        <input class="form-control" type="number" id="quantity" name="quantity" placeholder="Enter book quantity" min="0" required>
-                                    </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <label class="form-label" for="cate_id"><strong>Category</strong></label>
-                                        <select class="form-select" id="cate_id" name="cate_id" required>
-                                            <option>Select category</option>
-                                        </select>
-                                    </div>
-                                    <div class="col">
-                                        <label class="form-label"><strong>Picture</strong></label>
-                                        <div class="mb-3">
-                                            <input type="file" name="book_img" accept="image/*" class="form-control">
-                                        </div>
-                                    </div>
-
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Book</th>
+                                            <th class="text-center">Price</th>
+                                            <th class="text-center">Quantity&nbsp;</th>
+                                            <th class="d-xl-flex justify-content-xl-center" style="border-top-color: var(--bs-table-bg);border-bottom-color: var(--bs-table-bg);">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><img class="img-fluid me-2" width="30" height="30" src="assets/img/avatars/avatar3.jpeg" style="width: 100px;height: 100px;border-radius: 0px;transform: scale(1);">Airi Satou</td>
+                                            <td class="text-center"><strong>$100</strong></td>
+                                            <td style="text-align: center;"><strong>100</strong></td>
+                                            <td class="d-xl-flex justify-content-xl-center" style="border-bottom-color: var(--bs-table-bg);"><i class="fa fa-remove" style="font-size: 25px;"></i><i class="far fa-edit" style="font-size: 25px;margin-left: 18px;"></i></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr></tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 align-self-center">
+                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
                                 </div>
-                                <div class="mb-3">
-                                    <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+                                <div class="col-md-6">
+                                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                        <ul class="pagination">
+                                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                        </ul>
+                                    </nav>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col text-center align-self-center"><img /></div>
-    </div>
-    <div class="card shadow mb-5"></div>
-</div>
-<script>
-    const categorySelect = document.querySelector('#cate_id');
-    fetch('https://localhost:7186/api/Category')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category.id;
-                option.text = category.cate_name;
-                categorySelect.appendChild(option);
-            });
-        });
-    const form = document.getElementById('book-form');
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const formDataTmp = new FormData(form);
-        const formData = new FormData();
-        const jsonObject = {};
-        console.log(jsonObject);
-        formDataTmp.forEach(function (value, key) {
-            if (key === 'cate_id') {
-                // Replace category value with the selected option value
-                jsonObject[key] = Number(categorySelect.options[categorySelect.selectedIndex].value);
-            }
-            else if (key === 'quantity' || key === 'book_price') {
-                // Parse quantity and price values as numbers
-                jsonObject[key] = Number(value);
-            }
-            else {
-                jsonObject[key] = value;
-            }
-        });
-        jsonObject['book_img'] = "";
-        const fileImage = document.querySelector('input[type=file][name=book_img]').files[0];
-        formData.append('datajson', JSON.stringify(jsonObject));
-        formData.append('fileImage', fileImage);
-        const requestObject = {
-            method: 'POST',
-            body: formData
-        };
-        try {
-            const response = await fetch('https://localhost:7186/api/Book/uploadfile', requestObject);
-            if (!response.ok) {
-                throw new Error('Failed to submit form');
-            }
-            alert('Form submitted successfully');
-        } catch (error) {
-            console.error(error);
-            alert('Failed to submit form');
-        }
-    });
-
-</script>
-
-</script>
