@@ -1,6 +1,7 @@
 ﻿using BusinessObjects;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,9 @@ namespace DataAccess
                 using (var context = new ApplicationDbContext())
                 {
                     p = context.Books.SingleOrDefault(x => x.ID == bookId);
+                   
+                    
+
                 }
             }
             catch (Exception e)

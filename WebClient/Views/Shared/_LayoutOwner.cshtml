@@ -22,7 +22,8 @@
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link active" asp-controller="SellingReport" asp-action="Index"><i class="fas fa-tachometer-alt"></i><span>Selling Report</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="MBook" asp-action="Index"><i class="fas fa-user"></i><span>Manage Book</span></a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="MOrder" asp-action="Index"><i class="fas fa-table"></i><span>Manage Order</span></a><a class="nav-link" asp-controller="RequestCategory" asp-action="Index"><i class="fa fa-list-alt"></i><span>Request Category</span></a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="MOrder" asp-action="Index"><i class="fas fa-table"></i><span>Manage Order</span></a>
+                        <a class="nav-link" asp-controller="RequestCategory" asp-action="Create"><i class="fa fa-list-alt"></i><span>Request Category</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"></div>
             </div>
@@ -105,8 +106,9 @@
                         </ul>
                     </div>
                 </nav>
-
-    @RenderBody()
+                <main role="main" class="pb-3">
+                     @RenderBody()
+                     </main>
 
 
 
@@ -123,7 +125,11 @@
       ></a>
     </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/script.min.js"></script>
+        <script src="~assets/js/script.min.js"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+      
     @await RenderSectionAsync("Scripts", required: false)
 </body>
     
