@@ -71,9 +71,38 @@ namespace BookManagementAPI.Controllers
             repository.AddBook(b);
             return Ok(b);
         }
+        [HttpPut("{id}")]
+        //public async Task<IActionResult> Put(int id, [FromForm] string datajson, IFormFile fileImage)
+        public async Task<IActionResult> Put(int id, [FromForm] string datajson)
+        {
+            var bookToUpdate = repository.GetBookByID(id);
+
+            if (bookToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            var b = JsonConvert.DeserializeObject<Book>(datajson);
+            bookToUpdate.book_name = b.book_name;
+            bookToUpdate.book_author = b.book_author;
+            bookToUpdate.cate_id = b.cate_id;
+            bookToUpdate.book_price = b.book_price;
+/*
+            if (fileImage != null && fileImage.Length > 0)
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileImage.FileName);
+                using (var stream = System.IO.File.Create(path))
+                {
+                    await fileImage.CopyToAsync(stream);
+                }
+                bookToUpdate.book_img = "/images/" + fileImage.FileName;
+            }*/
+
+            repository.UpdateBook(bookToUpdate);
+            return Ok(bookToUpdate);
+        }
 
 
-      
 
         // DELETE api/<BookController>/5
         [HttpDelete("{id}")]

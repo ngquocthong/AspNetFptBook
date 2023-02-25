@@ -1,12 +1,25 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BusinessObjects;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using System.Net.Http.Headers;
 
 namespace WebClient.Areas.Owner.Controllers
 {
+
     [Area("Owner")]
-    public class RequestCategory : Controller
+    public class RequestCategoryController : Controller
     {
+        private readonly HttpClient client = null;
+        private string api;
         // GET: RequestCategory
+        public RequestCategoryController()
+        {
+            client = new HttpClient();
+            var contentType = new MediaTypeWithQualityHeaderValue("application/json");
+            client.DefaultRequestHeaders.Accept.Add(contentType);
+            this.api = "https://localhost:7186/api/Category";
+        }
         public ActionResult Index()
         {
             return View();
@@ -21,22 +34,35 @@ namespace WebClient.Areas.Owner.Controllers
         // GET: RequestCategory/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
         // POST: RequestCategory/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+       /* [ValidateAntiForgeryToken]*/
+        public async Task<ActionResult> Create(Category cate)
         {
-            try
+
+            if (ModelState.IsValid)
+            {
+                string data = JsonSerializer.Serialize(cate);
+                var content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage respon = await client.PostAsync(api, content);
+                if (respon.StatusCode == System.Net.HttpStatusCode.Created)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(cate);
+           /* try
             {
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return View();
-            }
+            }*/
         }
 
         // GET: RequestCategory/Edit/5
