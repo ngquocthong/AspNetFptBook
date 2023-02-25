@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace WebClient.Areas.Customer.Controllers
 {
     [Area("Owner")]
+    [Authorize(Roles = "Owner")]
     public class MBookController : Controller
     {
         // GET: BookController
