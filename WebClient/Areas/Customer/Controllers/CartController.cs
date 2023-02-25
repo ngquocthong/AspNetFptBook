@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace WebClient.Areas.Customer.Controllers
-{
+{ // Controller of Cart
 	[Area("Customer")]
 	public class CartController : Controller
 	{
