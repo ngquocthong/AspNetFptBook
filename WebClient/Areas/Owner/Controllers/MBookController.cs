@@ -1,33 +1,22 @@
-﻿using BusinessObjects;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http.Headers;
-using System.Text.Json;
+using System.Data;
 
 namespace WebClient.Areas.Customer.Controllers
 {
     [Area("Owner")]
+    [Authorize(Policy = "rolecreation")]
     public class MBookController : Controller
     {
         // GET: BookController
-        private readonly HttpClient client = null;
-        private string api;
-        public MBookController()
+
+        public ActionResult Index()
         {
-            client = new HttpClient();
-            var contentType = new MediaTypeWithQualityHeaderValue("application/json");
-            client.DefaultRequestHeaders.Accept.Add(contentType);
-            this.api = "https://localhost:7186/api/Book";
-        }
-        public async Task<ActionResult> Index()
-        {
-            HttpResponseMessage response = await client.GetAsync(api);
-            string data = await response.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            List<Book> list = JsonSerializer.Deserialize<List<Book>>(data, options);
-            return View(list);
+            return View();
         }
 
+        // GET: BookController/Details/5
         public ActionResult Details(int id)
         {
             return View();
@@ -56,18 +45,9 @@ namespace WebClient.Areas.Customer.Controllers
         }
 
         // GET: BookController/Edit/5
-        public async Task<ActionResult> Edit(int id)
+        public ActionResult Edit(int id)
         {
-            HttpResponseMessage response = await client.GetAsync(api + "/" + id);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var data = response.Content.ReadAsStringAsync().Result;
-                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                var obj = JsonSerializer.Deserialize<Book>(data, options);               
-                return View(obj);
-            }
-            return NotFound();
+            return View();
         }
 
         // POST: BookController/Edit/5
@@ -88,7 +68,6 @@ namespace WebClient.Areas.Customer.Controllers
         // GET: BookController/Delete/5
         public ActionResult Delete(int id)
         {
-
             return View();
         }
 
