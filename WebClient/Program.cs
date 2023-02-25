@@ -22,8 +22,14 @@ builder.Services.AddAuthorization(options =>
     policy.RequireClaim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", "support@procodeguide.com"
     ));
 
-    options.AddPolicy("rolecreation", policy =>
+    options.AddPolicy("AdminRole", policy =>
     policy.RequireRole("Admin")
+    );
+    options.AddPolicy("CustomerRole", policy =>
+    policy.RequireRole("Customer")
+    );
+    options.AddPolicy("OwnerRole", policy =>
+    policy.RequireRole("Owner")
     );
 });
 
