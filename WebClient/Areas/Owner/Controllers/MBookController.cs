@@ -6,7 +6,7 @@ using System.Data;
 namespace WebClient.Areas.Customer.Controllers
 {
     [Area("Owner")]
-    [Authorize(Roles = "Owner")]
+    [Authorize(Policy = "rolecreation")]
     public class MBookController : Controller
     {
         // GET: BookController
