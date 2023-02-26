@@ -1,6 +1,6 @@
-﻿using BusinessObjects;
+﻿
 
-namespace WebClient.Models
+namespace BusinessObjects
 {
     public class CartItem
     {

@@ -1,79 +1,101 @@
-﻿@using WebClient.Models;
+﻿@using BusinessObjects;
 @model List<CartItem>
-<main class="page shopping-cart-page">
-    <section class="clean-block clean-cart dark">
-        @if (Model.Count > 0)
-        {
-            double total = 0;
-            int stt = 1;
-            <div class="container">
-                <div class="block-heading">
-                    <h2 class="text-info" style="margin-bottom: 0px;margin-top: 0px;min-width: 10px;border-width: 0px;font-size: 39.1px;">Shopping Cart</h2>
-                </div>
-                <div class="content">
-                    <div class="row g-0">
-                        <div class="col-md-12 col-lg-8">
-                            <div class="items" style="margin-top: 0px;">
-                                @foreach (var cartitem in Model)
-                                {
-                                    var totals = cartitem.book.quantity * cartitem.book.book_price;
-                                    total += totals;
-                                    <div class="product">
-                                        <div class="row justify-content-center align-items-center">
-                                            <div class="col-md-3">
-                                                <div class="product-image"><input type="checkbox"><img class="img-fluid d-block mx-auto image" src="assets/img/tech/image2.jpg"></div>
-                                            </div>
-                                            <div class="col-md-5 product-info">
-                                                <a class="product-name" href="#">@cartitem.book.book_name</a>
-                                            </div>
-                                            <div class="col-6 col-md-2 quantity"><label class="form-label d-none d-md-block" for="quantity">Quantity</label><input type="number" id="number" class="form-control quantity-input" value="1"></div>
-                                            <div class="col-6 col-md-2 price">$<span>@(total.ToString("n0"))</span></div>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
 
-                        <div class="col-md-12 col-lg-4">
-                            <div class="summary" style="margin-top: 0px;">
-                                <h3>Summary</h3>
-                                <h4><span class="text">Subtotal</span><span class="price">@(total.ToString("n0"))</span></h4>
-                                <h4><span class="text">Discount</span><span class="price">$0</span></h4>
-                                <h4><span class="text">Shipping</span><span class="price">$10</span></h4>
-                                <h4><span class="text">Total</span>$<span class="price">@(total.ToString("n0"))</span></h4>
-                                <a asp-controller="Cart" asp-action="Checkout" class="btn btn-success">Checkout</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-        else
-        {
-            <p class="alert alert-danger">Giỏ hàng trống</p>
-        }
-    </section>
+
+<main class="page shopping-cart-page">
+	<section class="clean-block clean-cart dark">
+		<div class="container">
+			<div class="block-heading">
+				<h2 class="text-info">Shopping Cart</h2>
+				@if (Model.Count > 0)
+				{
+					double total = 0;
+					int stt = 1;
+					<div class="content">
+						<div class="row g-0">
+							<div class="col-md-12 col-lg-8">
+								<div class="items">
+									@foreach (var cartitem in Model)
+									{
+										var thanhtien = cartitem.quantity * cartitem.book.book_price;
+										total += thanhtien;
+										<div class="product">
+											<div class="row justify-content-center align-items-center">
+												<div class="col-md-3">
+													<div class="product-image"><img class="img-fluid d-block mx-auto image" src="assets/img/tech/image2.jpg"></div>
+												</div>
+												<div class="col-md-5 product-info"><a class="product-name" href="#">@cartitem.book.book_name</a></div>
+												<div class="col-6 col-md-2 quantity"><label class="form-label d-none d-md-block" for="quantity">Quantity</label><input asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.book.ID}")" /></div>
+												<div class="col-6 col-md-2 price">
+													<span>
+														@(cartitem.book.book_price.ToString("n0"))
+													</span>
+												</div>
+												<button class="btn btn-success updatecartitem"
+												data-productid="@cartitem.book.ID">
+													Update
+												</button>
+												<a asp-route="removecart" asp-route-productid="@cartitem.book.ID "
+										   class="btn btn-danger">Delete</a>
+											</div>
+										</div>
+									}
+								</div>
+							</div>
+							<div class="col-md-12 col-lg-4">
+								<div class="summary">
+									<h3>Summary</h3>
+									<h4>
+										<span class="text">Subtotal</span><span class="price">
+											@(
+												total.ToString("n0")
+												)
+										</span>
+									</h4>
+									<h4><span class="text">Discount</span><span class="price">$0</span></h4>
+									<h4><span class="text">Shipping</span><span class="price">$0</span></h4>
+									<h4>
+										<span class="text">Total</span><span class="price">
+											@(
+												total.ToString("n0")
+												)
+										</span>
+									</h4><button class="btn btn-primary btn-lg d-block w-100" type="button">Checkout</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+				else
+				{
+					<p class="alert alert-danger">Giỏ hàng trống</p>
+				}
+			</div>
+		</div>
+	</section>
 </main>
+
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-            $(".updatecartitem").click(function (event) {
-                event.preventDefault();
-                var id = $(this).attr("data-id");
-                var quantity = $("#quantity-" + id).val();
-                $.ajax({
-                    type: "POST",
-                    url: "@Url.RouteUrl("updatecart")",
-                    data: {
-                        id: id,
-                        quantity: quantity
-                    },
-                    success: function (result) {
-                        window.location.href = "@Url.RouteUrl("cart")";
-                    }
-                });
-            });
-        });
-    </script>
-      }
+	<script>
+		$(document).ready(function () {
+			$(".updatecartitem").click(function (event) {
+				event.preventDefault();
+				var productid = $(this).attr("data-productid");
+				var quantity = $("#quantity-" + productid).val();
+				$.ajax({
+					type: "POST",
+					url: "@Url.RouteUrl("updatecart")",
+					data: {
+						productid: productid,
+						quantity: quantity
+					},
+					success: function (result) {
+						window.location.href = "@Url.RouteUrl("cart")";
+					}
+				});
+			});
+		});
+	</script>
 }
+
+
