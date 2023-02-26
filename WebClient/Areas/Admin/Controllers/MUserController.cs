@@ -3,30 +3,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebClient.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class BookController : Controller
+    public class MUserController : Controller
     {
-        // GET: BookController
-        [HttpGet]
+        // GET: MUser
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: BookController/Details/5
+        // GET: MUser/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: BookController/Create
-  
+        // GET: MUser/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: BookController/Create
+        // POST: MUser/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -41,13 +38,13 @@ namespace WebClient.Areas.Admin.Controllers
             }
         }
 
-        // GET: BookController/Edit/5
+        // GET: MUser/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: BookController/Edit/5
+        // POST: MUser/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -62,13 +59,13 @@ namespace WebClient.Areas.Admin.Controllers
             }
         }
 
-        // GET: BookController/Delete/5
+        // GET: MUser/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: BookController/Delete/5
+        // POST: MUser/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
