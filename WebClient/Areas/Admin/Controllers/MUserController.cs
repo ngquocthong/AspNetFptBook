@@ -1,16 +1,52 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BusinessObjects;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Text.Json;
+using WebClient.Data;
+using ApplicationDbContext = WebClient.Data.ApplicationDbContext;
 
 namespace WebClient.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class MUserController : Controller
     {
         // GET: MUser
-        public ActionResult Index()
+        private readonly ApplicationDbContext _db;
+        public MUserController(ApplicationDbContext db)
         {
-            return View();
+            _db = db;
         }
 
+        public ActionResult Index()
+        {
+            IEnumerable<ApplicationUser> usList = _db.Users.ToList();
+            IEnumerable<IdentityUserRole<string>> usRoles = _db.UserRoles.ToList();
+            IEnumerable<IdentityRole<string>> rolesList = _db.Roles.ToList();
+            IEnumerable<ApplicationUser> ownerUsers = from user in usList
+                                                      join userRole in usRoles on user.Id equals userRole.UserId
+                                                      join role in rolesList on userRole.RoleId equals role.Id
+                                                      where role.Name == "Owner"
+                                                      select user;
+
+            return View(ownerUsers);    
+          
+        }
+        public ActionResult Customer()
+        {
+            IEnumerable<ApplicationUser> usList = _db.Users.ToList();
+            IEnumerable<IdentityUserRole<string>> usRoles = _db.UserRoles.ToList();
+            IEnumerable<IdentityRole<string>> rolesList = _db.Roles.ToList();
+            IEnumerable<ApplicationUser> ownerUsers = from user in usList
+                                                      join userRole in usRoles on user.Id equals userRole.UserId
+                                                      join role in rolesList on userRole.RoleId equals role.Id
+                                                      where role.Name == "Customer"
+                                                      select user;
+
+            return View("Index",ownerUsers);
+
+        }
         // GET: MUser/Details/5
         public ActionResult Details(int id)
         {
