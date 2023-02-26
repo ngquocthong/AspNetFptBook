@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/BusinessObjects/Migrations/20230223093655_mi3.Designer.cs
+/BusinessObjects/Migrations/20230223093655_mi3.cs
+/BusinessObjects/Migrations/ApplicationDbContextModelSnapshot.cs

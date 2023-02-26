@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebClient.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("admin/[controller]")]
+
     public class MCategoryController : Controller
     {
         // GET: ManageCategory

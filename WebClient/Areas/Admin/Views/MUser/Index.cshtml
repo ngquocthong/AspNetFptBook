@@ -1,12 +1,20 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using BusinessObjects;
-@model IEnumerable<Book>
-
+﻿@using Microsoft.AspNetCore.Identity
+@using WebClient.Data
+@model IEnumerable<ApplicationUser>
+<style>
+    /* Define CSS variables for the colors */
+    :root {
+        --bg-color: var(--bs-gray-100);
+        --text-color: var(--bs-gray-900);
+    }
+</style>
 <div class="container-fluid">
-    <h3 class="text-dark mb-4"></h3>
     <div class="card shadow">
         <div class="card-header py-3">
-            <a asp-action="Create" class="text-primary m-0 fw-bold">Add New</a>
+            <p class="text-primary m-0 fw-bold"></p>
+            <div class="btn-group" role="group">
+                <a asp-action="Index" id="owner" class="btn" type="button">Owner</a>
+                <a asp-action="Customer" id="customer" class="btn" type="button" >Customer</a></div>
         </div>
         <div class="card-body">
             <div class="row">
@@ -31,33 +39,27 @@
                 <table class="table my-0" id="dataTable">
                     <thead>
                         <tr>
-                            <th>Book</th>
-
-                            <th class="text-center">Price</th>
-                            <th class="text-center">Quantity&nbsp;</th>
-                            <th class="d-xl-flex justify-content-xl-center" style="border-top-color: var(--bs-table-bg);border-bottom-color: var(--bs-table-bg);">Action</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Office</th>
+                            <th>Age</th>
+                            <th>Start date</th>
+                            <th>Salary</th>
                         </tr>
                     </thead>
                     <tbody>
-
-                        @foreach (var book in Model)
-                        {
-                            <tr>
-                                <td><img class="img-fluid me-2" width="30" height="30" src="https://localhost:7186/api/Book/image/@book.ID" style="width: 100px;height: 100px;border-radius: 0px;transform: scale(1);">@book.book_name</td>
-                                <td class="text-center" ><strong>@book.book_price</strong></td>
-                                <td style="text-align: center;"><strong>@book.quantity</strong></td>
-                                <td class="d-xl-flex justify-content-xl-center" style="border-bottom-color: var(--bs-table-bg);">
-                                    <a class="far fa-edit" asp-action="Edit" asp-route-id="@book.ID" style="font-size: 25px;margin-left: 18px;"></a>
-                                    <a class="fa fa-remove delete-book"  data-bookid="@book.ID"  style="font-size: 25px;"></a>
-                                </td>
-                            </tr>
+                        @foreach (var u in Model)
+	                    {
+                        <tr>
+                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Airi Satou</td>
+                          @*  <td>@u.FullName</td>
+                            <td>@u.Email</td>
+                            <td>@u.</td>*@
+                            <td>@u.FullName</td>
+                            <td>@u.Email</td>
+                        </tr>
                         }
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
             <div class="row">
@@ -69,39 +71,38 @@
                         <ul class="pagination">
                             <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                             <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
                         </ul>
-
                     </nav>
                 </div>
             </div>
         </div>
     </div>
-</div
+</div>
+</div>
+<footer class="bg-white sticky-footer">
+    <div class="container my-auto">
+        <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
+    </div>
+</footer>
+</div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
 
+<script>
+    // Get references to the buttons
+    const owner = document.getElementById('owner');
+    const cus = document.getElementById('customer');
 
-@section Scripts {
-    <script>
+    // Add click event listeners to the buttons
+    owner.addEventListener('click', () => {
+        owner.style.backgroundColor = 'var(--bg-color)';
+        owner.style.color = 'var(--text-color)';
+    });
 
-        $(document).on("click", ".delete-book", function () {
-            var x = confirm('Are you sure to delete this book?');
-            if(x) {
-            var bookId = $(this).data("bookid");
-            $.ajax({
-                url: "https://localhost:7186/api/Book/" + bookId,
-                type: "DELETE",
-                success: function () {
-                    window.location.reload();
-                },
-                error: function (xhr, status, error) {
-                    console.log(xhr);
-                }
-            });
-    
-            }
-      });
-            
-    </script>
-}
+    cus.addEventListener('click', () => {
+        cus.style.backgroundColor = 'var(--bg-color)';
+        cus.style.color = 'var(--text-color)';
+    });
+</script>
