@@ -52,7 +52,6 @@ namespace WebClient.Areas.Customer.Controllers
             session.SetString(CARTKEY, jsoncart);
         }
         [Route("/cart", Name = "cart")]
-
         public IActionResult Cart()
         {
             return View(GetCartItems());
@@ -83,38 +82,43 @@ namespace WebClient.Areas.Customer.Controllers
                 return RedirectToAction(nameof(Cart));
             }
             return NotFound();
-
+             
         }
 
         // GET: CartController/Edit/5
         [Route("/updatecart", Name = "updatecart")]
         [HttpPost]
-        public ActionResult UpdateCart(int id, int quantity)
+        public IActionResult UpdateCart([FromForm] int productid, [FromForm] int quantity)
         {
+            // Cập nhật Cart thay đổi số lượng quantity ...
             var cart = GetCartItems();
-            var cartitem = cart.Find(b => b.book.ID == id);
+            var cartitem = cart.Find(p => p.book.ID == productid);
             if (cartitem != null)
             {
-                cartitem.book.quantity = quantity;
+                // Đã tồn tại, tăng thêm 1
+                cartitem.quantity = quantity;
             }
             SaveCartSession(cart);
+            // Trả về mã thành công (không có nội dung gì - chỉ để Ajax gọi)
             return Ok();
         }
 
 
-        [Route("/removecart/{id:int}", Name = "removecart")]
-        public IActionResult RemoveCart(int id)
+        /// xóa item trong cart
+        [Route("/removecart/{productid:int}", Name = "removecart")]
+        public IActionResult RemoveCart([FromRoute] int productid)
         {
             var cart = GetCartItems();
-            var cartitem = cart.Find(b => b.book.ID == id);
+            var cartitem = cart.Find(p => p.book.ID == productid);
             if (cartitem != null)
             {
-                cartitem.book.quantity--;
-                if (cartitem.quantity < 1)
+                if (cartitem.quantity > 1)
                 {
-                    cart.Remove(cartitem);
+                    cartitem.quantity--;
                 }
-
+                else { cart.Remove(cartitem); }
+                // Đã tồn tại, tăng thêm 1
+                
             }
 
             SaveCartSession(cart);
