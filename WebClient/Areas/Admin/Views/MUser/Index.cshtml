@@ -41,22 +41,21 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Birth Day</th>
+                            <th>Gender</th>
+                            <th>Address</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var u in Model)
 	                    {
                         <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Airi Satou</td>
-                          @*  <td>@u.FullName</td>
-                            <td>@u.Email</td>
-                            <td>@u.</td>*@
                             <td>@u.FullName</td>
                             <td>@u.Email</td>
+                            <td>@u.DofB</td>
+                            <td>@u.Gender</td>
+                            <td>@u.Address</td>
                         </tr>
                         }
                     </tbody>
