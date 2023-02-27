@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using System.Text.Json.Serialization;
 
 namespace BusinessObjects
 {
@@ -45,7 +46,8 @@ namespace BusinessObjects
         public string? book_img { get; set; }
         public int cate_id { get; set; }
         [ForeignKey("cate_id")]
-        public virtual Category? Category { get; set; }
+		[JsonIgnore]
+		public virtual Category? Category { get; set; }
 
 /*        public int owner_id { get; set; }
         [ForeignKey("owner_id")]

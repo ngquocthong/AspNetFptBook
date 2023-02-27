@@ -4,6 +4,7 @@ using BusinessObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230227083854_mi55")]
+    partial class mi55
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,7 +261,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 1,
-                            createdDate = new DateTime(2023, 2, 27, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(405),
+                            createdDate = new DateTime(2023, 2, 27, 15, 38, 53, 896, DateTimeKind.Local).AddTicks(5351),
                             cus_id = "ahha",
                             shippingAddress = "123 Main St, Anytown USA",
                             status = true,
@@ -268,7 +270,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 2,
-                            createdDate = new DateTime(2023, 2, 26, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(415),
+                            createdDate = new DateTime(2023, 2, 26, 15, 38, 53, 896, DateTimeKind.Local).AddTicks(5364),
                             cus_id = "ahha",
                             shippingAddress = "456 Elm St, Anytown USA",
                             status = false,
@@ -277,7 +279,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 3,
-                            createdDate = new DateTime(2023, 2, 25, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(419),
+                            createdDate = new DateTime(2023, 2, 25, 15, 38, 53, 896, DateTimeKind.Local).AddTicks(5370),
                             cus_id = "ahha",
                             shippingAddress = "789 Maple St, Anytown USA",
                             status = true,
@@ -286,7 +288,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 4,
-                            createdDate = new DateTime(2023, 2, 24, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(420),
+                            createdDate = new DateTime(2023, 2, 24, 15, 38, 53, 896, DateTimeKind.Local).AddTicks(5372),
                             cus_id = "ahha",
                             shippingAddress = "101 Oak St, Anytown USA",
                             status = false,
@@ -295,7 +297,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 5,
-                            createdDate = new DateTime(2023, 2, 23, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(421),
+                            createdDate = new DateTime(2023, 2, 23, 15, 38, 53, 896, DateTimeKind.Local).AddTicks(5373),
                             cus_id = "ahha",
                             shippingAddress = "111 Pine St, Anytown USA",
                             status = true,
@@ -304,7 +306,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 6,
-                            createdDate = new DateTime(2023, 2, 22, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(456),
+                            createdDate = new DateTime(2023, 2, 22, 15, 38, 53, 896, DateTimeKind.Local).AddTicks(5374),
                             cus_id = "ahha",
                             shippingAddress = "222 Cedar St, Anytown USA",
                             status = false,
@@ -313,7 +315,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 7,
-                            createdDate = new DateTime(2023, 2, 21, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(457),
+                            createdDate = new DateTime(2023, 2, 21, 15, 38, 53, 896, DateTimeKind.Local).AddTicks(5375),
                             cus_id = "ahha",
                             shippingAddress = "333 Elm St, Anytown USA",
                             status = true,
@@ -322,7 +324,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 8,
-                            createdDate = new DateTime(2023, 2, 20, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(458),
+                            createdDate = new DateTime(2023, 2, 20, 15, 38, 53, 896, DateTimeKind.Local).AddTicks(5376),
                             cus_id = "ahha",
                             shippingAddress = "444 Birch St, Anytown USA",
                             status = false,
@@ -331,7 +333,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 9,
-                            createdDate = new DateTime(2023, 2, 19, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(459),
+                            createdDate = new DateTime(2023, 2, 19, 15, 38, 53, 896, DateTimeKind.Local).AddTicks(5378),
                             cus_id = "ahha",
                             shippingAddress = "555 Maple St, Anytown USA",
                             status = true,
@@ -340,7 +342,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 10,
-                            createdDate = new DateTime(2023, 2, 18, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(460),
+                            createdDate = new DateTime(2023, 2, 18, 15, 38, 53, 896, DateTimeKind.Local).AddTicks(5380),
                             cus_id = "ahha",
                             shippingAddress = "666 Oak St, Anytown USA",
                             status = false,

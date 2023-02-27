@@ -4,6 +4,7 @@ using BusinessObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230227081502_mi9")]
+    partial class mi9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,9 +237,8 @@ namespace BusinessObjects.Migrations
                     b.Property<DateTime>("createdDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("cus_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("cus_id")
+                        .HasColumnType("int");
 
                     b.Property<string>("shippingAddress")
                         .IsRequired()
@@ -259,8 +260,8 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 1,
-                            createdDate = new DateTime(2023, 2, 27, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(405),
-                            cus_id = "ahha",
+                            createdDate = new DateTime(2023, 2, 27, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2073),
+                            cus_id = 1,
                             shippingAddress = "123 Main St, Anytown USA",
                             status = true,
                             totalPrice = 100.0
@@ -268,8 +269,8 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 2,
-                            createdDate = new DateTime(2023, 2, 26, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(415),
-                            cus_id = "ahha",
+                            createdDate = new DateTime(2023, 2, 26, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2084),
+                            cus_id = 2,
                             shippingAddress = "456 Elm St, Anytown USA",
                             status = false,
                             totalPrice = 200.0
@@ -277,8 +278,8 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 3,
-                            createdDate = new DateTime(2023, 2, 25, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(419),
-                            cus_id = "ahha",
+                            createdDate = new DateTime(2023, 2, 25, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2090),
+                            cus_id = 3,
                             shippingAddress = "789 Maple St, Anytown USA",
                             status = true,
                             totalPrice = 50.0
@@ -286,8 +287,8 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 4,
-                            createdDate = new DateTime(2023, 2, 24, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(420),
-                            cus_id = "ahha",
+                            createdDate = new DateTime(2023, 2, 24, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2091),
+                            cus_id = 4,
                             shippingAddress = "101 Oak St, Anytown USA",
                             status = false,
                             totalPrice = 75.0
@@ -295,8 +296,8 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 5,
-                            createdDate = new DateTime(2023, 2, 23, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(421),
-                            cus_id = "ahha",
+                            createdDate = new DateTime(2023, 2, 23, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2092),
+                            cus_id = 5,
                             shippingAddress = "111 Pine St, Anytown USA",
                             status = true,
                             totalPrice = 125.0
@@ -304,8 +305,8 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 6,
-                            createdDate = new DateTime(2023, 2, 22, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(456),
-                            cus_id = "ahha",
+                            createdDate = new DateTime(2023, 2, 22, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2095),
+                            cus_id = 6,
                             shippingAddress = "222 Cedar St, Anytown USA",
                             status = false,
                             totalPrice = 150.0
@@ -313,8 +314,8 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 7,
-                            createdDate = new DateTime(2023, 2, 21, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(457),
-                            cus_id = "ahha",
+                            createdDate = new DateTime(2023, 2, 21, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2096),
+                            cus_id = 7,
                             shippingAddress = "333 Elm St, Anytown USA",
                             status = true,
                             totalPrice = 200.0
@@ -322,8 +323,8 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 8,
-                            createdDate = new DateTime(2023, 2, 20, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(458),
-                            cus_id = "ahha",
+                            createdDate = new DateTime(2023, 2, 20, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2097),
+                            cus_id = 8,
                             shippingAddress = "444 Birch St, Anytown USA",
                             status = false,
                             totalPrice = 175.0
@@ -331,8 +332,8 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 9,
-                            createdDate = new DateTime(2023, 2, 19, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(459),
-                            cus_id = "ahha",
+                            createdDate = new DateTime(2023, 2, 19, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2098),
+                            cus_id = 9,
                             shippingAddress = "555 Maple St, Anytown USA",
                             status = true,
                             totalPrice = 225.0
@@ -340,8 +341,8 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 10,
-                            createdDate = new DateTime(2023, 2, 18, 16, 39, 51, 946, DateTimeKind.Local).AddTicks(460),
-                            cus_id = "ahha",
+                            createdDate = new DateTime(2023, 2, 18, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2099),
+                            cus_id = 10,
                             shippingAddress = "666 Oak St, Anytown USA",
                             status = false,
                             totalPrice = 250.0
@@ -364,20 +365,6 @@ namespace BusinessObjects.Migrations
                     b.HasIndex("book_id");
 
                     b.ToTable("OrderDetails");
-
-                    b.HasData(
-                        new
-                        {
-                            order_id = 1,
-                            book_id = 1,
-                            quantity = 2
-                        },
-                        new
-                        {
-                            order_id = 1,
-                            book_id = 2,
-                            quantity = 1
-                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.StoreOwner", b =>
