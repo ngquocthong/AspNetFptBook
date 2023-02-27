@@ -8,10 +8,15 @@ using WebClient.Models;
 
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using System.Text.Json.Serialization;
 
 namespace WebClient.Areas.Customer.Controllers
 {
     [Area("Customer")]
+    [Authorize(Roles = "Customer")]
+
     public class CartController : Controller
     {
         public const string CARTKEY = "cart";
@@ -25,7 +30,7 @@ namespace WebClient.Areas.Customer.Controllers
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
-            api = "https://localhost:7186/api/Book";
+            api = "https://localhost:7186/api";
             _logger = logger;
         }
 
@@ -61,14 +66,17 @@ namespace WebClient.Areas.Customer.Controllers
 
         public async Task<ActionResult> AddToCart(int id)
         {
-            HttpResponseMessage response = await client.GetAsync(api + "/" + id);
+            api = api + "/Book";
+
+			HttpResponseMessage response = await client.GetAsync(api + "/" + id);
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
                 var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                 var obj = JsonSerializer.Deserialize<Book>(data, options);
                 var book = obj;
-                var cart = GetCartItems();
+				var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+				var cart = GetCartItems();
                 var cartitem = cart.Find(b => b.book.ID == id);
                 if (cartitem != null)
                 {
@@ -76,7 +84,7 @@ namespace WebClient.Areas.Customer.Controllers
                 }
                 else
                 {
-                    cart.Add(new CartItem() { quantity = 1, book = book });
+                    cart.Add(new CartItem() { quantity = 1, book = book, cus_id = userId});
                 }
                 SaveCartSession(cart);
                 return RedirectToAction(nameof(Cart));
@@ -124,5 +132,51 @@ namespace WebClient.Areas.Customer.Controllers
             SaveCartSession(cart);
             return RedirectToAction(nameof(Cart));
         }
-    }
+		public async Task<IActionResult> CheckOut(string userID)
+		{
+			api = api + "/Orders";
+			var orderDetails = new OrderDetails();
+			var cart = GetCartItems();
+			Order or = new Order();
+            or.totalPrice = 0;
+            or.cus_id = userID;
+            or.createdDate = DateTime.Now;
+			or.shippingAddress = "ABC";
+
+			foreach (var item in cart)
+            {
+                OrderDetails od = new OrderDetails();
+                od.book_id = item.book.ID;
+                od.quantity = item.quantity;
+				or.totalPrice += item.quantity * item.book.book_price;
+                od.Order = or;
+                od.Book = item.book;
+                if (od != null)
+                    or.OrderDetails = new List<OrderDetails>();
+                or.OrderDetails.Add(od);
+
+
+            }
+
+			// gan 
+
+
+			string data = JsonSerializer.Serialize<Order>(or);
+
+		    
+			var content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage respon = await client.PostAsync(api, content);
+			if (respon.StatusCode == System.Net.HttpStatusCode.NoContent)
+			{
+				return RedirectToAction("Index");
+			}
+            return View();
+			
+		}
+
+
+		//public IActionResult CheckOut([FromForm] string email, [FromForm] string address)
+
+
+	}
 }
