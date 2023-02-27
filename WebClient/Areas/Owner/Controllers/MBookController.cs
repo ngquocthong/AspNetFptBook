@@ -9,7 +9,7 @@ using System.Text.Json;
 namespace WebClient.Areas.Customer.Controllers
 {
     [Area("Owner")]
-    [Authorize(Policy = "rolecreation")]
+    [Authorize(Roles = "Owner")]
     public class MBookController : Controller
     {
         // GET: BookController
@@ -22,6 +22,7 @@ namespace WebClient.Areas.Customer.Controllers
             client.DefaultRequestHeaders.Accept.Add(contentType);
             this.api = "https://localhost:7186/api/Book";
         }
+
         public async Task<ActionResult> Index()
         {
             HttpResponseMessage response = await client.GetAsync(api);
