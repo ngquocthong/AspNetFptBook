@@ -9,11 +9,11 @@ using WebClient.Data;
 
 #nullable disable
 
-namespace WebClient.Data.Migrations
+namespace WebClient.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230227042851_User")]
-    partial class User
+    [Migration("20230227050759_Mi1")]
+    partial class Mi1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -165,8 +165,9 @@ namespace WebClient.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("Address")
-                        .HasColumnType("int");
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
