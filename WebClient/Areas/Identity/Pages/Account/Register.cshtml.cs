@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
@@ -76,6 +77,15 @@ namespace WebClient.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
+            [Display(Name = "Day of Brith")]
+            public DateTime DofB { get; set; }
+            [Required]
+            [Display(Name = "Gender")]
+            public string Gender { get; set; }
+            [Required]
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+            [Required]
             [Display(Name = "User Role")]
             public string UserRole { get; set; }
         }
@@ -94,7 +104,7 @@ namespace WebClient.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, FullName = Input.FullName };
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, FullName = Input.FullName, DofB = Input.DofB, Gender = Input.Gender, Address= Input.Address };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

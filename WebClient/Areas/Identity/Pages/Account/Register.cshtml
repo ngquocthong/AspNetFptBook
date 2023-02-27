@@ -38,10 +38,32 @@
 								<input asp-for="Input.Password" class="form-control form-control-user" />
 								<span asp-validation-for="Input.Password" class="text-danger"></span>
 							</div>
+
 							<div class="mb-3">
 								<label asp-for="Input.ConfirmPassword"></label>
 								<input asp-for="Input.ConfirmPassword" class="form-control form-control-user" />
 								<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+							</div>
+							<div class="mb-3">
+								<label asp-for="Input.DofB"></label>
+								<input asp-for="Input.DofB" class="form-control form-control-user" type="date" />
+								<span asp-validation-for="Input.DofB" class="text-danger"></span>
+							</div>
+							<div class="mb-3">
+								<label asp-for="Input.Gender"></label>
+								<div class="d-xl-flex justify-content-xl-center align-items-xl-center">
+									<label>Male</label>
+									<input type="radio" asp-for="Input.Gender" value="M" />
+									<label>Female</label>
+									<input type="radio" asp-for="Input.Gender" value="F" />
+								</div>
+								
+								<span asp-validation-for="Input.Gender" class="text-danger"></span>
+							</div>
+							<div class="mb-3">
+								<label asp-for="Input.Address"></label>
+								<input asp-for="Input.Address" class="form-control form-control-user" />
+								<span asp-validation-for="Input.Address" class="text-danger"></span>
 							</div>
 							<div class="mb-3">
 								<label asp-for="Input.UserRole"></label>
