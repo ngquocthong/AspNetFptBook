@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BusinessObjects.Migrations
 {
-    public partial class mi1 : Migration
+    public partial class Mi1111 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,7 +30,8 @@ namespace BusinessObjects.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     cate_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cate_des = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    cate_des = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    accept = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -122,12 +123,11 @@ namespace BusinessObjects.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    totalPrice = table.Column<double>(type: "float", nullable: false),
+                    createdDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    status = table.Column<bool>(type: "bit", nullable: false),
+                    shippingAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    cus_id = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -146,7 +146,7 @@ namespace BusinessObjects.Migrations
                 {
                     order_id = table.Column<int>(type: "int", nullable: false),
                     book_id = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -167,13 +167,29 @@ namespace BusinessObjects.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "ID", "cate_des", "cate_name" },
-                values: new object[] { 1, "Related to unrealistic storey", "Fiction" });
+                columns: new[] { "ID", "accept", "cate_des", "cate_name" },
+                values: new object[,]
+                {
+                    { 1, false, "Related to unrealistic storey", "Fiction" },
+                    { 2, false, "Related to financial", "Finance" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "ID", "cate_des", "cate_name" },
-                values: new object[] { 2, "Related to financial", "Finance" });
+                table: "Orders",
+                columns: new[] { "ID", "CustomerID", "createdDate", "cus_id", "shippingAddress", "status", "totalPrice" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(2023, 2, 27, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7522), "ahha", "123 Main St, Anytown USA", true, 100.0 },
+                    { 2, null, new DateTime(2023, 2, 26, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7535), "ahha", "456 Elm St, Anytown USA", false, 200.0 },
+                    { 3, null, new DateTime(2023, 2, 25, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7539), "ahha", "789 Maple St, Anytown USA", true, 50.0 },
+                    { 4, null, new DateTime(2023, 2, 24, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7540), "ahha", "101 Oak St, Anytown USA", false, 75.0 },
+                    { 5, null, new DateTime(2023, 2, 23, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7542), "ahha", "111 Pine St, Anytown USA", true, 125.0 },
+                    { 6, null, new DateTime(2023, 2, 22, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7543), "ahha", "222 Cedar St, Anytown USA", false, 150.0 },
+                    { 7, null, new DateTime(2023, 2, 21, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7544), "ahha", "333 Elm St, Anytown USA", true, 200.0 },
+                    { 8, null, new DateTime(2023, 2, 20, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7544), "ahha", "444 Birch St, Anytown USA", false, 175.0 },
+                    { 9, null, new DateTime(2023, 2, 19, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7545), "ahha", "555 Maple St, Anytown USA", true, 225.0 },
+                    { 10, null, new DateTime(2023, 2, 18, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7546), "ahha", "666 Oak St, Anytown USA", false, 250.0 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Books",
@@ -186,6 +202,16 @@ namespace BusinessObjects.Migrations
                     { 4, "Robert Kiyosaki", "png", "Rich Dad Poor Dad", 15.99, 2, 40 },
                     { 5, "Benjamin Graham", "png", "The Intelligent Investor", 20.989999999999998, 2, 10 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "OrderDetails",
+                columns: new[] { "book_id", "order_id", "quantity" },
+                values: new object[] { 1, 1, 2 });
+
+            migrationBuilder.InsertData(
+                table: "OrderDetails",
+                columns: new[] { "book_id", "order_id", "quantity" },
+                values: new object[] { 2, 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_cate_id",

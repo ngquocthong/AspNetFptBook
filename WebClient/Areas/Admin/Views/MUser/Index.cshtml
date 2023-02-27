@@ -2,19 +2,33 @@
 @using WebClient.Data
 @model IEnumerable<ApplicationUser>
 <style>
-    /* Define CSS variables for the colors */
-    :root {
-        --bg-color: var(--bs-gray-100);
-        --text-color: var(--bs-gray-900);
+    .btn-owner {
+        background-color: blue;
+        color: white;
+    }
+
+    .btn-customer {
+        background-color: gray;
+        color: white;
+    }
+
+    .btn-owner.active {
+        background-color: blue;
+        color: white;
+    }
+
+    .btn-customer.active {
+        background-color: gray;
+        color: white;
     }
 </style>
 <div class="container-fluid">
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 fw-bold"></p>
-            <div class="btn-group" role="group">
-                <a asp-action="Index" id="owner" class="btn" type="button">Owner</a>
-                <a asp-action="Customer" id="customer" class="btn" type="button" >Customer</a></div>
+        <div class="btn-group" role="group">
+                <a asp-action="Index" id="owner" class="btn btn-owner active" type="button">Owner</a>
+                <a asp-action="Customer" id="customer" class="btn btn-customer" type="button">Customer</a>
         </div>
         <div class="card-body">
             <div class="row">
@@ -90,18 +104,16 @@
     </div>
 
 <script>
-    // Get references to the buttons
-    const owner = document.getElementById('owner');
-    const cus = document.getElementById('customer');
+   var ownerBtn = document.getElementById("owner");
+   var customerBtn = document.getElementById("customer");
 
-    // Add click event listeners to the buttons
-    owner.addEventListener('click', () => {
-        owner.style.backgroundColor = 'var(--bg-color)';
-        owner.style.color = 'var(--text-color)';
+    ownerBtn.addEventListener("click", function() {
+      ownerBtn.classList.add("active");
+      customerBtn.classList.remove("active");
     });
 
-    cus.addEventListener('click', () => {
-        cus.style.backgroundColor = 'var(--bg-color)';
-        cus.style.color = 'var(--text-color)';
+    customerBtn.addEventListener("click", function() {
+      customerBtn.classList.add("active");
+      ownerBtn.classList.remove("active");
     });
 </script>
