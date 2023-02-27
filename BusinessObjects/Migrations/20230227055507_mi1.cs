@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BusinessObjects.Migrations
 {
-    public partial class mi : Migration
+    public partial class mi1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -81,6 +81,7 @@ namespace BusinessObjects.Migrations
                     book_author = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     book_price = table.Column<double>(type: "float", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false),
+                    book_img = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     cate_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -121,11 +122,12 @@ namespace BusinessObjects.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    totalPrice = table.Column<double>(type: "float", nullable: false),
-                    createdDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    status = table.Column<bool>(type: "bit", nullable: false),
-                    shippingAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cus_id = table.Column<int>(type: "int", nullable: false),
+                    OrderNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CustomerID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -143,7 +145,8 @@ namespace BusinessObjects.Migrations
                 columns: table => new
                 {
                     order_id = table.Column<int>(type: "int", nullable: false),
-                    book_id = table.Column<int>(type: "int", nullable: false)
+                    book_id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -174,14 +177,14 @@ namespace BusinessObjects.Migrations
 
             migrationBuilder.InsertData(
                 table: "Books",
-                columns: new[] { "ID", "book_author", "book_name", "book_price", "cate_id", "quantity" },
+                columns: new[] { "ID", "book_author", "book_img", "book_name", "book_price", "cate_id", "quantity" },
                 values: new object[,]
                 {
-                    { 1, "F. Scott Fitzgerald", "The Great Gatsby", 10.99, 1, 50 },
-                    { 2, "Harper Lee", "To Kill a Mockingbird", 8.9900000000000002, 1, 30 },
-                    { 3, "Paulo Coelho", "The Alchemist", 12.99, 1, 20 },
-                    { 4, "Robert Kiyosaki", "Rich Dad Poor Dad", 15.99, 2, 40 },
-                    { 5, "Benjamin Graham", "The Intelligent Investor", 20.989999999999998, 2, 10 }
+                    { 1, "F. Scott Fitzgerald", "png", "The Great Gatsby", 10.99, 1, 50 },
+                    { 2, "Harper Lee", "png", "To Kill a Mockingbird", 8.9900000000000002, 1, 30 },
+                    { 3, "Paulo Coelho", "png", "The Alchemist", 12.99, 1, 20 },
+                    { 4, "Robert Kiyosaki", "png", "Rich Dad Poor Dad", 15.99, 2, 40 },
+                    { 5, "Benjamin Graham", "png", "The Intelligent Investor", 20.989999999999998, 2, 10 }
                 });
 
             migrationBuilder.CreateIndex(

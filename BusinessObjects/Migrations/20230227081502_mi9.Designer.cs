@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230220022933_mi")]
-    partial class mi
+    [Migration("20230227081502_mi9")]
+    partial class mi9
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,6 +56,9 @@ namespace BusinessObjects.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("book_img")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("book_name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -80,6 +83,7 @@ namespace BusinessObjects.Migrations
                         {
                             ID = 1,
                             book_author = "F. Scott Fitzgerald",
+                            book_img = "png",
                             book_name = "The Great Gatsby",
                             book_price = 10.99,
                             cate_id = 1,
@@ -89,6 +93,7 @@ namespace BusinessObjects.Migrations
                         {
                             ID = 2,
                             book_author = "Harper Lee",
+                            book_img = "png",
                             book_name = "To Kill a Mockingbird",
                             book_price = 8.9900000000000002,
                             cate_id = 1,
@@ -98,6 +103,7 @@ namespace BusinessObjects.Migrations
                         {
                             ID = 3,
                             book_author = "Paulo Coelho",
+                            book_img = "png",
                             book_name = "The Alchemist",
                             book_price = 12.99,
                             cate_id = 1,
@@ -107,6 +113,7 @@ namespace BusinessObjects.Migrations
                         {
                             ID = 4,
                             book_author = "Robert Kiyosaki",
+                            book_img = "png",
                             book_name = "Rich Dad Poor Dad",
                             book_price = 15.99,
                             cate_id = 2,
@@ -116,6 +123,7 @@ namespace BusinessObjects.Migrations
                         {
                             ID = 5,
                             book_author = "Benjamin Graham",
+                            book_img = "png",
                             book_name = "The Intelligent Investor",
                             book_price = 20.989999999999998,
                             cate_id = 2,
@@ -247,6 +255,98 @@ namespace BusinessObjects.Migrations
                     b.HasIndex("CustomerID");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            createdDate = new DateTime(2023, 2, 27, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2073),
+                            cus_id = 1,
+                            shippingAddress = "123 Main St, Anytown USA",
+                            status = true,
+                            totalPrice = 100.0
+                        },
+                        new
+                        {
+                            ID = 2,
+                            createdDate = new DateTime(2023, 2, 26, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2084),
+                            cus_id = 2,
+                            shippingAddress = "456 Elm St, Anytown USA",
+                            status = false,
+                            totalPrice = 200.0
+                        },
+                        new
+                        {
+                            ID = 3,
+                            createdDate = new DateTime(2023, 2, 25, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2090),
+                            cus_id = 3,
+                            shippingAddress = "789 Maple St, Anytown USA",
+                            status = true,
+                            totalPrice = 50.0
+                        },
+                        new
+                        {
+                            ID = 4,
+                            createdDate = new DateTime(2023, 2, 24, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2091),
+                            cus_id = 4,
+                            shippingAddress = "101 Oak St, Anytown USA",
+                            status = false,
+                            totalPrice = 75.0
+                        },
+                        new
+                        {
+                            ID = 5,
+                            createdDate = new DateTime(2023, 2, 23, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2092),
+                            cus_id = 5,
+                            shippingAddress = "111 Pine St, Anytown USA",
+                            status = true,
+                            totalPrice = 125.0
+                        },
+                        new
+                        {
+                            ID = 6,
+                            createdDate = new DateTime(2023, 2, 22, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2095),
+                            cus_id = 6,
+                            shippingAddress = "222 Cedar St, Anytown USA",
+                            status = false,
+                            totalPrice = 150.0
+                        },
+                        new
+                        {
+                            ID = 7,
+                            createdDate = new DateTime(2023, 2, 21, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2096),
+                            cus_id = 7,
+                            shippingAddress = "333 Elm St, Anytown USA",
+                            status = true,
+                            totalPrice = 200.0
+                        },
+                        new
+                        {
+                            ID = 8,
+                            createdDate = new DateTime(2023, 2, 20, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2097),
+                            cus_id = 8,
+                            shippingAddress = "444 Birch St, Anytown USA",
+                            status = false,
+                            totalPrice = 175.0
+                        },
+                        new
+                        {
+                            ID = 9,
+                            createdDate = new DateTime(2023, 2, 19, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2098),
+                            cus_id = 9,
+                            shippingAddress = "555 Maple St, Anytown USA",
+                            status = true,
+                            totalPrice = 225.0
+                        },
+                        new
+                        {
+                            ID = 10,
+                            createdDate = new DateTime(2023, 2, 18, 15, 15, 2, 136, DateTimeKind.Local).AddTicks(2099),
+                            cus_id = 10,
+                            shippingAddress = "666 Oak St, Anytown USA",
+                            status = false,
+                            totalPrice = 250.0
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.OrderDetails", b =>
@@ -255,6 +355,9 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("book_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quantity")
                         .HasColumnType("int");
 
                     b.HasKey("order_id", "book_id");

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230221115350_MiggTuan")]
-    partial class MiggTuan
+    [Migration("20230227064835_mi4")]
+    partial class mi4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -231,24 +231,31 @@ namespace BusinessObjects.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int?>("CustomerID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("createdDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("cus_id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("shippingAddress")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("status")
-                        .HasColumnType("bit");
+                    b.Property<int?>("CustomerID")
+                        .HasColumnType("int");
 
-                    b.Property<double>("totalPrice")
-                        .HasColumnType("float");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -263,6 +270,9 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("book_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.HasKey("order_id", "book_id");

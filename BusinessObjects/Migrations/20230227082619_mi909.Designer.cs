@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230225080631_migra1")]
-    partial class migra1
+    [Migration("20230227082619_mi909")]
+    partial class mi909
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -255,6 +255,98 @@ namespace BusinessObjects.Migrations
                     b.HasIndex("CustomerID");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            createdDate = new DateTime(2023, 2, 27, 15, 26, 19, 569, DateTimeKind.Local).AddTicks(9120),
+                            cus_id = 1,
+                            shippingAddress = "123 Main St, Anytown USA",
+                            status = true,
+                            totalPrice = 100.0
+                        },
+                        new
+                        {
+                            ID = 2,
+                            createdDate = new DateTime(2023, 2, 26, 15, 26, 19, 569, DateTimeKind.Local).AddTicks(9132),
+                            cus_id = 2,
+                            shippingAddress = "456 Elm St, Anytown USA",
+                            status = false,
+                            totalPrice = 200.0
+                        },
+                        new
+                        {
+                            ID = 3,
+                            createdDate = new DateTime(2023, 2, 25, 15, 26, 19, 569, DateTimeKind.Local).AddTicks(9137),
+                            cus_id = 3,
+                            shippingAddress = "789 Maple St, Anytown USA",
+                            status = true,
+                            totalPrice = 50.0
+                        },
+                        new
+                        {
+                            ID = 4,
+                            createdDate = new DateTime(2023, 2, 24, 15, 26, 19, 569, DateTimeKind.Local).AddTicks(9138),
+                            cus_id = 4,
+                            shippingAddress = "101 Oak St, Anytown USA",
+                            status = false,
+                            totalPrice = 75.0
+                        },
+                        new
+                        {
+                            ID = 5,
+                            createdDate = new DateTime(2023, 2, 23, 15, 26, 19, 569, DateTimeKind.Local).AddTicks(9139),
+                            cus_id = 5,
+                            shippingAddress = "111 Pine St, Anytown USA",
+                            status = true,
+                            totalPrice = 125.0
+                        },
+                        new
+                        {
+                            ID = 6,
+                            createdDate = new DateTime(2023, 2, 22, 15, 26, 19, 569, DateTimeKind.Local).AddTicks(9142),
+                            cus_id = 6,
+                            shippingAddress = "222 Cedar St, Anytown USA",
+                            status = false,
+                            totalPrice = 150.0
+                        },
+                        new
+                        {
+                            ID = 7,
+                            createdDate = new DateTime(2023, 2, 21, 15, 26, 19, 569, DateTimeKind.Local).AddTicks(9142),
+                            cus_id = 7,
+                            shippingAddress = "333 Elm St, Anytown USA",
+                            status = true,
+                            totalPrice = 200.0
+                        },
+                        new
+                        {
+                            ID = 8,
+                            createdDate = new DateTime(2023, 2, 20, 15, 26, 19, 569, DateTimeKind.Local).AddTicks(9143),
+                            cus_id = 8,
+                            shippingAddress = "444 Birch St, Anytown USA",
+                            status = false,
+                            totalPrice = 175.0
+                        },
+                        new
+                        {
+                            ID = 9,
+                            createdDate = new DateTime(2023, 2, 19, 15, 26, 19, 569, DateTimeKind.Local).AddTicks(9144),
+                            cus_id = 9,
+                            shippingAddress = "555 Maple St, Anytown USA",
+                            status = true,
+                            totalPrice = 225.0
+                        },
+                        new
+                        {
+                            ID = 10,
+                            createdDate = new DateTime(2023, 2, 18, 15, 26, 19, 569, DateTimeKind.Local).AddTicks(9145),
+                            cus_id = 10,
+                            shippingAddress = "666 Oak St, Anytown USA",
+                            status = false,
+                            totalPrice = 250.0
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.OrderDetails", b =>
@@ -265,11 +357,28 @@ namespace BusinessObjects.Migrations
                     b.Property<int>("book_id")
                         .HasColumnType("int");
 
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("order_id", "book_id");
 
                     b.HasIndex("book_id");
 
                     b.ToTable("OrderDetails");
+
+                    b.HasData(
+                        new
+                        {
+                            order_id = 1,
+                            book_id = 1,
+                            quantity = 2
+                        },
+                        new
+                        {
+                            order_id = 1,
+                            book_id = 2,
+                            quantity = 1
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.StoreOwner", b =>

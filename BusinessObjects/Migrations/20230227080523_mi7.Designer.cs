@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230225055248_BussinessObject")]
-    partial class BussinessObject
+    [Migration("20230227080523_mi7")]
+    partial class mi7
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -263,6 +263,9 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("book_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quantity")
                         .HasColumnType("int");
 
                     b.HasKey("order_id", "book_id");

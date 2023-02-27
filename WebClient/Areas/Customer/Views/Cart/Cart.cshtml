@@ -1,12 +1,14 @@
 ﻿@using BusinessObjects;
 @model List<CartItem>
-
-
+string userid;
+@{
+	string userID="";
+}
 <main class="page shopping-cart-page">
 	<section class="clean-block clean-cart dark">
 		<div class="container">
 			<div class="block-heading">
-				<h2 class="text-info">Shopping Cart</h2>
+				<h2 class="text-info">Shopping Cartt</h2>
 				@if (Model.Count > 0)
 				{
 					double total = 0;
@@ -17,6 +19,7 @@
 								<div class="items">
 									@foreach (var cartitem in Model)
 									{
+										 userID = cartitem.cus_id; 
 										var thanhtien = cartitem.quantity * cartitem.book.book_price;
 										total += thanhtien;
 										<div class="product">
@@ -35,8 +38,9 @@
 												data-productid="@cartitem.book.ID">
 													Update
 												</button>
-												<a asp-route="removecart" asp-route-productid="@cartitem.book.ID "
-										   class="btn btn-danger">Delete</a>
+												<a asp-route="removecart" asp-route-productid="@cartitem.book.ID" class="btn btn-danger">Delete</a>
+										
+												
 											</div>
 										</div>
 									}
@@ -60,8 +64,12 @@
 												total.ToString("n0")
 												)
 										</span>
-									</h4><button class="btn btn-primary btn-lg d-block w-100" type="button">Checkout</button>
+									</h4>
+									<a asp-action="CheckOut" asp-route-userid="@userID" class="btn btn-primary btn-lg d-block w-100" type="button">Checkout</a>
+									
+									
 								</div>
+								
 							</div>
 						</div>
 					</div>
