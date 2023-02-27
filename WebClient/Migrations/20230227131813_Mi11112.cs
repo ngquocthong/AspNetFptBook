@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebClient.Migrations
 {
-    public partial class Mi1 : Migration
+    public partial class Mi11112 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

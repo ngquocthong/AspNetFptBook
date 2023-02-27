@@ -12,7 +12,7 @@ namespace BookManagementAPI.Controllers
     public class CategoryController : ControllerBase
     {
         // GET: api/<CategoryController>
-        ICategoryRepository repository = new CateroryRepository();
+        ICategoryRepository repository = new CategoryRepository();
 
         [HttpGet]
         public ActionResult<IEnumerable<Category>> Get() => repository.GetCategories();
