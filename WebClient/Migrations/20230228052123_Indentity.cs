@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebClient.Migrations
 {
-    public partial class Mi11112 : Migration
+    public partial class Indentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -157,6 +157,26 @@ namespace WebClient.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "1", "ae9d5365-1966-48b0-9874-f8d1a6c8fd06", "Admin", "ADMIN" },
+                    { "2", "bf732328-ae0d-4c90-aeaa-f981b8a475c0", "Owner", "Owner" },
+                    { "3", "a31a3b21-c28b-46bf-b38c-f88ead93603b", "Customer", "Customer" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "DofB", "Email", "EmailConfirmed", "FullName", "Gender", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "1", 0, "Binh Duong", "9a676d23-008d-48a5-8d3b-72dfbdf4e2a1", new DateTime(2002, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@example.com", true, "Toi La Acc Min", "M", false, null, null, null, "AQAAAAEAACcQAAAAEE+d8VbZ5DPYIYfe09WzmzCpKQylz6oFPl64H+bYJgf3MmzSHRNN9rV7W9sUnrcGKw==", null, false, "", false, null });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "1", "1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
