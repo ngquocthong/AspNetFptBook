@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
@@ -7,7 +8,7 @@ using System.Text.Json;
 namespace WebClient.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
+    [Authorize(Policy = "AdminPolicy")]
     public class MCategoryController : Controller
     {
         private readonly HttpClient client = null;
@@ -19,8 +20,10 @@ namespace WebClient.Areas.Admin.Controllers
             client.DefaultRequestHeaders.Accept.Add(contentType);
             this.api = "https://localhost:7186/api/Category";
         }
+       
         // GET: ManageCategory
         [HttpGet]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult> Index()
         {
             HttpResponseMessage respon = await client.GetAsync(api);

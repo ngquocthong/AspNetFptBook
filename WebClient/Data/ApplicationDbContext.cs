@@ -29,7 +29,10 @@ namespace WebClient.Data
                 {
                     Id = "1",
                     FullName = "Toi La Acc Min", 
+                    UserName = "admin@example.com",
+                    NormalizedUserName = "ADMIN@EXAMPLE.COM",
                     Email = "admin@example.com",
+                    NormalizedEmail= "ADMIN@EXAMPLE.COM",
                     DofB = new DateTime(2002,02,02),
                     Gender = "M",
                     Address= "Binh Duong",
