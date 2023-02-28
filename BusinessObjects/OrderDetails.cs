@@ -12,9 +12,10 @@ namespace BusinessObjects
     public class OrderDetails
     {
         [Key]
-		[JsonIgnore]
+		/*[JsonIgnore]*/
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int id { get; set; }
 		public int order_id { get; set; }
-        [Key]
         public int book_id { get; set; }
 		public int quantity { get; set; }
 

@@ -25,7 +25,10 @@ namespace BusinessObjects
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Admin> Admin { get; set; }
 		public DbSet<Cart> Carts { get; set; }
+		public DbSet<Customer> Customers { get; set; }
 		public DbSet<Order> Orders { get; set; }
+		public DbSet<OrderDetails> OrderDetailses { get; set; }
+		public DbSet<StoreOwner> StoreOwners { get; set; }
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<OrderDetails>().HasKey(m => new { m.order_id, m.book_id });

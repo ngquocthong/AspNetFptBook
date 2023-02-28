@@ -16,5 +16,6 @@ namespace BusinessObjects
         public double cart_totalPrice { get; set; }
         public int cart_quantity { get; set; }
         public string cus_id { get; set; }
+       
     }
 }

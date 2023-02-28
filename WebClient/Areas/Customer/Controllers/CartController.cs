@@ -26,7 +26,6 @@ namespace WebClient.Areas.Customer.Controllers
         private readonly ILogger<BookController> _logger;
         public CartController(ILogger<BookController>? logger)
         {
-
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
@@ -132,6 +131,7 @@ namespace WebClient.Areas.Customer.Controllers
             SaveCartSession(cart);
             return RedirectToAction(nameof(Cart));
         }
+
 		public async Task<IActionResult> CheckOut(string userID)
 		{
 			api = api + "/Orders";
@@ -142,7 +142,7 @@ namespace WebClient.Areas.Customer.Controllers
             or.cus_id = userID;
             or.createdDate = DateTime.Now;
 			or.shippingAddress = "ABC";
-
+			or.OrderDetails = new List<OrderDetails>();
 			foreach (var item in cart)
             {
                 OrderDetails od = new OrderDetails();
@@ -151,11 +151,8 @@ namespace WebClient.Areas.Customer.Controllers
 				or.totalPrice += item.quantity * item.book.book_price;
                 od.Order = or;
                 od.Book = item.book;
-                if (od != null)
-                    or.OrderDetails = new List<OrderDetails>();
+                
                 or.OrderDetails.Add(od);
-
-
             }
 
 			// gan 
@@ -168,7 +165,7 @@ namespace WebClient.Areas.Customer.Controllers
             HttpResponseMessage respon = await client.PostAsync(api, content);
 			if (respon.StatusCode == System.Net.HttpStatusCode.NoContent)
 			{
-				return RedirectToAction("Index");
+				return RedirectToAction("Index", "Order");
 			}
             return View();
 			
