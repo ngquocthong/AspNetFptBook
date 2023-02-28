@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace WebClient.Areas.Customer.Controllers
@@ -25,11 +26,21 @@ namespace WebClient.Areas.Customer.Controllers
 
         public async Task<ActionResult> Index()
         {
-            HttpResponseMessage response = await client.GetAsync(api);
-            string data = await response.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            List<Book> list = JsonSerializer.Deserialize<List<Book>>(data, options);
-            return View(list);
+
+            try
+            {
+                var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                HttpResponseMessage response = await client.GetAsync(api);
+                string data = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                List<Book> list = JsonSerializer.Deserialize<List<Book>>(data, options);
+                list = list.Where(b => b.owner_id == userID).ToList();
+                return View(list);
+            }
+            catch (JsonException ex)
+            {
+                return View(new List<Book>());
+            }
         }
 
         public ActionResult Details(int id)
@@ -41,7 +52,9 @@ namespace WebClient.Areas.Customer.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewData["userID"] = userID;
+            return View("Create");
         }
 
         // POST: BookController/Create
