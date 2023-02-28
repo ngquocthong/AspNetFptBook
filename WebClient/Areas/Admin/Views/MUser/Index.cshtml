@@ -3,7 +3,7 @@
 @model IEnumerable<ApplicationUser>
 <style>
     .btn-owner {
-        background-color: blue;
+        background-color: gray;
         color: white;
     }
 
@@ -18,7 +18,7 @@
     }
 
     .btn-customer.active {
-        background-color: gray;
+        background-color: blue;
         color: white;
     }
 </style>
@@ -70,6 +70,10 @@
                             <td>@u.DofB</td>
                             <td>@u.Gender</td>
                             <td>@u.Address</td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@u.Id">Edit</a>
+                                       @* <a asp-action="Delete" asp-route-id="@kh.cus_id" onclick="return confirm('chac chua');">Delete</a>*@
+                                    </td>
                         </tr>
                         }
                     </tbody>
@@ -104,16 +108,15 @@
     </div>
 
 <script>
-   var ownerBtn = document.getElementById("owner");
-   var customerBtn = document.getElementById("customer");
+    var ownerBtn = document.getElementById("owner");
+    var customerBtn = document.getElementById("customer");
 
-    ownerBtn.addEventListener("click", function() {
-      ownerBtn.classList.add("active");
-      customerBtn.classList.remove("active");
+    ownerBtn.addEventListener("click", function () {
+        ownerBtn.classList.add("active");
     });
 
-    customerBtn.addEventListener("click", function() {
-      customerBtn.classList.add("active");
-      ownerBtn.classList.remove("active");
+    customerBtn.addEventListener("click", function () {
+        customerBtn.classList.add("active");
+        ownerBtn.classList.remove("active");
     });
 </script>
