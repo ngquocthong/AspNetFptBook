@@ -56,14 +56,12 @@
                     </div>
                     <div class="col-md-9">
                         <div class="products">
-
-
                             <div class="row g-0" id="containBook">
                                 @foreach (var book in Model)
                                 {
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <div class="clean-product-item">
-                                            <div class="image"><a href=""><img class="img-fluid d-block mx-auto" src="https://localhost:7186/api/Book/image/@book.ID"></a></div>
+                                            <div class="image"><a asp-action="Details" asp-route-id="@book.ID"><img class="img-fluid d-block mx-auto" src="https://localhost:7186/api/Book/image/@book.ID"></a></div>
                                             <div class="product-name"><a asp-action ="Details" asp-route-id="@book.ID">@book.book_name</a>
 
                                     </div>

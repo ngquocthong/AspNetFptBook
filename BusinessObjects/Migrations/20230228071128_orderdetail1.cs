@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BusinessObjects.Migrations
 {
-    public partial class mi1 : Migration
+    public partial class orderdetail1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,6 +24,21 @@ namespace BusinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Carts",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    cart_totalPrice = table.Column<double>(type: "float", nullable: false),
+                    cart_quantity = table.Column<int>(type: "int", nullable: false),
+                    cus_id = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carts", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -38,21 +53,20 @@ namespace BusinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customers",
+                name: "Orders",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cus_username = table.Column<int>(type: "int", nullable: false),
-                    cus_pass = table.Column<int>(type: "int", nullable: false),
-                    cus_name = table.Column<int>(type: "int", nullable: false),
-                    dob = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cus_address = table.Column<int>(type: "int", nullable: false)
+                    totalPrice = table.Column<double>(type: "float", nullable: false),
+                    createdDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    status = table.Column<bool>(type: "bit", nullable: false),
+                    shippingAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    cus_id = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customers", x => x.ID);
+                    table.PrimaryKey("PK_Orders", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,69 +110,26 @@ namespace BusinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Carts",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    cart_totalPrice = table.Column<double>(type: "float", nullable: false),
-                    cart_quantity = table.Column<int>(type: "int", nullable: false),
-                    cus_id = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Carts", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Carts_Customers_cus_id",
-                        column: x => x.cus_id,
-                        principalTable: "Customers",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerID = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Orders_Customers_CustomerID",
-                        column: x => x.CustomerID,
-                        principalTable: "Customers",
-                        principalColumn: "ID");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OrderDetails",
+                name: "OrderDetailses",
                 columns: table => new
                 {
                     order_id = table.Column<int>(type: "int", nullable: false),
                     book_id = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetails", x => new { x.order_id, x.book_id });
+                    table.PrimaryKey("PK_OrderDetailses", x => new { x.order_id, x.book_id });
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Books_book_id",
+                        name: "FK_OrderDetailses_Books_book_id",
                         column: x => x.book_id,
                         principalTable: "Books",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Orders_order_id",
+                        name: "FK_OrderDetailses_Orders_order_id",
                         column: x => x.order_id,
                         principalTable: "Orders",
                         principalColumn: "ID",
@@ -168,12 +139,28 @@ namespace BusinessObjects.Migrations
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "ID", "cate_des", "cate_name" },
-                values: new object[] { 1, "Related to unrealistic storey", "Fiction" });
+                values: new object[,]
+                {
+                    { 1, "Related to unrealistic storey", "Fiction" },
+                    { 2, "Related to financial", "Finance" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "ID", "cate_des", "cate_name" },
-                values: new object[] { 2, "Related to financial", "Finance" });
+                table: "Orders",
+                columns: new[] { "ID", "createdDate", "cus_id", "shippingAddress", "status", "totalPrice" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 2, 28, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2406), "ahha", "123 Main St, Anytown USA", true, 100.0 },
+                    { 2, new DateTime(2023, 2, 27, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2416), "ahha", "456 Elm St, Anytown USA", false, 200.0 },
+                    { 3, new DateTime(2023, 2, 26, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2421), "ahha", "789 Maple St, Anytown USA", true, 50.0 },
+                    { 4, new DateTime(2023, 2, 25, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2422), "ahha", "101 Oak St, Anytown USA", false, 75.0 },
+                    { 5, new DateTime(2023, 2, 24, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2423), "ahha", "111 Pine St, Anytown USA", true, 125.0 },
+                    { 6, new DateTime(2023, 2, 23, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2424), "ahha", "222 Cedar St, Anytown USA", false, 150.0 },
+                    { 7, new DateTime(2023, 2, 22, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2425), "ahha", "333 Elm St, Anytown USA", true, 200.0 },
+                    { 8, new DateTime(2023, 2, 21, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2425), "ahha", "444 Birch St, Anytown USA", false, 175.0 },
+                    { 9, new DateTime(2023, 2, 20, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2426), "ahha", "555 Maple St, Anytown USA", true, 225.0 },
+                    { 10, new DateTime(2023, 2, 19, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2427), "ahha", "666 Oak St, Anytown USA", false, 250.0 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Books",
@@ -187,26 +174,25 @@ namespace BusinessObjects.Migrations
                     { 5, "Benjamin Graham", "png", "The Intelligent Investor", 20.989999999999998, 2, 10 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "OrderDetailses",
+                columns: new[] { "book_id", "order_id", "quantity" },
+                values: new object[] { 1, 1, 2 });
+
+            migrationBuilder.InsertData(
+                table: "OrderDetailses",
+                columns: new[] { "book_id", "order_id", "quantity" },
+                values: new object[] { 2, 1, 1 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Books_cate_id",
                 table: "Books",
                 column: "cate_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Carts_cus_id",
-                table: "Carts",
-                column: "cus_id",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_book_id",
-                table: "OrderDetails",
+                name: "IX_OrderDetailses_book_id",
+                table: "OrderDetailses",
                 column: "book_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_CustomerID",
-                table: "Orders",
-                column: "CustomerID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -218,7 +204,7 @@ namespace BusinessObjects.Migrations
                 name: "Carts");
 
             migrationBuilder.DropTable(
-                name: "OrderDetails");
+                name: "OrderDetailses");
 
             migrationBuilder.DropTable(
                 name: "StoreOwners");
@@ -231,9 +217,6 @@ namespace BusinessObjects.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Customers");
         }
     }
 }

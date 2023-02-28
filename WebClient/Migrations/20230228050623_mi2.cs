@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace BusinessObjects.Migrations
+namespace WebClient.Migrations
 {
-    public partial class mi4 : Migration
+    public partial class mi2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

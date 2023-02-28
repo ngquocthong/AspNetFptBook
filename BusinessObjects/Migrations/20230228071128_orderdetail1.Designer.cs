@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230227050658_Migration1")]
-    partial class Migration1
+    [Migration("20230228071128_orderdetail1")]
+    partial class orderdetail1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -145,13 +145,11 @@ namespace BusinessObjects.Migrations
                     b.Property<double>("cart_totalPrice")
                         .HasColumnType("float");
 
-                    b.Property<int>("cus_id")
-                        .HasColumnType("int");
+                    b.Property<string>("cus_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("cus_id")
-                        .IsUnique();
 
                     b.ToTable("Carts");
                 });
@@ -191,38 +189,6 @@ namespace BusinessObjects.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BusinessObjects.Customer", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<int>("cus_address")
-                        .HasColumnType("int");
-
-                    b.Property<int>("cus_name")
-                        .HasColumnType("int");
-
-                    b.Property<int>("cus_pass")
-                        .HasColumnType("int");
-
-                    b.Property<int>("cus_username")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("dob")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Customers");
-                });
-
             modelBuilder.Entity("BusinessObjects.Order", b =>
                 {
                     b.Property<int>("ID")
@@ -231,14 +197,12 @@ namespace BusinessObjects.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int?>("CustomerID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("createdDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("cus_id")
-                        .HasColumnType("int");
+                    b.Property<string>("cus_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("shippingAddress")
                         .IsRequired()
@@ -252,9 +216,99 @@ namespace BusinessObjects.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CustomerID");
-
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            createdDate = new DateTime(2023, 2, 28, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2406),
+                            cus_id = "ahha",
+                            shippingAddress = "123 Main St, Anytown USA",
+                            status = true,
+                            totalPrice = 100.0
+                        },
+                        new
+                        {
+                            ID = 2,
+                            createdDate = new DateTime(2023, 2, 27, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2416),
+                            cus_id = "ahha",
+                            shippingAddress = "456 Elm St, Anytown USA",
+                            status = false,
+                            totalPrice = 200.0
+                        },
+                        new
+                        {
+                            ID = 3,
+                            createdDate = new DateTime(2023, 2, 26, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2421),
+                            cus_id = "ahha",
+                            shippingAddress = "789 Maple St, Anytown USA",
+                            status = true,
+                            totalPrice = 50.0
+                        },
+                        new
+                        {
+                            ID = 4,
+                            createdDate = new DateTime(2023, 2, 25, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2422),
+                            cus_id = "ahha",
+                            shippingAddress = "101 Oak St, Anytown USA",
+                            status = false,
+                            totalPrice = 75.0
+                        },
+                        new
+                        {
+                            ID = 5,
+                            createdDate = new DateTime(2023, 2, 24, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2423),
+                            cus_id = "ahha",
+                            shippingAddress = "111 Pine St, Anytown USA",
+                            status = true,
+                            totalPrice = 125.0
+                        },
+                        new
+                        {
+                            ID = 6,
+                            createdDate = new DateTime(2023, 2, 23, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2424),
+                            cus_id = "ahha",
+                            shippingAddress = "222 Cedar St, Anytown USA",
+                            status = false,
+                            totalPrice = 150.0
+                        },
+                        new
+                        {
+                            ID = 7,
+                            createdDate = new DateTime(2023, 2, 22, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2425),
+                            cus_id = "ahha",
+                            shippingAddress = "333 Elm St, Anytown USA",
+                            status = true,
+                            totalPrice = 200.0
+                        },
+                        new
+                        {
+                            ID = 8,
+                            createdDate = new DateTime(2023, 2, 21, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2425),
+                            cus_id = "ahha",
+                            shippingAddress = "444 Birch St, Anytown USA",
+                            status = false,
+                            totalPrice = 175.0
+                        },
+                        new
+                        {
+                            ID = 9,
+                            createdDate = new DateTime(2023, 2, 20, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2426),
+                            cus_id = "ahha",
+                            shippingAddress = "555 Maple St, Anytown USA",
+                            status = true,
+                            totalPrice = 225.0
+                        },
+                        new
+                        {
+                            ID = 10,
+                            createdDate = new DateTime(2023, 2, 19, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2427),
+                            cus_id = "ahha",
+                            shippingAddress = "666 Oak St, Anytown USA",
+                            status = false,
+                            totalPrice = 250.0
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.OrderDetails", b =>
@@ -265,11 +319,36 @@ namespace BusinessObjects.Migrations
                     b.Property<int>("book_id")
                         .HasColumnType("int");
 
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("order_id", "book_id");
 
                     b.HasIndex("book_id");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderDetailses");
+
+                    b.HasData(
+                        new
+                        {
+                            order_id = 1,
+                            book_id = 1,
+                            id = 0,
+                            quantity = 2
+                        },
+                        new
+                        {
+                            order_id = 1,
+                            book_id = 2,
+                            id = 0,
+                            quantity = 1
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.StoreOwner", b =>
@@ -312,24 +391,6 @@ namespace BusinessObjects.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("BusinessObjects.Cart", b =>
-                {
-                    b.HasOne("BusinessObjects.Customer", "Customer")
-                        .WithOne("Cart")
-                        .HasForeignKey("BusinessObjects.Cart", "cus_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("BusinessObjects.Order", b =>
-                {
-                    b.HasOne("BusinessObjects.Customer", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerID");
-                });
-
             modelBuilder.Entity("BusinessObjects.OrderDetails", b =>
                 {
                     b.HasOne("BusinessObjects.Book", "Book")
@@ -352,14 +413,6 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Category", b =>
                 {
                     b.Navigation("Books");
-                });
-
-            modelBuilder.Entity("BusinessObjects.Customer", b =>
-                {
-                    b.Navigation("Cart")
-                        .IsRequired();
-
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("BusinessObjects.Order", b =>

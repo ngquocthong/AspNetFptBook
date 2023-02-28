@@ -1,0 +1,40 @@
+﻿@using BusinessObjects;
+@model IEnumerable<OrderDetails>
+@{
+	var books = ViewBag.Books as List<Book>;
+
+}
+
+<main class="page payment-page">
+	<section class="clean-block payment-form dark">
+		<div class="container">
+			<div class="block-heading">
+				<h2 class="text-info">Order @(Model.ElementAt(0).order_id)</h2>
+				<p></p>
+			</div>
+
+				<div class="products">
+					<h3 class="title">Checkout</h3>
+					@if (Model != null)
+					{
+						@foreach (var od in Model)
+						{
+						var book = books.FirstOrDefault(b => b.ID == od.book_id);
+						var total = od.quantity * book.book_price;
+							<div class="item">
+								<span class="price">@(total)</span>
+								<p class="item-name"> @book.book_name</p>
+								<p class="item-description">@book.book_author</p>
+
+							</div>
+						}
+					}
+					else
+					{
+						<p>No order details found</p>
+					}
+				</div>
+				<div class="card-details" style="padding: 39px 40px 31px;padding-top: 3px;"><button class="btn btn-primary d-block w-100" type="submit">View Order History</button></div>
+		</div>
+	</section>
+</main>

@@ -12,8 +12,8 @@ using WebClient.Data;
 namespace WebClient.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230227050759_Mi1")]
-    partial class Mi1
+    [Migration("20230228000812_mi1")]
+    partial class mi1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
