@@ -52,21 +52,21 @@ namespace WebClient.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "86f9ffe3-7005-4446-8081-db498e7a5030",
+                            ConcurrencyStamp = "0fd70b48-c728-4e71-9e56-36d8138c4752",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "077641ec-0acf-46e6-ab3d-597962535a8e",
+                            ConcurrencyStamp = "c2e860cc-92c9-4d06-b77e-0f84f3bdc309",
                             Name = "Owner",
                             NormalizedName = "Owner"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "97b2d670-2229-42ab-a276-e01eb83dd91a",
+                            ConcurrencyStamp = "4190907b-8b2e-401b-890d-231e03437be8",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         });
@@ -157,6 +157,13 @@ namespace WebClient.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -263,7 +270,7 @@ namespace WebClient.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Address = "Binh Duong",
-                            ConcurrencyStamp = "222d9f7d-e3ad-4224-9ba1-c0d3924a2111",
+                            ConcurrencyStamp = "38838aaf-0a1c-47bd-98de-bb43a8c8fdda",
                             DofB = new DateTime(2002, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@example.com",
                             EmailConfirmed = true,
@@ -272,7 +279,7 @@ namespace WebClient.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECgagNAlyWtxt4mO7q0K6m8je6uvV4UapO+Xnaw1hNffd8lcNdOOyaauS9KPoJjaJQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ0LB7FcTn4TJC6NBP5L7PkNN4V9Mq0NZb0n0f+fMm9IN617IClwqXnV7eHTPLCu5Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
