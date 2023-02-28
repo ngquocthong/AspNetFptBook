@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using WebClient.Data;
+using System.Security.Claims;
 
 namespace WebClient.Areas.Identity.Pages.Account
 {
@@ -22,11 +23,16 @@ namespace WebClient.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
+
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -113,10 +119,30 @@ namespace WebClient.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+
+                var user = await _userManager.FindByEmailAsync(Input.Email);
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+              
+                    var userRoles = await _userManager.GetRolesAsync(user);
+
+                    // Redirect based on role
+                    if (userRoles.Contains("Admin"))
+                    {
+                        return Redirect("/Admin/MCategory");
+                    }
+                    else if (userRoles.Contains("Owner"))
+                    {
+                        return Redirect("/Owner/MBook");
+                    }
+                    else
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

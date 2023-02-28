@@ -19,6 +19,10 @@ namespace DataAccess
                 {
                     listProducts = context.Books.ToList();
                 }
+                if (listProducts.Count == 0)
+                {
+                     return new List<Book>();
+                }
             }
             catch (Exception e)
             {

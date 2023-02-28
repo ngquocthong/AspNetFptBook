@@ -39,18 +39,25 @@ namespace BusinessObjects
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+        [Required]
         public string book_name { get; set; }
+        [Required]
         public string book_author { get; set; }
+        [Required]
         public double book_price { get; set; }
+        [Required]
         public int quantity { get; set; }
+        [Required]
         public string? book_img { get; set; }
+        [Required]
+        public string owner_id { get; set; }
+        [Required]
         public int cate_id { get; set; }
+  
         [ForeignKey("cate_id")]
 		[JsonIgnore]
 		public virtual Category? Category { get; set; }
 
-/*        public int owner_id { get; set; }
-        [ForeignKey("owner_id")]
-        public virtual StoreOwner? StoreOwner { get; set; }*/
     }
+    
 }

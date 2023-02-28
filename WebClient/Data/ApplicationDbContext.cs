@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace WebClient.Data
 {
@@ -9,6 +10,40 @@ namespace WebClient.Data
             : base(options)
         {
 
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole { Id = "2", Name = "Owner", NormalizedName = "Owner" },
+                new IdentityRole { Id = "3", Name = "Customer", NormalizedName = "Customer" }
+            );
+
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            builder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser
+                {
+                    Id = "1",
+                    FullName = "Toi La Acc Min", 
+                    UserName = "admin@example.com",
+                    NormalizedUserName = "ADMIN@EXAMPLE.COM",
+                    Email = "admin@example.com",
+                    NormalizedEmail= "ADMIN@EXAMPLE.COM",
+                    DofB = new DateTime(2002,02,02),
+                    Gender = "M",
+                    Address= "Binh Duong",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "Admin@123"),
+                    SecurityStamp = string.Empty
+                }
+            );
+
+            builder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string> { UserId = "1", RoleId = "1" }
+            );
         }
 
     }

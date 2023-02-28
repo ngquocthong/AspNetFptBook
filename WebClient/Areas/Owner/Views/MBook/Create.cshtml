@@ -1,4 +1,7 @@
-﻿<div class="container-fluid">
+﻿@using BusinessObjects;
+@model Book
+
+<div class="container-fluid">
     <h3 class="text-dark mb-4">Add New Book</h3>
     <div class="row mb-3">
         <div class="col-lg-8">
@@ -40,7 +43,7 @@
                                     <div class="col">
                                         <label class="form-label"><strong>Picture</strong></label>
                                         <div class="mb-3">
-                                            <input type="file" name="book_img" accept="image/*" class="form-control">
+                                            <input  id="book_img" type="file" name="book_img" accept="image/*" class="form-control">
                                         </div>
                                     </div>
 
@@ -58,7 +61,11 @@
     </div>
     <div class="card shadow mb-5"></div>
 </div>
-<script>
+
+
+   <script> <partial name="_ValidationScriptsPartial" /></script>
+
+    <script type="text/javascript">
     const categorySelect = document.querySelector('#cate_id');
     fetch('https://localhost:7186/api/Category')
         .then(response => response.json())
@@ -91,6 +98,7 @@
             }
         });
         jsonObject['book_img'] = "";
+            jsonObject['owner_id'] = '@ViewData["userID"]';
         const fileImage = document.querySelector('input[type=file][name=book_img]').files[0];
         formData.append('datajson', JSON.stringify(jsonObject));
         formData.append('fileImage', fileImage);
@@ -104,12 +112,15 @@
                 throw new Error('Failed to submit form');
             }
             alert('Form submitted successfully');
+            window.location.href = "/Owner/MBook";
         } catch (error) {
             console.error(error);
-            alert('Failed to submit form');
+            alert('Upload a Picture!');
         }
     });
+    </script>
 
-</script>
 
+<script>
+      
 </script>

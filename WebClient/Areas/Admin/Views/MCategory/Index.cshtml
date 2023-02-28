@@ -1,4 +1,6 @@
-﻿<div class="card shadow">
+﻿@using BusinessObjects;
+@model IEnumerable<Category>
+<div class="card shadow">
         <div class="container-fluid">
             <h3 class="text-dark mb-4" style="font-weight: bold;color: var(--bs-table-striped-color);">Manage Category</h3>
         </div>
@@ -14,35 +16,42 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-center">Cell 1</td>
-                                <td class="text-center">Cell 2</td>
-                                <td class="text-center"><i class="far fa-edit" style="font-size: 21px;"></i><i class="fas fa-trash-alt" style="font-size: 21px;margin-left: 13px;"></i></td>
-                            </tr>
-                            <tr class="text-center">
-                                <td class="text-center">Cell 3</td>
-                                <td class="text-center">Cell 4</td>
-                                <td class="text-center"></td>
-                            </tr>
-                        </tbody>
+							@foreach (Category cate in Model) {
+							if (cate.accept==true) {
+								<tr>
+									<td>@cate.cate_name</td>
+									<td>@cate.cate_des</td>
+								</tr>
+								}
+							}
+						</tbody>
                     </table>
                 </div>
             </div>
             <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Owner</h4>
-                        <h6 class="text-muted card-subtitle mb-2">Request A New Category: Fiction</h6>
-                        <p class="card-text">This category...........</p><a class="card-link" href="#">Accept</a><a class="card-link" href="#">Deny</a>
-                    </div>
-                </div>
+
+			@foreach (Category cate in Model)
+			{
+				if (cate.accept == false)
+				{
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title">Owner</h4>
+							<h6 class="text-muted card-subtitle mb-2">Request A New Category: @cate.cate_name</h6>
+							<p class="card-text">@cate.cate_des</p>
+							<a class="card-link" asp-action="Accept" asp-route-id="@cate.ID">Accept</a><a class="card-link" asp-action="Delete" asp-route-id="@cate.ID">Deny</a>
+						</div>
+					</div>
+				}
+			}
+				
+
             </div>
         </div>
-    @*</div>*@9
 </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
+<@*script type="text/javascript">
 	$(document).ready(function () {
 		ShowAllProducts();
 
@@ -60,20 +69,20 @@
 						appendElement.append($("<td>").html(value["id"]));
 						appendElement.append($("<td>").html(value["cate_name"]));
 						appendElement.append($("<td>").html(value["cate_des"]));
-						//appendElement.append($("<td>").html("<a href=\"?id=" + value["id"] + "\"><img src=\"icon/edit.png\"/></a>"));
-						//appendElement.append($("<td>").html("<img class=\"delete\" src=\"icon/close.png\"/>"));
+						appendElement.append($("<td>").html("<a href=\"?id=" + value["id"] + "\"><img src=\"icon/edit.png\"/></a>"));
+						appendElement.append($("<td>").html("<img class=\"delete\" src=\"icon/close.png\"/>"));
 					});
 				},
 				error: function (xhr, status, error) {
 					console.log(xhr)
 				}
 			});
-		}
-
+		}*@
+		<script  type="text/javascript">
 		$("table").on("click", "img.delete", function () {
 			var productId = $(this).parents("tr").find("td:nth-child(1)").text();
 			$.ajax({
-				url: "https://localhost:7186/api/Book/" + productId,
+				url: "https://localhost:7186/api/Category/" + productId,
 				type: "delete",
 				contentType: "application/json",
 				dataType: "json",

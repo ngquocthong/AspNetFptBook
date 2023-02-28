@@ -12,8 +12,8 @@ using WebClient.Data;
 namespace WebClient.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230228000812_mi1")]
-    partial class mi1
+    [Migration("20230228053549_Identity")]
+    partial class Identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,29 @@ namespace WebClient.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "448d51ba-d3d3-4b17-994e-ee03ed9f247f",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "fe32d205-b3e2-417c-b7a9-4d304fa21690",
+                            Name = "Owner",
+                            NormalizedName = "Owner"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            ConcurrencyStamp = "f25ac6e3-8de9-4559-8887-908efc5cf675",
+                            Name = "Customer",
+                            NormalizedName = "Customer"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -136,6 +159,13 @@ namespace WebClient.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -235,6 +265,26 @@ namespace WebClient.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            Address = "Binh Duong",
+                            ConcurrencyStamp = "3bb865f2-4cdf-41b9-9b28-83730db91242",
+                            DofB = new DateTime(2002, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "Admin@example.com",
+                            EmailConfirmed = true,
+                            FullName = "Toi La Acc Min",
+                            Gender = "M",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEJrGYeQPhGCHJdqljtz0K14RQ6cnKjovf3D56avXT3w/mguXWGK65Za3WUTYz563Ug==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@example.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

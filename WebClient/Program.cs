@@ -23,19 +23,19 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
     .AddDefaultTokenProviders();
 builder.Services.AddAuthorization(options =>
 {
+   
+        options.AddPolicy("AdminPolicy", policy =>
+            policy.RequireRole("Admin"));
+        options.AddPolicy("OwnerPolicy", policy =>
+            policy.RequireRole("Owner"));
+        options.AddPolicy("CustomerPolicy", policy =>
+            policy.RequireRole("Customer"));
+    
     options.AddPolicy("EmailID", policy =>
     policy.RequireClaim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", "support@procodeguide.com"
     ));
 
-    options.AddPolicy("AdminRole", policy =>
-    policy.RequireRole("Admin")
-    );
-    options.AddPolicy("CustomerRole", policy =>
-    policy.RequireRole("Customer")
-    );
-    options.AddPolicy("OwnerRole", policy =>
-    policy.RequireRole("Owner")
-    );
+    
 });
 var app = builder.Build();
 
@@ -68,5 +68,4 @@ app.UseEndpoints(endpoints =>
     endpoints.MapRazorPages();
 });
 app.MapRazorPages();
-
 app.Run();
