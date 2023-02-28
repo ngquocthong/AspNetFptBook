@@ -60,9 +60,7 @@ namespace WebClient.Areas.Customer.Controllers
 			}
 			catch (JsonException ex)
 			{
-				// Handle the exception
-				// Return an error view or redirect to an error page
-				return RedirectToAction("Index", "Error");
+				return View();
 			} 
 		}
 

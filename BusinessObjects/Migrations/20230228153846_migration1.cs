@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BusinessObjects.Migrations
 {
-    public partial class orderdetail1 : Migration
+    public partial class migration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,7 +45,8 @@ namespace BusinessObjects.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     cate_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cate_des = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    cate_des = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    accept = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,22 +71,6 @@ namespace BusinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StoreOwners",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    own_username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    own_pass = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    own_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    store_name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StoreOwners", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Books",
                 columns: table => new
                 {
@@ -95,7 +80,8 @@ namespace BusinessObjects.Migrations
                     book_author = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     book_price = table.Column<double>(type: "float", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false),
-                    book_img = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    book_img = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    owner_id = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     cate_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -138,51 +124,13 @@ namespace BusinessObjects.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "ID", "cate_des", "cate_name" },
-                values: new object[,]
-                {
-                    { 1, "Related to unrealistic storey", "Fiction" },
-                    { 2, "Related to financial", "Finance" }
-                });
+                columns: new[] { "ID", "accept", "cate_des", "cate_name" },
+                values: new object[] { 1, true, "Related to unrealistic storey", "Fiction" });
 
             migrationBuilder.InsertData(
-                table: "Orders",
-                columns: new[] { "ID", "createdDate", "cus_id", "shippingAddress", "status", "totalPrice" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2023, 2, 28, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2406), "ahha", "123 Main St, Anytown USA", true, 100.0 },
-                    { 2, new DateTime(2023, 2, 27, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2416), "ahha", "456 Elm St, Anytown USA", false, 200.0 },
-                    { 3, new DateTime(2023, 2, 26, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2421), "ahha", "789 Maple St, Anytown USA", true, 50.0 },
-                    { 4, new DateTime(2023, 2, 25, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2422), "ahha", "101 Oak St, Anytown USA", false, 75.0 },
-                    { 5, new DateTime(2023, 2, 24, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2423), "ahha", "111 Pine St, Anytown USA", true, 125.0 },
-                    { 6, new DateTime(2023, 2, 23, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2424), "ahha", "222 Cedar St, Anytown USA", false, 150.0 },
-                    { 7, new DateTime(2023, 2, 22, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2425), "ahha", "333 Elm St, Anytown USA", true, 200.0 },
-                    { 8, new DateTime(2023, 2, 21, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2425), "ahha", "444 Birch St, Anytown USA", false, 175.0 },
-                    { 9, new DateTime(2023, 2, 20, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2426), "ahha", "555 Maple St, Anytown USA", true, 225.0 },
-                    { 10, new DateTime(2023, 2, 19, 14, 11, 28, 545, DateTimeKind.Local).AddTicks(2427), "ahha", "666 Oak St, Anytown USA", false, 250.0 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Books",
-                columns: new[] { "ID", "book_author", "book_img", "book_name", "book_price", "cate_id", "quantity" },
-                values: new object[,]
-                {
-                    { 1, "F. Scott Fitzgerald", "png", "The Great Gatsby", 10.99, 1, 50 },
-                    { 2, "Harper Lee", "png", "To Kill a Mockingbird", 8.9900000000000002, 1, 30 },
-                    { 3, "Paulo Coelho", "png", "The Alchemist", 12.99, 1, 20 },
-                    { 4, "Robert Kiyosaki", "png", "Rich Dad Poor Dad", 15.99, 2, 40 },
-                    { 5, "Benjamin Graham", "png", "The Intelligent Investor", 20.989999999999998, 2, 10 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "OrderDetailses",
-                columns: new[] { "book_id", "order_id", "quantity" },
-                values: new object[] { 1, 1, 2 });
-
-            migrationBuilder.InsertData(
-                table: "OrderDetailses",
-                columns: new[] { "book_id", "order_id", "quantity" },
-                values: new object[] { 2, 1, 1 });
+                table: "Categories",
+                columns: new[] { "ID", "accept", "cate_des", "cate_name" },
+                values: new object[] { 2, false, "Related to financial", "Finance" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_cate_id",
@@ -205,9 +153,6 @@ namespace BusinessObjects.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderDetailses");
-
-            migrationBuilder.DropTable(
-                name: "StoreOwners");
 
             migrationBuilder.DropTable(
                 name: "Books");

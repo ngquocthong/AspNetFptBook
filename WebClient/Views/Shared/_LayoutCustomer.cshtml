@@ -12,13 +12,15 @@
 </head>
 <body>
      <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container"><a class="navbar-brand logo" href="#">Brand</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand logo" href="#">Brand</a>
+            <form asp-controller="Book" asp-action="Search" class="d-md-flex me-auto search-form" target="_self" style="margin-left: 169px;width: 361.263px;height: 38px;">
+                <div class="d-flex align-items-center"><label class="form-label d-flex mb-0" for="search-field"><i class="fas fa-search"></i></label>
+                        <input class="form-control search-field" type="search" id="search-field" name="word" style="width: 425.4px;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;" placeholder="Search">
+                </div>
+            </form>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
-                <ul>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Role" asp-action="Index">Roles</a>
-                    </li>
-                </ul>
+               
             </div>
             <div class="col-md-2">
                 <partial name="_LoginPartial.cshtml" />
