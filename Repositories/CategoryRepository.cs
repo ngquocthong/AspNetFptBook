@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public class CateroryRepository : ICategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         public List<Category> GetCategories() => CategoryDAO.GetCategories();
         public void AddCategory(Category c) => CategoryDAO.SaveCategory(c);
