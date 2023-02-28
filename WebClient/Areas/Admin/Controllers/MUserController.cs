@@ -75,24 +75,39 @@ namespace WebClient.Areas.Admin.Controllers
         }
 
         // GET: MUser/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
-            return View();
+            ApplicationUser obj = _db.Users.Find(id);
+            if (obj == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(obj);
         }
 
         // POST: MUser/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(string id, ApplicationUser obj)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                obj.Id = id;
+                var result = _db.Users.SingleOrDefault(b => b.Id == id);
+                if (result != null)
+                    result.FullName = obj.FullName;
+                    result.Address = obj.Address;
+                    result.DofB =obj.DofB;
+                    result.Gender = obj.Gender;
+                    
+                {
+                    result.FullName = obj.FullName;
+                    _db.SaveChanges();
+                }
+                
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(obj);
         }
 
         // GET: MUser/Delete/5

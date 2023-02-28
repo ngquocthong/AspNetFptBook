@@ -91,6 +91,7 @@ namespace WebClient.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int id, Category obj)
         {
             obj.ID = id;
+
             HttpResponseMessage respon = await client.DeleteAsync(api + "/" + id);
             return RedirectToAction("Index");
         }
