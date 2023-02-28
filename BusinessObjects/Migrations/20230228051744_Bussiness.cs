@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BusinessObjects.Migrations
 {
-    public partial class Mi1111 : Migration
+    public partial class Bussiness : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -170,7 +170,7 @@ namespace BusinessObjects.Migrations
                 columns: new[] { "ID", "accept", "cate_des", "cate_name" },
                 values: new object[,]
                 {
-                    { 1, false, "Related to unrealistic storey", "Fiction" },
+                    { 1, true, "Related to unrealistic storey", "Fiction" },
                     { 2, false, "Related to financial", "Finance" }
                 });
 
@@ -179,16 +179,16 @@ namespace BusinessObjects.Migrations
                 columns: new[] { "ID", "CustomerID", "createdDate", "cus_id", "shippingAddress", "status", "totalPrice" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2023, 2, 27, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7522), "ahha", "123 Main St, Anytown USA", true, 100.0 },
-                    { 2, null, new DateTime(2023, 2, 26, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7535), "ahha", "456 Elm St, Anytown USA", false, 200.0 },
-                    { 3, null, new DateTime(2023, 2, 25, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7539), "ahha", "789 Maple St, Anytown USA", true, 50.0 },
-                    { 4, null, new DateTime(2023, 2, 24, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7540), "ahha", "101 Oak St, Anytown USA", false, 75.0 },
-                    { 5, null, new DateTime(2023, 2, 23, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7542), "ahha", "111 Pine St, Anytown USA", true, 125.0 },
-                    { 6, null, new DateTime(2023, 2, 22, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7543), "ahha", "222 Cedar St, Anytown USA", false, 150.0 },
-                    { 7, null, new DateTime(2023, 2, 21, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7544), "ahha", "333 Elm St, Anytown USA", true, 200.0 },
-                    { 8, null, new DateTime(2023, 2, 20, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7544), "ahha", "444 Birch St, Anytown USA", false, 175.0 },
-                    { 9, null, new DateTime(2023, 2, 19, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7545), "ahha", "555 Maple St, Anytown USA", true, 225.0 },
-                    { 10, null, new DateTime(2023, 2, 18, 20, 13, 39, 433, DateTimeKind.Local).AddTicks(7546), "ahha", "666 Oak St, Anytown USA", false, 250.0 }
+                    { 1, null, new DateTime(2023, 2, 28, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7506), "ahha", "123 Main St, Anytown USA", true, 100.0 },
+                    { 2, null, new DateTime(2023, 2, 27, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7516), "ahha", "456 Elm St, Anytown USA", false, 200.0 },
+                    { 3, null, new DateTime(2023, 2, 26, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7519), "ahha", "789 Maple St, Anytown USA", true, 50.0 },
+                    { 4, null, new DateTime(2023, 2, 25, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7520), "ahha", "101 Oak St, Anytown USA", false, 75.0 },
+                    { 5, null, new DateTime(2023, 2, 24, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7521), "ahha", "111 Pine St, Anytown USA", true, 125.0 },
+                    { 6, null, new DateTime(2023, 2, 23, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7522), "ahha", "222 Cedar St, Anytown USA", false, 150.0 },
+                    { 7, null, new DateTime(2023, 2, 22, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7523), "ahha", "333 Elm St, Anytown USA", true, 200.0 },
+                    { 8, null, new DateTime(2023, 2, 21, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7523), "ahha", "444 Birch St, Anytown USA", false, 175.0 },
+                    { 9, null, new DateTime(2023, 2, 20, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7524), "ahha", "555 Maple St, Anytown USA", true, 225.0 },
+                    { 10, null, new DateTime(2023, 2, 19, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7525), "ahha", "666 Oak St, Anytown USA", false, 250.0 }
                 });
 
             migrationBuilder.InsertData(

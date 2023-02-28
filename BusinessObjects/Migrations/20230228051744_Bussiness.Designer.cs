@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230227132312_Mi111133")]
-    partial class Mi111133
+    [Migration("20230228051744_Bussiness")]
+    partial class Bussiness
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -266,7 +266,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 1,
-                            createdDate = new DateTime(2023, 2, 27, 20, 23, 12, 132, DateTimeKind.Local).AddTicks(6143),
+                            createdDate = new DateTime(2023, 2, 28, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7506),
                             cus_id = "ahha",
                             shippingAddress = "123 Main St, Anytown USA",
                             status = true,
@@ -275,7 +275,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 2,
-                            createdDate = new DateTime(2023, 2, 26, 20, 23, 12, 132, DateTimeKind.Local).AddTicks(6153),
+                            createdDate = new DateTime(2023, 2, 27, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7516),
                             cus_id = "ahha",
                             shippingAddress = "456 Elm St, Anytown USA",
                             status = false,
@@ -284,7 +284,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 3,
-                            createdDate = new DateTime(2023, 2, 25, 20, 23, 12, 132, DateTimeKind.Local).AddTicks(6160),
+                            createdDate = new DateTime(2023, 2, 26, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7519),
                             cus_id = "ahha",
                             shippingAddress = "789 Maple St, Anytown USA",
                             status = true,
@@ -293,7 +293,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 4,
-                            createdDate = new DateTime(2023, 2, 24, 20, 23, 12, 132, DateTimeKind.Local).AddTicks(6161),
+                            createdDate = new DateTime(2023, 2, 25, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7520),
                             cus_id = "ahha",
                             shippingAddress = "101 Oak St, Anytown USA",
                             status = false,
@@ -302,7 +302,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 5,
-                            createdDate = new DateTime(2023, 2, 23, 20, 23, 12, 132, DateTimeKind.Local).AddTicks(6162),
+                            createdDate = new DateTime(2023, 2, 24, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7521),
                             cus_id = "ahha",
                             shippingAddress = "111 Pine St, Anytown USA",
                             status = true,
@@ -311,7 +311,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 6,
-                            createdDate = new DateTime(2023, 2, 22, 20, 23, 12, 132, DateTimeKind.Local).AddTicks(6163),
+                            createdDate = new DateTime(2023, 2, 23, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7522),
                             cus_id = "ahha",
                             shippingAddress = "222 Cedar St, Anytown USA",
                             status = false,
@@ -320,7 +320,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 7,
-                            createdDate = new DateTime(2023, 2, 21, 20, 23, 12, 132, DateTimeKind.Local).AddTicks(6164),
+                            createdDate = new DateTime(2023, 2, 22, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7523),
                             cus_id = "ahha",
                             shippingAddress = "333 Elm St, Anytown USA",
                             status = true,
@@ -329,7 +329,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 8,
-                            createdDate = new DateTime(2023, 2, 20, 20, 23, 12, 132, DateTimeKind.Local).AddTicks(6165),
+                            createdDate = new DateTime(2023, 2, 21, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7523),
                             cus_id = "ahha",
                             shippingAddress = "444 Birch St, Anytown USA",
                             status = false,
@@ -338,7 +338,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 9,
-                            createdDate = new DateTime(2023, 2, 19, 20, 23, 12, 132, DateTimeKind.Local).AddTicks(6166),
+                            createdDate = new DateTime(2023, 2, 20, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7524),
                             cus_id = "ahha",
                             shippingAddress = "555 Maple St, Anytown USA",
                             status = true,
@@ -347,7 +347,7 @@ namespace BusinessObjects.Migrations
                         new
                         {
                             ID = 10,
-                            createdDate = new DateTime(2023, 2, 18, 20, 23, 12, 132, DateTimeKind.Local).AddTicks(6167),
+                            createdDate = new DateTime(2023, 2, 19, 12, 17, 44, 273, DateTimeKind.Local).AddTicks(7525),
                             cus_id = "ahha",
                             shippingAddress = "666 Oak St, Anytown USA",
                             status = false,
