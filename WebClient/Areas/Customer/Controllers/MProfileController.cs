@@ -13,14 +13,10 @@ namespace WebClient.Areas.Customer.Controllers
             _db = db;
         }
 
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
-            ApplicationUser obj = _db.Users.Find(id);
-            if (obj == null)
-            {
-                return RedirectToAction("Index");
-            }
-            return View(obj);
+            
+            return View();
 
         }
         // GET: MUser/Details/5
@@ -56,7 +52,7 @@ namespace WebClient.Areas.Customer.Controllers
             ApplicationUser obj = _db.Users.Find(id);
             if (obj == null)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit");
             }
             return View(obj);
         }
@@ -80,8 +76,8 @@ namespace WebClient.Areas.Customer.Controllers
                     result.FullName = obj.FullName;
                     _db.SaveChanges();
                 }
-
-                return RedirectToAction("Index");
+                TempData["Message"] = "Update Success";
+                return RedirectToAction("Edit");
             }
             return View(obj);
         }
