@@ -19,10 +19,7 @@ namespace BookManagementAPI.Controllers
 
         // GET api/<CategoryController>/5
         [HttpGet("{id}")]
-        public string GetCateByID(int id)
-        {
-            return "value";
-        }
+        public Category GetCateByID(int id) => repository.GetCateByID(id);
 
         // POST api/<CategoryController>
         [HttpPost]
