@@ -3,12 +3,12 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav">
+<div class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
 
     <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Customer" asp-controller="MProfile" asp-action="Edit" asp-route-id="@UserManager.GetUserId(User)" title="Edit">Hello @UserManager.GetUserAsync(User).Result.FullName!</a>
+            <a class="nav-link text-dark" >Hello @UserManager.GetUserAsync(User).Result.FullName!</a>
 
     </li>
     <li class="nav-item">
@@ -26,4 +26,4 @@ else
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>
 }
-</ul>
+</div>
