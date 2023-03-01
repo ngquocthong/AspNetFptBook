@@ -50,8 +50,11 @@ namespace WebClient.Areas.Customer.Controllers
         //Clear session of Cart
         void ClearCart()
         {
-            var session = HttpContext.Session;
-            session.Remove(CARTKEY);
+
+            List<CartItem> cart = GetCartItems();
+            cart.Clear();
+            SaveCartSession(cart);
+
         }
         void SaveCartSession(List<CartItem> ls)
         {
@@ -165,22 +168,17 @@ namespace WebClient.Areas.Customer.Controllers
                 
                 await UpdateBookDetails(bookApi, bookDetails);
             }
-
-			 
-// gan
-
 			string data = JsonSerializer.Serialize<Order>(or);
-
-		    
 			var content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage respon = await client.PostAsync(api, content);
-			if (respon.StatusCode == System.Net.HttpStatusCode.NoContent)
+           
+            if (respon.StatusCode == System.Net.HttpStatusCode.NoContent)
 			{
                 ClearCart();
-				return RedirectToAction("Index", "Order");
+                return RedirectToAction("Index", "Order");
 			}
+            
             return View();
-			
 		}
 
         private async Task<IActionResult> UpdateBookDetails(string bookApi, Book bookDetails)

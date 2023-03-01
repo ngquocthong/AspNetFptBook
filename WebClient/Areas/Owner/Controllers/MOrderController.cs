@@ -38,12 +38,14 @@ namespace WebClient.Areas.Owner.Controllers
 
 
             ViewBag.Customer = usList;
-
-			HttpResponseMessage response = await client.GetAsync(api);
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            HttpResponseMessage response = await client.GetAsync(api);
             string data = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             List<Order> list = JsonSerializer.Deserialize<List<Order>>(data, options);
-            
+            list = list.Where(b => b.owner_id == userID).ToList();
+
+             
             return View(list);
             
         }
