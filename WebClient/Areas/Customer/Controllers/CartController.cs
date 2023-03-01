@@ -142,7 +142,7 @@ namespace WebClient.Areas.Customer.Controllers
 
 		public async Task<IActionResult> CheckOut(string userID)
 		{
-			api = api + "/Orders";
+			 api = api + "/Orders";
 			var orderDetails = new OrderDetails();
 			var cart = GetCartItems();
 			Order or = new Order();
