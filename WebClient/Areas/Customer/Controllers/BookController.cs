@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace WebClient.Areas.Customer.Controllers
@@ -26,12 +27,20 @@ namespace WebClient.Areas.Customer.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            HttpResponseMessage response = await client.GetAsync(api);
-            string data = await response.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            List<Book> list = JsonSerializer.Deserialize<List<Book>>(data, options);
-            return View(list);
-        }
+			try
+			{
+				var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+				HttpResponseMessage response = await client.GetAsync(api);
+				string data = await response.Content.ReadAsStringAsync();
+				var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+				List<Book> list = JsonSerializer.Deserialize<List<Book>>(data, options);
+				return View(list);
+			}
+			catch (JsonException ex)
+			{
+				return View(new List<Book>());
+			}
+		}
 
         // GET: BookController/Details/5
         public async Task<ActionResult> Details(int id)

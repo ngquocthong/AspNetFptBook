@@ -26,11 +26,18 @@ namespace WebClient.Areas.Admin.Controllers
         [Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult> Index()
         {
+            try
+            {
             HttpResponseMessage respon = await client.GetAsync(api);
             string data = await respon.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             List<Category> list = JsonSerializer.Deserialize<List<Category>>(data, options);
             return View(list);
+            }
+            catch (JsonException ex)
+            {
+                return View(new List<Category>());
+            }
         }
 
         // GET: ManageCategory/Details/5
@@ -42,6 +49,7 @@ namespace WebClient.Areas.Admin.Controllers
         // GET: ManageCategory/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
