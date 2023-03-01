@@ -27,8 +27,8 @@
         <div class="card-header py-3">
             <p class="text-primary m-0 fw-bold"></p>
         <div class="btn-group" role="group">
-                <a asp-action="Index" id="owner" class="btn btn-owner active" type="button">Owner</a>
-                <a asp-action="Customer" id="customer" class="btn btn-customer" type="button">Customer</a>
+                <a asp-action="Index" id="owner" class="btn  " type="button">Owner</a>
+                <a asp-action="Customer" id="customer" class="btn " type="button">Customer</a>
         </div>
         <div class="card-body">
             <div class="row">
@@ -100,16 +100,3 @@
 </div>
 </div>
 
-<script>
-    var ownerBtn = document.getElementById("owner");
-    var customerBtn = document.getElementById("customer");
-
-    ownerBtn.addEventListener("click", function () {
-        ownerBtn.classList.add("active");
-    });
-
-    customerBtn.addEventListener("click", function () {
-        customerBtn.classList.add("active");
-        ownerBtn.classList.remove("active");
-    });
-</script>

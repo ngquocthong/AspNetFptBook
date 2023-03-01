@@ -1,6 +1,7 @@
 ﻿using BusinessObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Drawing;
@@ -27,19 +28,32 @@ namespace WebClient.Areas.Customer.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-			try
-			{
-				var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-				HttpResponseMessage response = await client.GetAsync(api);
-				string data = await response.Content.ReadAsStringAsync();
-				var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-				List<Book> list = JsonSerializer.Deserialize<List<Book>>(data, options);
-				return View(list);
-			}
-			catch (JsonException ex)
-			{
-				return View(new List<Book>());
-			}
+            try
+            {
+                var userRole = User.FindFirstValue(ClaimTypes.Role);
+
+                if (userRole == "Owner")
+                {
+                    return Redirect("Owner/MBook");
+                }
+                else if (userRole == "Admin")
+                {
+                    return Redirect("Admin/MCategory");
+                }
+                else
+                {
+                    HttpResponseMessage response = await client.GetAsync(api);
+                    string data = await response.Content.ReadAsStringAsync();
+                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                    List<Book> list = JsonSerializer.Deserialize<List<Book>>(data, options);
+                    return View(list);
+                }
+            }
+
+            catch (JsonException ex)
+            {
+                return View(new List<Book>());
+            }
 		}
 
         // GET: BookController/Details/5
