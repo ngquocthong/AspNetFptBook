@@ -6,9 +6,14 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
+    <li class="nav-item fa fa-">
             <a class="nav-link text-dark" asp-area="Customer" asp-controller="MProfile" asp-action="Edit" asp-route-id="@UserManager.GetUserId(User)" title="Edit">Hello @User.Identity?.Name!</a>
 
+    </li>
+    <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Cart" asp-action="Cart" asp-route-id="@UserManager.GetUserId(User)">
+            <i class="fa fa-shopping-cart"></i>
+        </a>
     </li>
     <li class="nav-item">
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">

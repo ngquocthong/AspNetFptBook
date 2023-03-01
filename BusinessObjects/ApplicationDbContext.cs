@@ -31,9 +31,9 @@ namespace BusinessObjects
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<OrderDetails>().HasKey(m => new { m.order_id, m.book_id });
-			modelBuilder.Entity<Category>().HasData(
+			/*modelBuilder.Entity<Category>().HasData(
 				new Category { ID = 1, cate_name = "Fiction", accept = true, cate_des = "Related to unrealistic storey" },
-				new Category { ID = 2, cate_name = "Finance", accept = false, cate_des = "Related to financial" });
+				new Category { ID = 2, cate_name = "Finance", accept = false, cate_des = "Related to financial" });*/
             /*modelBuilder.Entity<Book>().HasData(
 				new Book { ID = 1, book_name = "The Great Gatsby", book_author = "F. Scott Fitzgerald", book_price = 10.99, quantity = 50, cate_id = 1, book_img = "png" }, //owner_id = 1 },
 				new Book { ID = 2, book_name = "To Kill a Mockingbird", book_author = "Harper Lee", book_price = 8.99, quantity = 30, cate_id = 1, book_img = "png" }, //owner_id = 1 },

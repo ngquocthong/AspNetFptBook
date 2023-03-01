@@ -20,7 +20,7 @@ namespace WebClient.Areas.Customer.Controllers
 
     public class CartController : Controller
     {
-        public const string CARTKEY = "cart";
+        public /*const*/ string CARTKEY = "cart";
 
         private readonly HttpClient client = null;
         private string api;
@@ -32,12 +32,15 @@ namespace WebClient.Areas.Customer.Controllers
             client.DefaultRequestHeaders.Accept.Add(contentType);
             api = "https://localhost:7186/api";
             _logger = logger;
+          
         }
 
         List<CartItem> GetCartItems()
         {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var KEY = CARTKEY + userID.ToString();
             var session = HttpContext.Session;
-            string jsoncart = session.GetString(CARTKEY);
+            string jsoncart = session.GetString(KEY);
             if (jsoncart != null)
             {
                 return JsonConvert.DeserializeObject<List<CartItem>>(jsoncart);
@@ -52,9 +55,11 @@ namespace WebClient.Areas.Customer.Controllers
         }
         void SaveCartSession(List<CartItem> ls)
         {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var KEY = CARTKEY + userID.ToString();
             var session = HttpContext.Session;
             string jsoncart = JsonConvert.SerializeObject(ls);
-            session.SetString(CARTKEY, jsoncart);
+            session.SetString(KEY, jsoncart);
         }
         [Route("/cart", Name = "cart")]
         public IActionResult Cart()
@@ -90,7 +95,6 @@ namespace WebClient.Areas.Customer.Controllers
                 return RedirectToAction(nameof(Cart));
             }
             return NotFound();
-             
         }
 
         // GET: CartController/Edit/5
@@ -170,6 +174,7 @@ namespace WebClient.Areas.Customer.Controllers
             HttpResponseMessage respon = await client.PostAsync(api, content);
 			if (respon.StatusCode == System.Net.HttpStatusCode.NoContent)
 			{
+                ClearCart();
 				return RedirectToAction("Index", "Order");
 			}
             return View();

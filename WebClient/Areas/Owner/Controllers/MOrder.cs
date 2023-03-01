@@ -1,15 +1,39 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Data;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Text.Json;
+using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebClient.Areas.Owner.Controllers
 {
     [Area("Owner")]
+    [Authorize(Roles = "Owner")]
     public class MOrder : Controller
     {
-        // GET: MOrder
-        public ActionResult Index()
+        // GET: BookController
+        private readonly HttpClient client = null;
+        private string api;
+        public MOrder()
         {
-            return View();
+            client = new HttpClient();
+            var contentType = new MediaTypeWithQualityHeaderValue("application/json");
+            client.DefaultRequestHeaders.Accept.Add(contentType);
+            this.api = "https://localhost:7186/api/Orders";
+
+        }
+        [HttpGet]
+        public async Task<ActionResult> Index()
+        {
+            
+            HttpResponseMessage response = await client.GetAsync(api);
+            string data = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            List<Order> list = JsonSerializer.Deserialize<List<Order>>(data, options);
+            return View(list);
+           
         }
 
         // GET: MOrder/Details/5

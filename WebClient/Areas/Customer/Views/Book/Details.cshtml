@@ -28,7 +28,7 @@
                                     <img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star-half-empty.svg" /><img src="assets/img/star-empty.svg" />
                                 </div>
                                 <div class="price">
-                                    <h3>@Model.book_price</h3>
+                                    <h3>$@(Model.book_price)</h3>
                                 </div>
                                 <a id="addToCartBtn" asp-controller="Cart" asp-action="AddToCart"  asp-route-id="@Model.ID" class="btn btn-primary" type="button">
                                     Add to Cart
@@ -36,13 +36,7 @@
 
                                 <div class="summary">
                                     <p> 
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Donec augue nunc, pretium at augue at, convallis
-                                        pellentesque ipsum. Vestibulum diam risus, sagittis at
-                                        fringilla at, pulvinar vel risus. Vestibulum dignissim
-                                        eu nulla eu imperdiet. Morbi mollis tellus a nunc
-                                        vestibulum consequat. Quisque tristique elit et nibh
-                                        dapibus sodales. Nam sollicitudin a urna sed iaculis.
+                                        @Model.book_description
                                     </p>
                                 </div>
                             </div>
