@@ -6,18 +6,25 @@ using BusinessObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using WebClient.Data;
+using ApplicationDbContext = WebClient.Data.ApplicationDbContext;
 
 namespace WebClient.Areas.Owner.Controllers
 {
     [Area("Owner")]
     [Authorize(Roles = "Owner")]
-    public class MOrder : Controller
+    public class MOrderController : Controller
     {
-        // GET: BookController
-        private readonly HttpClient client = null;
+		private readonly ApplicationDbContext _db;
+		
+			
+		// GET: BookController
+		private readonly HttpClient client = null;
         private string api;
-        public MOrder()
+        public MOrderController(ApplicationDbContext db)
         {
+            _db = db;
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
@@ -27,13 +34,18 @@ namespace WebClient.Areas.Owner.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            
-            HttpResponseMessage response = await client.GetAsync(api);
+            List<ApplicationUser> usList = _db.Users.ToList();
+
+
+            ViewBag.Customer = usList;
+
+			HttpResponseMessage response = await client.GetAsync(api);
             string data = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             List<Order> list = JsonSerializer.Deserialize<List<Order>>(data, options);
+            
             return View(list);
-           
+            
         }
 
         // GET: MOrder/Details/5
@@ -85,19 +97,25 @@ namespace WebClient.Areas.Owner.Controllers
         }
 
         // GET: MOrder/Delete/5
-        public ActionResult Delete(int id)
+        /*public ActionResult Delete(int id)
         {
-            return View();
-        }
+            List<Order> orders= new List<Order>();
+            var order = orders.Find(o => o.ID == id);
+            orders.Remove(order);
+            _db.SaveChanges();
+            return View("Index");
+        }*/
 
         // POST: MOrder/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [HttpGet]
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+           
+
+                HttpResponseMessage respon = await client.DeleteAsync(api + "/" + id);
+                return RedirectToAction("Index");
             }
             catch
             {

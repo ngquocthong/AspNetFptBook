@@ -147,6 +147,7 @@ namespace WebClient.Areas.Customer.Controllers
             or.cus_id = userID;
             or.createdDate = DateTime.Now;
 			or.shippingAddress = "ABC";
+           
 			or.OrderDetails = new List<OrderDetails>();
 			foreach (var item in cart)
             {
@@ -155,6 +156,7 @@ namespace WebClient.Areas.Customer.Controllers
                 od.quantity = item.quantity;
 				or.totalPrice += item.quantity * item.book.book_price;
                 od.Order = or;
+                or.owner_id = item.book.owner_id;
                 od.Book = item.book;
                 or.OrderDetails.Add(od);
                 var bookApi = "https://localhost:7186/api/Book/" + item.book.ID;

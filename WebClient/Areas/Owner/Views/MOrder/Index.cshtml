@@ -1,5 +1,10 @@
 ﻿@using BusinessObjects
+@using WebClient.Data;
 @model IEnumerable<Order>
+@{
+    var customers = ViewBag.Customer as List<ApplicationUser>;
+
+}
 <div class="d-flex flex-column" id="content-wrapper">
     <div id="content">
         <div class="container-fluid">
@@ -40,13 +45,15 @@
                             <tbody>
                                 @foreach(var o in Model)
                                 {
-                                <tr>
-                                    <td class="text-center">@o.cus_id </td>
-                                    <td class="text-center">@o.shippingAddress</td>
-                                    <td class="text-center">@o.createdDate</td>
-                                    <td class="text-center">@o.totalPrice</td>
-                                    <td style="text-align: center;"><i class="fa fa-remove" style="width: 25;height: 25;"></i></td>
-                                </tr>
+                                    var customer = customers.FirstOrDefault(c => c.Id == o.cus_id);
+                                    string customerName = customer != null ? customer.FullName : "";
+                                    <tr>
+                                        <td class="text-center">@customerName</td>
+                                        <td class="text-center">@o.shippingAddress</td>
+                                        <td class="text-center">@o.createdDate</td>
+                                        <td class="text-center">@o.totalPrice</td>
+                                        <td style="text-align: center;"><a asp-controller="MOrder" asp-action="Delete" asp-route-id ="@o.ID" onclick="return confirm('Are you sure?')"><i class="fa fa-remove" style="width: 25;height: 25;"></i></a></td>
+                                    </tr>
 								}
                             </tbody>
                         </table>
@@ -71,5 +78,3 @@
             </div>
         </div>
     </div>
-  
-</div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
