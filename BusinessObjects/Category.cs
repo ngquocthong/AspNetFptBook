@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace BusinessObjects
 {
@@ -18,6 +19,8 @@ namespace BusinessObjects
         public string cate_name { get; set; }
         public string cate_des { get; set; }
         public Boolean accept { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<Book>? Books { get; set; }
     }
 }

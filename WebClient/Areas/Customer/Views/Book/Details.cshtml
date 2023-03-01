@@ -30,11 +30,12 @@
                                 <div class="price">
                                     <h3>@Model.book_price</h3>
                                 </div>
-                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.ID" class="btn btn-primary" type="button">
-                                    <i class="icon-basket"></i>Add to Cart
+                                <a id="addToCartBtn" asp-controller="Cart" asp-action="AddToCart"  asp-route-id="@Model.ID" class="btn btn-primary" type="button">
+                                    Add to Cart
                                 </a>
+
                                 <div class="summary">
-                                    <p>
+                                    <p> 
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                         Donec augue nunc, pretium at augue at, convallis
                                         pellentesque ipsum. Vestibulum diam risus, sagittis at
@@ -52,3 +53,18 @@
         </div>
     </section>
 </main>
+<script type="text/javascript">
+    // Get the button element by its ID
+    var addToCartBtn = document.getElementById("addToCartBtn");
+
+    // Check if the quantity is less than or equal to 0
+    if (@Model.quantity <= 0) {
+        // Disable the button by adding the "disabled" attribute
+        addToCartBtn.setAttribute("disabled", "disabled");
+        // Show an alert to the user
+        addToCartBtn.addEventListener("click", function(event) {
+            event.preventDefault(); // prevent default action of the button
+            alert("Sorry, this book is currently out of stock.");
+        });
+    }
+</script>

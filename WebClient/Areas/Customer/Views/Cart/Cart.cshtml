@@ -71,7 +71,7 @@ string userid;
 											</div>
 											<div class="col-md-5 product-info" style="width: 240px;"><a class="product-name" href="#">@cartitem.book.book_name</a></div>
 											<div class="col-6 col-md-2 quantity"><label class="form-label d-none d-md-block" for="quantity">Quantity</label>
-												<input type="number" asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.book.ID}")" class="form-control quantity-input" >
+												<input type="number" min=0 max="@cartitem.book.quantity" asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.book.ID}")" class="form-control quantity-input" >
 											</div>
 											<div class="col-6 col-md-2 price" style="width: 96px;"><span>@cartitem.book.book_price</span></div>
 											<div class="col-6 col-md-2 text-center d-xxl-flex flex-column price" style="width: 96px;">
@@ -80,7 +80,7 @@ string userid;
 										</div>
 									</div>
 
-                            }
+								}
 								</div>
 							</div>
 							<div class="col-md-12 col-lg-4">
@@ -102,7 +102,7 @@ string userid;
 												)
 										</span>
 									</h4>
-									<a asp-action="CheckOut" asp-route-userid="@userID" class="btn btn-primary btn-lg d-block w-100" type="button">Checkout</a>
+									<a asp-action="CheckOut" id="checkout" asp-route-userid="@userID" class="btn btn-primary btn-lg d-block w-100" type="button">Checkout</a>
 									
 									
 								</div>
@@ -119,6 +119,8 @@ string userid;
 		</div>
 	</section>
 </main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 @section Scripts {
 	<script>
@@ -140,6 +142,7 @@ string userid;
 				});
 			});
 		});
+
 	</script>
 }
 

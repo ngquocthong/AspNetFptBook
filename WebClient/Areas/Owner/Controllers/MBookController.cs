@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections;
 using System.Data;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -19,8 +21,8 @@ namespace WebClient.Areas.Customer.Controllers
         public MBookController()
         {
             client = new HttpClient();
-            var contentType = new MediaTypeWithQualityHeaderValue("application/json");
-            client.DefaultRequestHeaders.Accept.Add(contentType);
+            //var contentType = new MediaTypeWithQualityHeaderValue("application/json");
+            //client.DefaultRequestHeaders.Accept.Add(contentType);
             this.api = "https://localhost:7186/api/Book";
         }
 
@@ -50,20 +52,48 @@ namespace WebClient.Areas.Customer.Controllers
 
         // GET: BookController/Create
         [HttpGet]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewBag.cate_id = new SelectList(await GetCategories(), "ID", "cate_name");
             ViewData["userID"] = userID;
             return View("Create");
         }
 
-        // POST: BookController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        private async Task<List<Category>> GetCategories()
         {
             try
             {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7186/api/Category");
+                string data = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                List<Category> list = JsonSerializer.Deserialize<List<Category>>(data, options);
+                return list;
+            }
+            catch (JsonException ex)
+            {
+                return new List<Category>();
+            }
+        }
+
+       /* [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(Book book)
+        {
+            try
+            {
+                var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                book.owner_id = userID;
+                book.book_img = "";
+
+                    string data = JsonSerializer.Serialize(book);
+                    var content = new StringContent(data, System.Text.Encoding.UTF8, "multipart/form-data");
+                    HttpResponseMessage respon = await client.PostAsync(api, content);
+                    if (respon.StatusCode == System.Net.HttpStatusCode.Created)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -71,7 +101,7 @@ namespace WebClient.Areas.Customer.Controllers
                 return View();
             }
         }
-
+*/
         // GET: BookController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {

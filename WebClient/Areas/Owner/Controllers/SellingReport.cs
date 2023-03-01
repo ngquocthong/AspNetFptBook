@@ -10,6 +10,7 @@ namespace WebClient.Areas.Owner.Controllers
         // GET: SellingReport
         public ActionResult Index()
         {
+
             return View();
         }
 
