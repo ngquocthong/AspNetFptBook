@@ -43,7 +43,7 @@
                                     <div class="col">
                                         <label class="form-label"><strong>Picture</strong></label>
                                         <div class="mb-3">
-                                            <input  id="book_img" type="file" name="book_img" accept="image/*" class="form-control">
+                                            <input id="book_img" type="file" name="book_img" accept="image/*" class="form-control">
                                         </div>
                                     </div>
 
@@ -63,10 +63,10 @@
 </div>
 
 
-   <script> <partial name="_ValidationScriptsPartial" /></script>
+<script><partial name="_ValidationScriptsPartial" /></script>
 
-    <script type="text/javascript">
-    const categorySelect = document.querySelector('#cate_id');
+<script type="text/javascript">
+        const categorySelect = document.querySelector('#cate_id');
     fetch('https://localhost:7186/api/Category')
         .then(response => response.json())
         .then(data => {
@@ -98,7 +98,7 @@
             }
         });
         jsonObject['book_img'] = "";
-            jsonObject['owner_id'] = '@ViewData["userID"]';
+        jsonObject['owner_id'] = '@ViewData["userID"]';
         const fileImage = document.querySelector('input[type=file][name=book_img]').files[0];
         formData.append('datajson', JSON.stringify(jsonObject));
         formData.append('fileImage', fileImage);
@@ -118,9 +118,9 @@
             alert('Upload a Picture!');
         }
     });
-    </script>
+</script>
 
 
 <script>
-      
+
 </script>

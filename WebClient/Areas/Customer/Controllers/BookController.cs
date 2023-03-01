@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -106,6 +108,25 @@ namespace WebClient.Areas.Customer.Controllers
             {
                 return View();
             }
+        }
+        public  async Task<ActionResult> Search(string word)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(api);
+                if(response.IsSuccessStatusCode) { 
+			    var data = response.Content.ReadAsStringAsync().Result;
+			    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+				List<Book> obj = JsonSerializer.Deserialize<List<Book>>(data, options);
+				List<Book> filteredbook = obj.Where(b => b.book_name.ToLower().Contains(word.Trim().ToLower())).ToList();
+				return View("Index", filteredbook);
+                }
+			}
+			catch (JsonException ex)
+            {
+                return View();
+            } 
+            return Ok();
         }
     }
 }

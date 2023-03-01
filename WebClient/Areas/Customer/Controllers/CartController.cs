@@ -11,6 +11,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using System.Text.Json.Serialization;
+using System.Text;
 
 namespace WebClient.Areas.Customer.Controllers
 {
@@ -151,12 +152,16 @@ namespace WebClient.Areas.Customer.Controllers
 				or.totalPrice += item.quantity * item.book.book_price;
                 od.Order = or;
                 od.Book = item.book;
-                
                 or.OrderDetails.Add(od);
+                var bookApi = "https://localhost:7186/api/Book/" + item.book.ID;
+                var bookDetails = await GetBookDetails(bookApi);
+                bookDetails.quantity -= item.quantity;
+                
+                await UpdateBookDetails(bookApi, bookDetails);
             }
 
-			// gan 
-
+			 
+// gan
 
 			string data = JsonSerializer.Serialize<Order>(or);
 
@@ -171,9 +176,38 @@ namespace WebClient.Areas.Customer.Controllers
 			
 		}
 
+        private async Task<IActionResult> UpdateBookDetails(string bookApi, Book bookDetails)
+        {
 
-		//public IActionResult CheckOut([FromForm] string email, [FromForm] string address)
+            string data = JsonSerializer.Serialize<Book>(bookDetails);
+            var content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PutAsync(bookApi, content);
+            if (response.IsSuccessStatusCode)
+            {
+                return NoContent();
+            }
+            return NoContent();
+            
+        }
+     
+        private async Task<Book> GetBookDetails(string bookApi)
+        {
+
+            HttpResponseMessage response = await client.GetAsync(bookApi);
+            if (response.IsSuccessStatusCode)
+            {
+                var data = response.Content.ReadAsStringAsync().Result;
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var obj = JsonSerializer.Deserialize<Book>(data, options);
+                return obj;
+            }
+            throw new NotImplementedException();
+        }
 
 
-	}
+
+        //public IActionResult CheckOut([FromForm] string email, [FromForm] string address)
+
+
+    }
 }

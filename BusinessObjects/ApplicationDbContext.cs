@@ -25,6 +25,7 @@ namespace BusinessObjects
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Admin> Admin { get; set; }
 		public DbSet<Cart> Carts { get; set; }
+		
 		public DbSet<Order> Orders { get; set; }
 		public DbSet<OrderDetails> OrderDetailses { get; set; }
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

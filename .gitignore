@@ -367,3 +367,6 @@ FodyWeavers.xsd
 /BusinessObjects/appsettings.json
 /BusinessObjects/appsettings.json
 /WebClient/appsettings.json
+/WebClient/appsettings.json
+/BusinessObjects/appsettings.json
+/BookManagementAPI/appsettings.json
