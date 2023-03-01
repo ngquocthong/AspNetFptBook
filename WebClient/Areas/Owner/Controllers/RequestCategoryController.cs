@@ -46,6 +46,7 @@ namespace WebClient.Areas.Owner.Controllers
 
             if (ModelState.IsValid)
             {
+                TempData["Message"] = "Request Success! Please waiting for Admin's response";
                 string data = JsonSerializer.Serialize(cate);
                 var content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
                 HttpResponseMessage respon = await client.PostAsync(api, content);
@@ -53,8 +54,8 @@ namespace WebClient.Areas.Owner.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-            }
-            return View(cate);
+            } else ViewBag.success =false;
+            return View();
            /* try
             {
                 return RedirectToAction(nameof(Index));

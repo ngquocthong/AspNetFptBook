@@ -90,7 +90,8 @@ namespace WebClient.Areas.Identity.Pages.Account
             public string UserRole { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+
+		public async Task OnGetAsync(string returnUrl = null)
         {
             var roles = _roleManager.Roles.ToList();
             roles.Remove(_roleManager.Roles.SingleOrDefault(r => r.Name == "Admin"));
