@@ -77,6 +77,7 @@ namespace WebClient.Areas.Admin.Controllers
                 var data = respon.Content.ReadAsStringAsync().Result;
                 var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                 var obj = JsonSerializer.Deserialize<Category>(data, options);
+                
                 return View(obj);
             }
             return NotFound();
@@ -88,6 +89,7 @@ namespace WebClient.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int id, Category obj)
         {
             obj.ID = id;
+            obj.accept = true;
             string data = JsonSerializer.Serialize<Category>(obj);
             var content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage respon = await client.PutAsync(api + "/" + id, content);
