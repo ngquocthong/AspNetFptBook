@@ -67,9 +67,12 @@ namespace WebClient.Areas.Owner.Controllers
         }
 
         // GET: RequestCategory/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
+
+
             return View();
+			
         }
 
         // POST: RequestCategory/Edit/5
