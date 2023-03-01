@@ -2,7 +2,7 @@
 @model List<CartItem>
 string userid;
 @{
-	string userID="";
+	string userID = "";
 }
 @*<main class="page shopping-cart-page">
 	<section class="clean-block clean-cart dark">
@@ -19,7 +19,7 @@ string userid;
 								<div class="items">
 									@foreach (var cartitem in Model)
 									{
-										 userID = cartitem.cus_id; 
+										 userID = cartitem.cus_id;
 										var thanhtien = cartitem.quantity * cartitem.book.book_price;
 										total += thanhtien;
 										<div class="product">
@@ -39,31 +39,31 @@ string userid;
 													Update
 												</button>
 												<a asp-route="removecart" asp-route-productid="@cartitem.book.ID" class="btn btn-danger">asp-route="removecart" asp-route-productid="@cartitem.book.ID"</a>
-										
-												
+
+
 											</div>
 										</div>
 									}*@
-									<main class="page shopping-cart-page">
-        <section class="clean-block clean-cart dark">
-            <div class="container">
-                <div class="block-heading">
-                    <h2 class="text-info">Shopping Cart</h2>
-                </div>
-                @if (Model.Count > 0)
-                {
-                double total = 0;
-                int stt = 1;
-                <div class="content">
-                    <div class="row g-0">
-                        <div class="col-md-12 col-lg-8">
-                            <div class="items" style="padding-left: 6px;">
-                                @foreach (var cartitem in Model)
-                                {
-                                userID = cartitem.cus_id;
-                                var thanhtien = cartitem.quantity * cartitem.book.book_price;
-                                total += thanhtien;
-							
+<main class="page shopping-cart-page">
+	<section class="clean-block clean-cart dark">
+		<div class="container">
+			<div class="block-heading">
+				<h2 class="text-info">Shopping Cart</h2>
+			</div>
+			@if (Model.Count > 0)
+			{
+				double total = 0;
+				int stt = 1;
+				<div class="content">
+					<div class="row g-0">
+						<div class="col-md-12 col-lg-8">
+							<div class="items" style="padding-left: 6px;">
+								@foreach (var cartitem in Model)
+								{
+									userID = cartitem.cus_id;
+									var thanhtien = cartitem.quantity * cartitem.book.book_price;
+									total += thanhtien;
+
 									<div class="product">
 										<div class="row justify-content-center align-items-center">
 											<div class="col-md-3">
@@ -76,7 +76,8 @@ string userid;
 											<div class="col-6 col-md-2 price" style="width: 96px;"><span>@cartitem.book.book_price</span></div>
 											<div class="col-6 col-md-2 text-center d-xxl-flex flex-column price" style="width: 96px;">
 												<button class="btn btn-primary updatecartitem" type="button" style="font-size: 9px;background: rgb(76,195,20);" data-productid="@cartitem.book.ID">Update</button>
-												<a asp-action="removecart" asp-route-productid="@cartitem.book.ID" class="btn btn-primary"  type="button" style="font-size: 9px;margin-top: 6px;background: var(--bs-red);">Delete</a></div>
+												<a asp-action="removecart" asp-route-productid="@cartitem.book.ID" class="btn btn-primary" type="button" style="font-size: 9px;margin-top: 6px;background: var(--bs-red);">Delete</a>
+											</div>
 										</div>
 									</div>
 

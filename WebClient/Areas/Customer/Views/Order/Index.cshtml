@@ -21,7 +21,7 @@
                         <tbody>
                             @foreach(var o in Model){
                             <tr>
-                                  <td><a  asp-action="Details" asp-route-id="@o.ID">Order @(count)</a></td>
+                                  <td><a asp-action="Details" asp-route-id="@o.ID">Order @(count)</a></td>
                                 <td>@o.totalPrice</td>
                                 </tr>
                                 count++;
