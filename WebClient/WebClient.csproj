@@ -28,6 +28,8 @@
     <Folder Include="Areas\Owner\Models\" />
     <Folder Include="Areas\RoleAuthen\Data\" />
     <Folder Include="Areas\RoleAuthen\Models\" />
+    <Folder Include="Areas\SendMail\Data\" />
+    <Folder Include="Areas\SendMail\Views\" />
     <Folder Include="Data\Migrations\" />
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\assetsOwner\" />
