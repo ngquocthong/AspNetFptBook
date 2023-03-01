@@ -70,9 +70,8 @@ string userid;
 												<div class="product-image"><img class="img-fluid d-block mx-auto image" src="https://localhost:7186/api/Book/image/@cartitem.book.ID"></div>
 											</div>
 											<div class="col-md-5 product-info" style="width: 240px;"><a class="product-name" href="#">@cartitem.book.book_name</a></div>
-											<div class="col-6 col-md-2 quantity">
-												<label class="form-label d-none d-md-block" for="quantity">Quantity</label>
-												<input type="number" asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.book.ID}")" class="form-control quantity-input">
+											<div class="col-6 col-md-2 quantity"><label class="form-label d-none d-md-block" for="quantity">Quantity</label>
+												<input type="number" min=0 max="@cartitem.book.quantity" asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.book.ID}")" class="form-control quantity-input" >
 											</div>
 											<div class="col-6 col-md-2 price" style="width: 96px;"><span>@cartitem.book.book_price</span></div>
 											<div class="col-6 col-md-2 text-center d-xxl-flex flex-column price" style="width: 96px;">
@@ -81,45 +80,48 @@ string userid;
 											</div>
 										</div>
 									</div>
+
 								}
+								</div>
 							</div>
-						</div>
-						<div class="col-md-12 col-lg-4">
-							<div class="summary">
-								<h3>Summary</h3>
-								<h4>
-									<span class="text">Subtotal</span><span class="price">
-										@(
-											total.ToString("n0")
-											)
-									</span>
-								</h4>
-								<h4><span class="text">Discount</span><span class="price">$0</span></h4>
-								<h4><span class="text">Shipping</span><span class="price">$0</span></h4>
-								<h4>
-									<span class="text">Total</span><span class="price">
-										@(
-											total.ToString("n0")
-											)
-									</span>
-								</h4>
-								<a asp-action="CheckOut" asp-route-userid="@userID" class="btn btn-primary btn-lg d-block w-100" type="button">Checkout</a>
-
-
+							<div class="col-md-12 col-lg-4">
+								<div class="summary">
+									<h3>Summary</h3>
+									<h4>
+										<span class="text">Subtotal</span><span class="price">
+											@(
+												total.ToString("n0")
+												)
+										</span>
+									</h4>
+									<h4><span class="text">Discount</span><span class="price">$0</span></h4>
+									<h4><span class="text">Shipping</span><span class="price">$0</span></h4>
+									<h4>
+										<span class="text">Total</span><span class="price">
+											@(
+												total.ToString("n0")
+												)
+										</span>
+									</h4>
+									<a asp-action="CheckOut" id="checkout" asp-route-userid="@userID" class="btn btn-primary btn-lg d-block w-100" type="button">Checkout</a>
+									
+									
+								</div>
+								
 							</div>
-
 						</div>
 					</div>
-				</div>
-			}
-			else
-			{
-				<p class="alert alert-danger">Giỏ hàng trống</p>
-			}
-		</div>
+				}
+				else
+				{
+					<p class="alert alert-danger">Giỏ hàng trống</p>
+				}
+			</div>
 		</div>
 	</section>
 </main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 @section Scripts {
 	<script>
@@ -141,6 +143,7 @@ string userid;
 				});
 			});
 		});
+
 	</script>
 }
 

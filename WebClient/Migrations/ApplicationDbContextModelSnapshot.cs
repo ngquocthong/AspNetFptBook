@@ -52,21 +52,21 @@ namespace WebClient.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "0d83b409-90bf-4f84-8b29-4a3c757dbacb",
+                            ConcurrencyStamp = "f2141fa0-ba7c-41a3-b8d0-3eef9fd7c2bf",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "7cf66d91-a6dd-40f6-b9ff-cb907305b32c",
+                            ConcurrencyStamp = "dc516525-99b1-4693-8f33-d2b84163d792",
                             Name = "Owner",
                             NormalizedName = "Owner"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "bb038b85-9109-4c65-a28a-a07e6d2fcbab",
+                            ConcurrencyStamp = "b6513593-9d65-472f-b015-7db1eb293b5c",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         });
@@ -270,7 +270,7 @@ namespace WebClient.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Address = "Binh Duong",
-                            ConcurrencyStamp = "98fdf6a4-cc08-4815-965c-1bffe5bdb3cd",
+                            ConcurrencyStamp = "47b09f3b-266e-4ecd-b120-4398900f1b90",
                             DofB = new DateTime(2002, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@example.com",
                             EmailConfirmed = true,
@@ -279,7 +279,7 @@ namespace WebClient.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAED5pLiDbIXauYUs0lkaerq8mHzHFwODW/IjGb+VnYpF2cJbrdTaJ4X0vbUBZRgnC6g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELnSxOVz/ghRgVA90r+lPIoEmFcnIR2albG0aA2Z6BAL6X0cW6F2KHj7yNUHx1nLHg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

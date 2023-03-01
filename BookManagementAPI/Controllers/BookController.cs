@@ -42,12 +42,24 @@ namespace BookManagementAPI.Controllers
         [HttpGet("{id}")]
         public Book Get(int id) => repository.GetBookByID(id);
         // POST api/<BookController>
+
         [HttpPost]
-        public IActionResult Post(Book b)
+        public async Task<IActionResult> Post([FromForm]Book b)
         {
-           
             repository.AddBook(b);
-            return NoContent();
+            if (b.imgFile.Length > 0)
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", b.imgFile.FileName);
+                using (var stream = System.IO.File.Create(path))
+                {
+                    await b.imgFile.CopyToAsync(stream);
+                }
+                b.book_img = "/images/" + b.imgFile.FileName;
+
+            }
+            else b.book_img = "";
+            repository.AddBook(b);
+            return Ok(b);
         }
 
         [HttpPost]
@@ -73,7 +85,7 @@ namespace BookManagementAPI.Controllers
         }
         [HttpPut("{id}")]
         //public async Task<IActionResult> Put(int id, [FromForm] string datajson, IFormFile fileImage)
-        public async Task<IActionResult> Put(int id, [FromForm] string datajson)
+        public async Task<IActionResult> Put(int id, Book b)
         {
             var bookToUpdate = repository.GetBookByID(id);
 
@@ -82,10 +94,10 @@ namespace BookManagementAPI.Controllers
                 return NotFound();
             }
 
-            var b = JsonConvert.DeserializeObject<Book>(datajson);
             bookToUpdate.book_name = b.book_name;
             bookToUpdate.book_author = b.book_author;
             bookToUpdate.cate_id = b.cate_id;
+            bookToUpdate.quantity = b.quantity;
             bookToUpdate.book_price = b.book_price;
 /*
             if (fileImage != null && fileImage.Length > 0)

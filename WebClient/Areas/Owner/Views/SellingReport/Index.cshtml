@@ -112,17 +112,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script>
         const revenue = document.getElementById("revenue");
-        var xValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+        var xValues = [];
+        for (let i = 1; i <= 30; i++) {
+            xValues.push(i);
+        }
         fetch("https://localhost:7186/api/Orders")
             .then(function (response) {
                 return response.json();
             })
             .then(function (data) {
-                var total = 0;
-                var yValues = data.map(function (order) {
-                    total = order.totalPrice + total;
-                    return total;
-                });
+                const revenueByDay = Array.from({ length: 30 }, () => 0);
+                for (let i = 0; i < data.length; i++) {
+                    const order = data[i];
+                    const date = new Date(order.createdDate);
+                    const day = date.getDate();
+                    revenueByDay[day - 1] += order.totalPrice;
+                }
+                const total = revenueByDay.reduce((a, b) => a + b, 0);
                 revenue.innerHTML = "$" + total;
                 new Chart("myChart", {
                     type: "line",
@@ -133,7 +139,7 @@
                             lineTension: 0,
                             backgroundColor: "rgba(0,0,255,1.0)",
                             borderColor: "rgba(0,0,255,0.1)",
-                            data: yValues
+                            data: revenueByDay
                         }]
                     },
                     options: {
@@ -147,5 +153,6 @@
             .catch(function (error) {
                 console.error(error);
             });
+
 
     </script>
