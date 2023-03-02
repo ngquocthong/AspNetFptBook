@@ -7,7 +7,7 @@ namespace BusinessObjects
 {
 	public class Order
 	{
-        public string owner_id;
+        
 
         /*[JsonIgnore]*/
         [Key]
@@ -17,7 +17,8 @@ namespace BusinessObjects
 		public double totalPrice { get; set; }
 		public DateTime createdDate { get; set; }
 		public bool status { get; set; }
-		public string shippingAddress { get; set; }
+        public string owner_id { get; set; }
+        public string shippingAddress { get; set; }
 		public string cus_id { get; set; }
 
 

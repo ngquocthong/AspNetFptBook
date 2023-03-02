@@ -1,101 +1,106 @@
 ﻿@using BusinessObjects;
 @model IEnumerable<Category>
-<div class="card shadow">
-        <div class="container-fluid">
-            <h3 class="text-dark mb-4" style="font-weight: bold;color: var(--bs-table-striped-color);">Manage Category</h3>
-        </div>
-        <div class="row">
-            <div class="col" style="margin-left: 16px;">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="text-center">Name</th>
-                                <th class="text-center">Description</th>
-                                <th class="text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-							@foreach (Category cate in Model) {
-							if (cate.accept==true) {
-								<tr>
-									<td>@cate.cate_name</td>
-									<td>@cate.cate_des</td>
-									<td class="text-center">
-									<a asp-action="Edit" asp-route-id = "@cate.ID" class="far fa-edit" style="font-size: 20px;"></a>
-										<a asp-action="Delete" asp-route-id="@cate.ID" onclick="return confirm('Are you sure you want to delete this item?')" class="fa fa-trash" style="font-size: 20px;margin-left: 9px;"></a>
-									</td>
-								</tr>
+<div class="container-fluid">
+	<h3 class="text-dark mb-4"></h3>
+	<div class="card shadow">
+		<div class="card-header py-3">
+			<h3 class="text-dark mb-4" style="font-weight: bold;color: var(--bs-table-striped-color);">Manage Category</h3>
+		</div>
+
+		<div class="row">
+			<div class="col" style="margin-left: 16px;">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th class="text-center">Name</th>
+								<th class="text-center">Description</th>
+								<th class="text-center">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (Category cate in Model)
+							{
+								if (cate.accept == true)
+								{
+									<tr>
+										<td>@cate.cate_name</td>
+										<td>@cate.cate_des</td>
+										<td class="text-center">
+											<a asp-action="Edit" asp-route-id="@cate.ID" class="far fa-edit" style="font-size: 20px;"></a>
+											<a asp-action="Delete" asp-route-id="@cate.ID" onclick="return confirm('Are you sure you want to delete this item?')" class="fa fa-trash" style="font-size: 20px;margin-left: 9px;"></a>
+										</td>
+									</tr>
 								}
 							}
 						</tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col">
+					</table>
+				</div>
+			</div>
+			<div class="col">
 
-			@foreach (Category cate in Model)
-			{
-				if (cate.accept == false)
+				@foreach (Category cate in Model)
 				{
-					<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">Owner</h4>
-							<h6 class="text-muted card-subtitle mb-2">Request A New Category: @cate.cate_name</h6>
-							<p class="card-text">@cate.cate_des</p>
-							<a class="card-link" asp-action="Accept" asp-route-id="@cate.ID">Accept</a><a class="card-link" asp-action="Delete" asp-route-id="@cate.ID">Deny</a>
+					if (cate.accept == false)
+					{
+						<div class="card">
+							<div class="card-body">
+								<h4 class="card-title">@cate.email_request</h4>
+								<h6 class="text-muted card-subtitle mb-2">Request A New Category: @cate.cate_name</h6>
+								<p class="card-text">@cate.cate_des</p>
+								<a class="card-link" asp-action="Accept" asp-route-id="@cate.ID">Accept</a><a class="card-link" asp-action="Delete" asp-route-id="@cate.ID">Deny</a>
+							</div>
 						</div>
-					</div>
+					}
 				}
-			}
-				
 
-            </div>
-        </div>
-    </div>
+
+			</div>
+		</div>
+	</div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <@*script type="text/javascript">
-	$(document).ready(function () {
-		ShowAllProducts();
-
-		function ShowAllProducts() {
-			$("table tbody").html("");
-			$.ajax({
-				url: "https://localhost:7186/api/Category",
-				type: "get",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function (result, status, xhr) {
-					$.each(result, function (index, value) {
-						appendElement = $("<tr>");
-						$("tbody").append(appendElement);
-						appendElement.append($("<td>").html(value["id"]));
-						appendElement.append($("<td>").html(value["cate_name"]));
-						appendElement.append($("<td>").html(value["cate_des"]));
-						appendElement.append($("<td>").html("<a href=\"?id=" + value["id"] + "\"><img src=\"icon/edit.png\"/></a>"));
-						appendElement.append($("<td>").html("<img class=\"delete\" src=\"icon/close.png\"/>"));
-					});
-				},
-				error: function (xhr, status, error) {
-					console.log(xhr)
-				}
-			});
-		}*@
-		<script  type="text/javascript">
-		$("table").on("click", "img.delete", function () {
-			var productId = $(this).parents("tr").find("td:nth-child(1)").text();
-			$.ajax({
-				url: "https://localhost:7186/api/Category/" + productId,
-				type: "delete",
-				contentType: "application/json",
-				dataType: "json",
-				success: function (result, status, xhr) {
-					ShowAllProducts();
-				},
-				error: function (xhr, status, error) {
-					console.log(xhr)
-				}
-			});
-		});
+		  $(document).ready(function () {
+		  ShowAllProducts();
+		  function ShowAllProducts() {
+		  $("table tbody").html("");
+		  $.ajax({
+		  url: "https://localhost:7186/api/Category",
+		  type: "get",
+		  contentType: "application/json; charset=utf-8",
+		  dataType: "json",
+		  success: function (result, status, xhr) {
+		  $.each(result, function (index, value) {
+		  appendElement = $("<tr>");
+		  $("tbody").append(appendElement);
+		  appendElement.append($("<td>").html(value["id"]));
+		  appendElement.append($("<td>").html(value["cate_name"]));
+		  appendElement.append($("<td>").html(value["cate_des"]));
+		  appendElement.append($("<td>").html("<a href=\"?id=" + value["id"] + "\"><img src=\"icon/edit.png\"/></a>"));
+		  appendElement.append($("<td>").html("<img class=\"delete\" src=\"icon/close.png\"/>"));
+		  });
+		  },
+		  error: function (xhr, status, error) {
+		  console.log(xhr)
+		  }
+		  });
+		  }*@
+<script  type="text/javascript">
+$("table").on("click", "img.delete", function () {
+	var productId = $(this).parents("tr").find("td:nth-child(1)").text();
+	$.ajax({
+		url: "https://localhost:7186/api/Category/" + productId,
+		type: "delete",
+		contentType: "application/json",
+		dataType: "json",
+		success: function (result, status, xhr) {
+			ShowAllProducts();
+		},
+		error: function (xhr, status, error) {
+			console.log(xhr)
+		}
+	});
+});
 	});
 </script>

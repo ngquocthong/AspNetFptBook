@@ -18,27 +18,30 @@
                         <div class="col-md-6">
                             <div class="gallery">
                                 <div id="product-preview" class="vanilla-zoom">
-                                    <img src="https://localhost:7186/api/Book/image/@Model.ID" style="width: 545px;height: 527.663px;" />
+                                    <img src="https://localhost:7186/api/Book/image/@Model.ID" style="width: 545px;height: 700px;" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="info">
-                                <h3>@Model.book_name</h3>
+                                <h2>@Model.book_name</h3>
                                 <div class="rating">
    
                                 </div>
                                 <div class="price">
-                                    <h3>$@(Model.book_price)</h3>
+                                    <h3>Price: $@(Model.book_price)</h3>
                                 </div>
                                 <a id="addToCartBtn" asp-controller="Cart" asp-action="AddToCart"  asp-route-id="@Model.ID" class="btn btn-primary" type="button">
                                     Add to Cart
                                 </a>
+                                <div class="price">
+                                    <h4>Available: @(Model.quantity) book(s)</h4>
+                                </div>
 
                                 <div class="summary">
-                                    <p> 
+                                    <h5> 
                                         @Model.book_description
-                                    </p>
+                                    </h5>
                                 </div>
                             </div>
                         </div>

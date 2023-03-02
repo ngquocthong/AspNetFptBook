@@ -34,24 +34,26 @@ namespace WebClient.Areas.Owner.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            List<ApplicationUser> usList = _db.Users.ToList();
-
-
-            ViewBag.Customer = usList;
-            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            HttpResponseMessage response = await client.GetAsync(api);
-            string data = await response.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            List<Order> list = JsonSerializer.Deserialize<List<Order>>(data, options);
-            list = list.Where(b => b.owner_id == userID).ToList();
-
-             
-            return View(list);
-            
+            try
+            {
+                List<ApplicationUser> usList = _db.Users.ToList();
+                ViewBag.Customer = usList;
+                var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                HttpResponseMessage response = await client.GetAsync(api);
+                string data = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                List<Order> list = JsonSerializer.Deserialize<List<Order>>(data, options);
+                list = list.Where(b => b.owner_id == userID).ToList();
+                return View(list);
+            }
+            catch (JsonException ex)
+            {
+                return View(new List<Order>());
+            }
         }
 
-        // GET: MOrder/Details/5
-        public ActionResult Details(int id)
+	// GET: MOrder/Details/5
+	public ActionResult Details(int id)
         {
             return View();
         }

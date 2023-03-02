@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebClient.Data;
 
@@ -12,10 +11,9 @@ using WebClient.Data;
 namespace WebClient.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230301194451_mi5")]
-    partial class mi5
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,21 +52,21 @@ namespace WebClient.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "3487532e-dda2-4d66-a008-057cbad8af6c",
+                            ConcurrencyStamp = "48fbe8fc-fe5b-4a2a-b49d-4fcabbc79ecc",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "bc181aec-9bdd-4e1a-a59c-affb30e77050",
+                            ConcurrencyStamp = "096a1715-ae27-4325-aef3-ce3b9ed76059",
                             Name = "Owner",
                             NormalizedName = "Owner"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "50d8a66b-2ae2-491c-9ce7-de5ff91caad6",
+                            ConcurrencyStamp = "4a525f5a-5583-4b0d-b747-a60afac44624",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         });
@@ -272,7 +270,7 @@ namespace WebClient.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Address = "Binh Duong",
-                            ConcurrencyStamp = "d014cd49-048d-488c-8a61-d434c92e8a81",
+                            ConcurrencyStamp = "f4355b2b-c8a1-45d6-8d8e-3622d0f63080",
                             DofB = new DateTime(2002, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@example.com",
                             EmailConfirmed = true,
@@ -281,7 +279,7 @@ namespace WebClient.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH9ARU5xv+TXiZ0A+2lAX4+pKWQOj3bueS0Q2xzcLkzFMt5/Gn7fsyeXYBhWuSorSg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELu9yWIz3pcYpGgxr2IPUF7+//u62yAWu3LN0kGGsNUJeA9wL7SFLxkEdifOB1x0dQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

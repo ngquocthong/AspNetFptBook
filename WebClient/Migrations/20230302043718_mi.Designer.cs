@@ -12,7 +12,7 @@ using WebClient.Data;
 namespace WebClient.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230301193930_mi")]
+    [Migration("20230302043718_mi")]
     partial class mi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,21 +54,21 @@ namespace WebClient.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "837b3dc8-9a87-47be-ac9a-bfd28abcf8fa",
+                            ConcurrencyStamp = "48fbe8fc-fe5b-4a2a-b49d-4fcabbc79ecc",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "7fa0b1e8-1d6d-4379-80b8-aff7dc01f8c5",
+                            ConcurrencyStamp = "096a1715-ae27-4325-aef3-ce3b9ed76059",
                             Name = "Owner",
                             NormalizedName = "Owner"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "122adcda-680f-4550-a72b-f14e25a0e117",
+                            ConcurrencyStamp = "4a525f5a-5583-4b0d-b747-a60afac44624",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         });
@@ -272,7 +272,7 @@ namespace WebClient.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Address = "Binh Duong",
-                            ConcurrencyStamp = "01301dbf-30ba-4225-a863-9d12d1194153",
+                            ConcurrencyStamp = "f4355b2b-c8a1-45d6-8d8e-3622d0f63080",
                             DofB = new DateTime(2002, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@example.com",
                             EmailConfirmed = true,
@@ -281,7 +281,7 @@ namespace WebClient.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP3n51owwbk0q1AzeZKL2NSAFnBx7849VYaUQDPBy6PUYhvYmBmtceYNlNQhwLy3iA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELu9yWIz3pcYpGgxr2IPUF7+//u62yAWu3LN0kGGsNUJeA9wL7SFLxkEdifOB1x0dQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
