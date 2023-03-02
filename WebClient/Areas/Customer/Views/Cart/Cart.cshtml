@@ -31,17 +31,18 @@ string userid;
 											<div class="col-md-3">
 												<div class="product-image"><img class="img-fluid d-block mx-auto image" src="https://localhost:7186/api/Book/image/@cartitem.book.ID"></div>
 											</div>
-											<div class="col-md-5 product-info" style="width: 240px;"><a class="product-name" href="#">@cartitem.book.book_name</a></div>
+											<div class="col-md-5 product-info" style="width: 240px;"><h5 class="product-name">@cartitem.book.book_name</h5></div>
 											<div class="col-6 col-md-2 quantity"><label class="form-label d-none d-md-block" for="quantity">Quantity</label>
 												<input type="number" min=0 max="@cartitem.book.quantity" asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.book.ID}")" class="form-control quantity-input" >
 											</div>
-											<div class="col-6 col-md-2 price" style="width: 96px;"><span>@cartitem.book.book_price</span></div>
+											<div class="col-6 col-md-2 price" style="width: 96px;"><span>$ @cartitem.book.book_price</span></div>
 											<div class="col-6 col-md-2 text-center d-xxl-flex flex-column price" style="width: 96px;">
 												<button class="btn btn-primary updatecartitem" type="button" style="font-size: 9px;background: rgb(76,195,20);" data-productid="@cartitem.book.ID">Update</button>
 												<a asp-action="removecart" asp-route-productid="@cartitem.book.ID" class="btn btn-primary" type="button" style="font-size: 9px;margin-top: 6px;background: var(--bs-red);">Delete</a>
 											</div>
 										</div>
 									</div>
+
 
 								}
 								</div>
@@ -78,6 +79,8 @@ string userid;
 				}
 			</div>
 		</div>
+
+		<div class="container" style="margin-right: 38.8px;margin-bottom: 360px;"></div>
 	</section>
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

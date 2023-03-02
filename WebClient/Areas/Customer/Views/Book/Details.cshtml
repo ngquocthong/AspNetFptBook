@@ -18,28 +18,33 @@
                         <div class="col-md-6">
                             <div class="gallery">
                                 <div id="product-preview" class="vanilla-zoom">
-                                    <img src="https://localhost:7186/api/Book/image/@Model.ID" style="width: 545px;height: 527.663px;" />
+                                    <img src="https://localhost:7186/api/Book/image/@Model.ID" style="width: 545px;height: 700px;" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="info">
-                                <h3>@Model.book_name</h3>
-                                <div class="rating">
-   
+                                <h2>@Model.book_name</h3>
+                                <div class="info">
+                                    <h5> 
+                                       Author: @Model.book_author
+                                    </h5>
                                 </div>
                                 <div class="price">
-                                    <h3>$@(Model.book_price)</h3>
+                                    <h3>Price: $@(Model.book_price)</h3>
                                 </div>
+                                <div class="text">
+                                    <h4>Available: @(Model.quantity) book(s)</h4>
+                                </div>
+                                <div class="summary">
+                                    <h5> 
+                                        @Model.book_description
+                                    </h5>
+                                </div>
+                                <br/>
                                 <a id="addToCartBtn" asp-controller="Cart" asp-action="AddToCart"  asp-route-id="@Model.ID" class="btn btn-primary" type="button">
                                     Add to Cart
                                 </a>
-
-                                <div class="summary">
-                                    <p> 
-                                        @Model.book_description
-                                    </p>
-                                </div>
                             </div>
                         </div>
                     </div>

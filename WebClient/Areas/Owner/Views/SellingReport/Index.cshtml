@@ -1,158 +1,166 @@
-﻿<div class="d-flex flex-column" id="content-wrapper">
-    <div id="content">
-        
-        <div class="container-fluid">
-            <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                <h3 class="text-dark mb-0">Dashboard</h3>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-start-primary py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col me-2">
-                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Earnings (monthly)</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span id="revenue">$40,000</span></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-start-success py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col me-2">
-                                    <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Earnings (annual)</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span>$215,000</span></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-start-info py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col me-2">
-                                    <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Tasks</span></div>
-                                    <div class="row g-0 align-items-center">
-                                        <div class="col-auto">
-                                            <div class="text-dark fw-bold h5 mb-0 me-3"><span>50%</span></div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="visually-hidden">50%</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-start-warning py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col me-2">
-                                    <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Pending Requests</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span>18</span></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-comments fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-7 col-xl-8">
-                    <div class="card shadow mb-4">
-                        <div class="card-header d-flex justify-content-between align-items-center">                           
-                            <h6 class="text-primary fw-bold m-0">Earnings Overview</h6>
-                            <div class="dropdown no-arrow">
-                                <button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
-                                    <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#">&nbsp;Something else here</a>
-                                </div>
-                            </div>
+﻿@using BusinessObjects;
+@model Book
+<div class="d-flex flex-column" id="content-wrapper">
+	<div id="content">
 
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-area"><canvas id="myChart" style="width:100%;max-width:600px"></canvas></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-xl-4">
-                    <div class="card shadow mb-4">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h6 class="text-primary fw-bold m-0">Revenue Sources</h6>
-                            <div class="dropdown no-arrow">
-                                <button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
-                                    <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#">&nbsp;Something else here</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-area"><canvas data-bss-chart=""></canvas></div>
-                            <div class="text-center small mt-4"><span class="me-2"><i class="fas fa-circle text-primary"></i>&nbsp;Direct</span><span class="me-2"><i class="fas fa-circle text-success"></i>&nbsp;Social</span><span class="me-2"><i class="fas fa-circle text-info"></i>&nbsp;Refferal</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+		<div class="container-fluid">
+			<div class="d-sm-flex justify-content-between align-items-center mb-4">
+				<h3 class="text-dark mb-0">Dashboard</h3>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-xl-3 mb-4">
+					<div class="card shadow border-start-primary py-2">
+						<div class="card-body">
+							<div class="row align-items-center no-gutters">
+								<div class="col me-2">
+									<div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Earnings (monthly)</span></div>
+									<div class="text-dark fw-bold h5 mb-0"><span id="revenue"></span></div>
+								</div>
+								<div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-xl-3 mb-4">
+					<div class="card shadow border-start-success py-2">
+						<div class="card-body">
+							<div class="row align-items-center no-gutters">
+								<div class="col me-2">
+									<div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Number Of Oders</span></div>
+									<div class="text-dark fw-bold h5 mb-0"><span id="numOfOrder"></span></div>
+								</div>
+								<div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-xl-3 mb-4">
+					<div class="card shadow border-start-info py-2">
+						<div class="card-body">
+							<div class="row align-items-center no-gutters">
+								<div class="col me-2">
+									<div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Number Of Selling Book</span></div>
+									<div class="row g-0 align-items-center">
+										<div class="col-auto">
+											<div class="text-dark fw-bold h5 mb-0 me-3"><span>@ViewBag.numberOfBooks</span></div>
+										</div>
+										
+									</div>
+								</div>
+								<div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-xl-3 mb-4">
+					<div class="card shadow border-start-warning py-2">
+						<div class="card-body">
+							<div class="row align-items-center no-gutters">
+								<div class="col me-2">
+									<div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Book Iventory</span></div>
+									<div class="text-dark fw-bold h5 mb-0"><span>@ViewBag.allBook</span></div>
+								</div>
+								<div class="col-auto"><i class="fas fa-comments fa-2x text-gray-300"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-7 col-xl-8">
+					<div class="card shadow mb-4">
+						<div class="card-header d-flex justify-content-between align-items-center">
+							<h6 class="text-primary fw-bold m-0">Earnings Overview</h6>
+							<div class="dropdown no-arrow">
+								<button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
+								<div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
+									<p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
+									<div class="dropdown-divider"></div><a class="dropdown-item" href="#">&nbsp;Something else here</a>
+								</div>
+							</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script>
-        const revenue = document.getElementById("revenue");
-        var xValues = [];
-        for (let i = 1; i <= 30; i++) {
-            xValues.push(i);
-        }
-        fetch("https://localhost:7186/api/Orders")
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                const revenueByDay = Array.from({ length: 30 }, () => 0);
-                for (let i = 0; i < data.length; i++) {
-                    const order = data[i];
-                    const date = new Date(order.createdDate);
-                    const day = date.getDate();
-                    revenueByDay[day - 1] += order.totalPrice;
-                }
-                const total = revenueByDay.reduce((a, b) => a + b, 0);
-                revenue.innerHTML = "$" + total;
-                new Chart("myChart", {
-                    type: "line",
-                    data: {
-                        labels: xValues,
-                        datasets: [{
-                            fill: false,
-                            lineTension: 0,
-                            backgroundColor: "rgba(0,0,255,1.0)",
-                            borderColor: "rgba(0,0,255,0.1)",
-                            data: revenueByDay
-                        }]
-                    },
-                    options: {
-                        legend: { display: false },
-                        scales: {
-                            yAxes: [{ ticks: { min: 6, max: 5000 } }],
-                        }
-                    }
-                });
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
+						</div>
+						<div class="card-body">
+							<div class="chart-area"><canvas id="myChart" style="width:100%;max-width:600px"></canvas></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5 col-xl-4">
+					<div class="card shadow mb-4">
+						<div class="card-header d-flex justify-content-between align-items-center">
+							<h6 class="text-primary fw-bold m-0">Top Selling Book</h6>
+							
+						</div>
+						<div class="card-body">
+							@{
+								var i = 0;
+								foreach (Book book in @ViewBag.topSellingBooks)
+								{
+									i++;
+									<div class="card-body">
+									<h4 class="card-title">"@i# "@book.book_name</h4>
+								</div>
+							}
+							}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script>
+	const revenue = document.getElementById("revenue");
+	const numOfO = document.getElementById("numOfOrder");
+	var xValues = [];
+	const ownerId = "@ViewBag.ownerID";
+	var numOrder = 0;
+		for (let i = 1; i <= 30; i++) {
+		xValues.push(i);
+	}
+	fetch("https://localhost:7186/api/Orders")
+		.then(function (response) {
+			return response.json();
+		})
+		.then(function (data) {
+			const revenueByDay = Array.from({ length: 30 }, () => 0);
+			for (let i = 0; i < data.length; i++) {
+				const order = data[i];
+				const date = new Date(order.createdDate);
+				const day = date.getDate();
+				if (order.owner_id === ownerId) { // Only include orders for the desired owner ID
+					revenueByDay[day - 1] += order.totalPrice;
+					numOrder++;
+				}
 
+			}
+			const total = revenueByDay.reduce((a, b) => a + b, 0);
 
-    </script>
+			const maxValue = total + 200;
+			numOfO.innerHTML = numOrder;
+			revenue.innerHTML = "$" + total;
+			new Chart("myChart", {
+				type: "line",
+				data: {
+					labels: xValues,
+					datasets: [{
+						fill: false,
+						lineTension: 0,
+						backgroundColor: "rgba(0,0,255,1.0)",
+						borderColor: "rgba(0,0,255,0.1)",
+						data: revenueByDay
+					}]
+				},
+				options: {
+					legend: { display: false },
+					scales: {
+						yAxes: [{ ticks: { min: 6, max: maxValue } }],
+					}
+				}
+			});
+		})
+		.catch(function (error) {
+			console.error(error);
+		});
+</script>

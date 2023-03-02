@@ -1,37 +1,42 @@
 ﻿@using BusinessObjects;
 @model IEnumerable<Order>
 @{
-    var count = 1;
+	var count = 1;
 }
 <main class="page payment-page">
-    <section class="clean-block payment-form dark">
-        <div class="container">
-            <div class="block-heading">
-                <h2 class="text-info">History Orders</h2>
-            </div>
-            <form>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="text-center">ID</th>
-                                <th class="text-center">Total</th>
-                                <th class="text-center">Create Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach(var o in Model){
-                            <tr>
-                                <td class ="text-center"><a asp-action="Details" asp-route-id="@o.ID">Order @(count)</a></td>
-                                <td class="text-center">$@o.totalPrice</td>
-                                <td class="text-center">@o.createdDate</td>
-                            </tr>
-                            count++;
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </form>
-        </div>
-    </section>
+	<section class="clean-block payment-form dark">
+		<div class="container">
+			<div class="block-heading">
+				<h2 class="text-info">History Orders</h2>
+			</div>
+			<form>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th class="text-center">ID</th>
+							<th class="text-center">Total</th>
+							<th class="text-center">Create Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var o in Model)
+						{
+							<tr>
+								<td class="text-center"><a asp-action="Details" asp-route-id="@o.ID">Order @(count)</a></td>
+								<td class="text-center">$@o.totalPrice</td>
+								<td class="text-center">@o.createdDate</td>
+							</tr>
+							count++;
+						}
+					</tbody>
+				</table>
+			
+			</div>
+			</form>
+			<div class="container" style="margin-right: 38.8px;margin-bottom: 360px;"></div>
+		</div>
+		
+	</section>
+
 </main>
