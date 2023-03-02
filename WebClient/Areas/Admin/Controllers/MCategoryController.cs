@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using WebClient.Areas.SendMail.Models;
 
 namespace WebClient.Areas.Admin.Controllers
 {
@@ -90,7 +92,7 @@ namespace WebClient.Areas.Admin.Controllers
         {
             obj.ID = id;
             obj.accept = true;
-            string data = JsonSerializer.Serialize<Category>(obj);
+			string data = JsonSerializer.Serialize<Category>(obj);
             var content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage respon = await client.PutAsync(api + "/" + id, content);
             if (respon.IsSuccessStatusCode)
@@ -100,12 +102,17 @@ namespace WebClient.Areas.Admin.Controllers
             return View(obj);
         }
 
-        // GET: ManageCategory/Delete/5
-        public async Task<IActionResult> Delete(int id, Category obj)
-        {
-            obj.ID = id;
 
-            HttpResponseMessage respon = await client.DeleteAsync(api + "/" + id);
+        // GET: ManageCategory/Delete/5
+        public async Task<IActionResult> Delete(int id)
+        {
+			HttpResponseMessage respon = await client.GetAsync(api + "/" + id);
+			string data = await respon.Content.ReadAsStringAsync();
+			var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+			Category c = JsonSerializer.Deserialize<Category>(data, options);
+			var message = await MailUtils.SendMail("thongnqgcc200003@fpt.edu.vn", c.email_request, "Denying Category", $"After consideration, we sorry to say that, {c.cate_name} has been denied by Admin. Sorry!", "thongnqgcc200003@fpt.edu.vn", "Tkcuatui1107.");
+			string catejson = JsonSerializer.Serialize<Category>(c);
+			HttpResponseMessage respon1 = await client.DeleteAsync(api + "/" + id);
             return RedirectToAction("Index");
         }
 
@@ -116,21 +123,19 @@ namespace WebClient.Areas.Admin.Controllers
             HttpResponseMessage respon = await client.GetAsync(api);
             string data = await respon.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+
             List<Category> list = JsonSerializer.Deserialize<List<Category>>(data, options);
-            foreach(Category c in list)
+            var c = list.Where(cate=> cate.ID == id).FirstOrDefault();
+          
+            c.accept = true;
+			var message = await MailUtils.SendMail("thongnqgcc200003@fpt.edu.vn", c.email_request, "Accepting Category", $"{c.cate_name} has been added to the system. Thank you for your submission!", "thongnqgcc200003@fpt.edu.vn", "Tkcuatui1107.");
+			string catejson = JsonSerializer.Serialize<Category>(c);
+            var content = new StringContent(catejson, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PutAsync(api + "/" + id, content);
+            if (respon.IsSuccessStatusCode)
             {
-                if(c.ID == id)
-                {
-                    c.accept = true;
-                    string catejson = JsonSerializer.Serialize<Category>(c);
-                    var content = new StringContent(catejson, System.Text.Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await client.PutAsync(api + "/" + id, content);
-                    if (respon.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction("Index");
-                    }
-                }
-            } 
+             return RedirectToAction("Index");
+            }
             return View("Index");
         }
 

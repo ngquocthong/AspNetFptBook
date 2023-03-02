@@ -11,16 +11,18 @@ namespace BusinessObjects
 {
     public class Category
     {
+		
 
-        [Key]
+		[Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-
+        
         public string cate_name { get; set; }
         public string cate_des { get; set; }
         public Boolean accept { get; set; }
+		public string? email_request { get; set; }
 
-        [JsonIgnore]
+		[JsonIgnore]
         public virtual ICollection<Book>? Books { get; set; }
     }
 }
