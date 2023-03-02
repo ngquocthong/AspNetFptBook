@@ -46,7 +46,8 @@ namespace BusinessObjects.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     cate_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     cate_des = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    accept = table.Column<bool>(type: "bit", nullable: false)
+                    accept = table.Column<bool>(type: "bit", nullable: false),
+                    email_request = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -124,13 +125,13 @@ namespace BusinessObjects.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "ID", "accept", "cate_des", "cate_name" },
-                values: new object[] { 1, true, "Related to unrealistic storey", "Fiction" });
+                columns: new[] { "ID", "accept", "cate_des", "cate_name", "email_request" },
+                values: new object[] { 1, true, "Related to unrealistic storey", "Fiction", "@email.com" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "ID", "accept", "cate_des", "cate_name" },
-                values: new object[] { 2, false, "Related to financial", "Finance" });
+                columns: new[] { "ID", "accept", "cate_des", "cate_name", "email_request" },
+                values: new object[] { 2, false, "Related to financial", "Finance", "@email.com" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_cate_id",

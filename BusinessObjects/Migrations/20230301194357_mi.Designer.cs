@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230301142542_mi")]
+    [Migration("20230301194357_mi")]
     partial class mi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,6 +126,10 @@ namespace BusinessObjects.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("email_request")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ID");
 
                     b.ToTable("Categories");
@@ -136,14 +140,16 @@ namespace BusinessObjects.Migrations
                             ID = 1,
                             accept = true,
                             cate_des = "Related to unrealistic storey",
-                            cate_name = "Fiction"
+                            cate_name = "Fiction",
+                            email_request = "@email.com"
                         },
                         new
                         {
                             ID = 2,
                             accept = false,
                             cate_des = "Related to financial",
-                            cate_name = "Finance"
+                            cate_name = "Finance",
+                            email_request = "@email.com"
                         });
                 });
 

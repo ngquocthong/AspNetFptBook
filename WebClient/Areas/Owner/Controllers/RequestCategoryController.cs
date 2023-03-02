@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 
 namespace WebClient.Areas.Owner.Controllers
 {
@@ -43,11 +44,13 @@ namespace WebClient.Areas.Owner.Controllers
        /* [ValidateAntiForgeryToken]*/
         public async Task<ActionResult> Create(Category cate)
         {
-
-            if (ModelState.IsValid)
+			var emailClaim = User.FindFirst(ClaimTypes.Email).Value;
+			cate.email_request = emailClaim;
+			if (ModelState.IsValid)
             {
                 TempData["Message"] = "Request Success! Please waiting for Admin's response";
-                string data = JsonSerializer.Serialize(cate);
+				
+				string data = JsonSerializer.Serialize(cate);
                 var content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
                 HttpResponseMessage respon = await client.PostAsync(api, content);
                 if (respon.StatusCode == System.Net.HttpStatusCode.Created)
