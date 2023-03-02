@@ -17,6 +17,7 @@ namespace DataAccess
                 using (var context = new ApplicationDbContext())
                 {
                     listCategorys = context.Categories.ToList();
+                   
                 }
             }
             catch (Exception e)

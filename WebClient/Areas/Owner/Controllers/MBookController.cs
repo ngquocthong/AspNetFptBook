@@ -66,8 +66,9 @@ namespace WebClient.Areas.Customer.Controllers
             {
                 HttpResponseMessage response = await client.GetAsync("https://localhost:7186/api/Category");
                 string data = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };               
                 List<Category> list = JsonSerializer.Deserialize<List<Category>>(data, options);
+                //list = list.Where(c => c.accept == true).ToList();
                 return list;
             }
             catch (JsonException ex)

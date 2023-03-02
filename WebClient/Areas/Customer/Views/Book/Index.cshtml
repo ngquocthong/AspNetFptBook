@@ -2,13 +2,23 @@
 @model IEnumerable<Book>
 <main class="page catalog-page">
     <section class="clean-block clean-catalog dark">
-        <div class="container">
+        <div class="container text-end">
             <div class="block-heading"> <h2 class="text-info"> <i>"The more that you read, the more things you will know."</i> - Dr. Seuss</h2>  </div>
+            <select class="" id="cate_id" onchange="categoryChanged(this)" name="cate_id" required>
+                <option>Select</option>
+            </select>
             <div class="content">
                 <div class="col-md-12">
-                    
-                        <div class="products">
+                        
+                           
+                        
+                    <div class="products">
                             <div class="row g-0" id="containBook">
+                               @if (TempData["Message"] != null)
+		                    {
+			                    <div class="alert alert-danger">@TempData["Message"]</div>
+		                    }
+                           
                                 @foreach (var book in Model)
                                 {
                                     <div class="col-12 col-md-6 col-lg-3">
@@ -33,6 +43,29 @@
     </section>
 </main>
 
+<script type="text/javascript">
+
+    const categorySelect = document.querySelector('#cate_id');
+    fetch('https://localhost:7186/api/Category')
+        .then(response => response.json())
+        .then(data => {
+            const acceptedCategories = data.filter(category => category.accept === true);
+            acceptedCategories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.text = category.cate_name;
+                categorySelect.appendChild(option);
+            });
+            const option = document.createElement('option');
+                option.value = 0;
+                option.text = "All";
+                categorySelect.appendChild(option);
+        });
+        function categoryChanged(select) {
+        var cate_id = select.value;
+        window.location.href = '/Customer/Book/BookInCate/?cate_id=' + cate_id; 
+    }
+</script>
 
 @*<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">

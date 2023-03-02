@@ -71,17 +71,19 @@
 <script><partial name="_ValidationScriptsPartial" /></script>
 
 <script type="text/javascript">
-        const categorySelect = document.querySelector('#cate_id');
+    const categorySelect = document.querySelector('#cate_id');
     fetch('https://localhost:7186/api/Category')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category.id;
-                option.text = category.cate_name;
-                categorySelect.appendChild(option);
-            });
+    .then(response => response.json())
+    .then(data => {
+        const acceptedCategories = data.filter(category => category.accept === true);
+        acceptedCategories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.id;
+            option.text = category.cate_name;
+            categorySelect.appendChild(option);
         });
+    });
+
     const form = document.getElementById('book-form');
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -120,7 +122,7 @@
             window.location.href = "/Owner/MBook";
         } catch (error) {
             console.error(error);
-            alert('Upload a Picture!');
+            alert('You must complete all the fill before submit!');
         }
     });
 </script>
