@@ -96,6 +96,7 @@ namespace BookManagementAPI.Controllers
 
             bookToUpdate.book_name = b.book_name;
             bookToUpdate.book_author = b.book_author;
+            bookToUpdate.book_description = b.book_description;
             bookToUpdate.cate_id = b.cate_id;
             bookToUpdate.quantity = b.quantity;
             bookToUpdate.book_price = b.book_price;

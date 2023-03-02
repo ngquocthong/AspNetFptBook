@@ -22,10 +22,9 @@
 						var book = books.FirstOrDefault(b => b.ID == od.book_id);
 						var total = od.quantity * book.book_price;
 							<div class="item">
-								<span class="price">@(total)</span>
+								<span class="price">$@(total)</span>
 								<p class="item-name"> @book.book_name</p>
 								<p class="item-description">@book.book_author</p>
-
 							</div>
 						}
 					}

@@ -20,7 +20,7 @@ namespace WebClient.Areas.Customer.Controllers
 
     public class CartController : Controller
     {
-        public const string CARTKEY = "cart";
+        public /*const*/ string CARTKEY = "cart";
 
         private readonly HttpClient client = null;
         private string api;
@@ -32,12 +32,15 @@ namespace WebClient.Areas.Customer.Controllers
             client.DefaultRequestHeaders.Accept.Add(contentType);
             api = "https://localhost:7186/api";
             _logger = logger;
+          
         }
 
         List<CartItem> GetCartItems()
         {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var KEY = CARTKEY + userID.ToString();
             var session = HttpContext.Session;
-            string jsoncart = session.GetString(CARTKEY);
+            string jsoncart = session.GetString(KEY);
             if (jsoncart != null)
             {
                 return JsonConvert.DeserializeObject<List<CartItem>>(jsoncart);
@@ -47,14 +50,19 @@ namespace WebClient.Areas.Customer.Controllers
         //Clear session of Cart
         void ClearCart()
         {
-            var session = HttpContext.Session;
-            session.Remove(CARTKEY);
+
+            List<CartItem> cart = GetCartItems();
+            cart.Clear();
+            SaveCartSession(cart);
+
         }
         void SaveCartSession(List<CartItem> ls)
         {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var KEY = CARTKEY + userID.ToString();
             var session = HttpContext.Session;
             string jsoncart = JsonConvert.SerializeObject(ls);
-            session.SetString(CARTKEY, jsoncart);
+            session.SetString(KEY, jsoncart);
         }
         [Route("/cart", Name = "cart")]
         public IActionResult Cart()
@@ -90,7 +98,6 @@ namespace WebClient.Areas.Customer.Controllers
                 return RedirectToAction(nameof(Cart));
             }
             return NotFound();
-             
         }
 
         // GET: CartController/Edit/5
@@ -135,7 +142,7 @@ namespace WebClient.Areas.Customer.Controllers
 
 		public async Task<IActionResult> CheckOut(string userID)
 		{
-			api = api + "/Orders";
+			 api = api + "/Orders";
 			var orderDetails = new OrderDetails();
 			var cart = GetCartItems();
 			Order or = new Order();
@@ -143,6 +150,7 @@ namespace WebClient.Areas.Customer.Controllers
             or.cus_id = userID;
             or.createdDate = DateTime.Now;
 			or.shippingAddress = "ABC";
+           
 			or.OrderDetails = new List<OrderDetails>();
 			foreach (var item in cart)
             {
@@ -151,6 +159,7 @@ namespace WebClient.Areas.Customer.Controllers
                 od.quantity = item.quantity;
 				or.totalPrice += item.quantity * item.book.book_price;
                 od.Order = or;
+                or.owner_id = item.book.owner_id;
                 od.Book = item.book;
                 or.OrderDetails.Add(od);
                 var bookApi = "https://localhost:7186/api/Book/" + item.book.ID;
@@ -159,21 +168,17 @@ namespace WebClient.Areas.Customer.Controllers
                 
                 await UpdateBookDetails(bookApi, bookDetails);
             }
-
-			 
-// gan
-
 			string data = JsonSerializer.Serialize<Order>(or);
-
-		    
 			var content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage respon = await client.PostAsync(api, content);
-			if (respon.StatusCode == System.Net.HttpStatusCode.NoContent)
+           
+            if (respon.StatusCode == System.Net.HttpStatusCode.NoContent)
 			{
-				return RedirectToAction("Index", "Order");
+                ClearCart();
+                return RedirectToAction("Index", "Order");
 			}
+            
             return View();
-			
 		}
 
         private async Task<IActionResult> UpdateBookDetails(string bookApi, Book bookDetails)
