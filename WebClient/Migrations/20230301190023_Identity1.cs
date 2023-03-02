@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebClient.Migrations
 {
-    public partial class mi1 : Migration
+    public partial class Identity1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -163,15 +163,15 @@ namespace WebClient.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "45d13a86-e669-4be5-a813-d40bddab7556", "Admin", "ADMIN" },
-                    { "2", "011f4434-c681-4d59-82d1-ba7360aa2b51", "Owner", "Owner" },
-                    { "3", "e74ec96e-7b30-4220-907b-153324011995", "Customer", "Customer" }
+                    { "1", "605ad46c-1f69-4880-be90-a2fb8c4cc3e3", "Admin", "ADMIN" },
+                    { "2", "a571961a-69eb-4409-9cc9-1e6f8defae5b", "Owner", "Owner" },
+                    { "3", "d49abb1d-6f34-4270-8d91-f12e14dad377", "Customer", "Customer" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "DofB", "Email", "EmailConfirmed", "FullName", "Gender", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, "Binh Duong", "86c7093d-6080-477c-9114-a5dde62f229b", new DateTime(2002, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@example.com", true, "Toi La Acc Min", "M", false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAEAACcQAAAAEHEE5cqJ435mzZJH4Pf79DuKPjOou5w54pakHTSvZjJPHc3gaf7kbClmgQ6WnTUBug==", null, false, "", false, "admin@example.com" });
+                values: new object[] { "1", 0, "Binh Duong", "7d2791d3-57b1-4be5-9b6b-8187dfef945d", new DateTime(2002, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@example.com", true, "Toi La Acc Min", "M", false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAEAACcQAAAAEA77wHR99mp8yi6RRorJwJhLdTTZOWrnAD4CJlIlQMKsItxM/A7+yeHdKYskBsw7fw==", null, false, "", false, "admin@example.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
