@@ -4,46 +4,7 @@ string userid;
 @{
 	string userID = "";
 }
-@*<main class="page shopping-cart-page">
-	<section class="clean-block clean-cart dark">
-		<div class="container">
-			<div class="block-heading">
-				<h2 class="text-info">Shopping Cartt</h2>
-				@if (Model.Count > 0)
-				{
-					double total = 0;
-					int stt = 1;
-					<div class="content">
-						<div class="row g-0">
-							<div class="col-md-12 col-lg-8">
-								<div class="items">
-									@foreach (var cartitem in Model)
-									{
-										 userID = cartitem.cus_id;
-										var thanhtien = cartitem.quantity * cartitem.book.book_price;
-										total += thanhtien;
-										<div class="product">
-											<div class="row justify-content-center align-items-center">
-												<div class="col-md-3">
-													<div class="product-image"><img class="img-fluid d-block mx-auto image" src="assets/img/tech/image2.jpg"></div>
-												</div>
-												<div class="col-md-5 product-info"><a class="product-name" href="#">@cartitem.book.book_name</a></div>
-												//<div class="col-6 col-md-2 quantity"><label class="form-label d-none d-md-block" for="quantity">Quantity</label><input asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.book.ID}")" /></div>
-												<div class="col-6 col-md-2 price">
-													<span>
-														@(cartitem.book.book_price.ToString("n0"))
-													</span>
-												</div>
-												<button class="btn btn-success updatecartitem"
-												data-productid="@cartitem.book.ID">
-													Update
-												</button>
-												<a asp-route="removecart" asp-route-productid="@cartitem.book.ID" class="btn btn-danger">asp-route="removecart" asp-route-productid="@cartitem.book.ID"</a>
 
-
-											</div>
-										</div>
-									}*@
 <main class="page shopping-cart-page">
 	<section class="clean-block clean-cart dark">
 		<div class="container">
@@ -53,6 +14,7 @@ string userid;
 			@if (Model.Count > 0)
 			{
 				double total = 0;
+				double totals = 0;
 				int stt = 1;
 				<div class="content">
 					<div class="row g-0">
@@ -63,7 +25,7 @@ string userid;
 									userID = cartitem.cus_id;
 									var thanhtien = cartitem.quantity * cartitem.book.book_price;
 									total += thanhtien;
-
+									totals = total + 10;
 									<div class="product">
 										<div class="row justify-content-center align-items-center">
 											<div class="col-md-3">
@@ -88,24 +50,22 @@ string userid;
 								<div class="summary">
 									<h3>Summary</h3>
 									<h4>
-										<span class="text">Subtotal</span><span class="price">
+										<span class="text">Subtotal</span><span class="price">$
 											@(
 												total.ToString("n0")
 												)
 										</span>
 									</h4>
 									<h4><span class="text">Discount</span><span class="price">$0</span></h4>
-									<h4><span class="text">Shipping</span><span class="price">$0</span></h4>
+									<h4><span class="text">Shipping</span><span class="price">$10</span></h4>
 									<h4>
-										<span class="text">Total</span><span class="price">
+										<span class="text">Total</span><span class="price">$
 											@(
-												total.ToString("n0")
+												totals.ToString("n0")
 												)
 										</span>
 									</h4>
-									<a asp-action="CheckOut" id="checkout" asp-route-userid="@userID" class="btn btn-primary btn-lg d-block w-100" type="button">Checkout</a>
-									
-									
+								<a asp-action="CheckOut" id="checkout" asp-route-userid="@userID" class="btn btn-primary btn-lg d-block w-100" type="button" onclick="return confirm('Are you sure you want to proceed with the checkout?')">Checkout</a>
 								</div>
 								
 							</div>
@@ -143,7 +103,6 @@ string userid;
 				});
 			});
 		});
-
 	</script>
 }
 

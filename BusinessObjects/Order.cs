@@ -7,8 +7,10 @@ namespace BusinessObjects
 {
 	public class Order
 	{
-		/*[JsonIgnore]*/
-		[Key]
+        public string owner_id;
+
+        /*[JsonIgnore]*/
+        [Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		
 		public int ID { get; set; }
@@ -17,6 +19,7 @@ namespace BusinessObjects
 		public bool status { get; set; }
 		public string shippingAddress { get; set; }
 		public string cus_id { get; set; }
+
 
 		public virtual ICollection<OrderDetails> OrderDetails{ get; set; }
 

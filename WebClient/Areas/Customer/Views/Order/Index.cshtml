@@ -16,15 +16,17 @@
                             <tr>
                                 <th class="text-center">ID</th>
                                 <th class="text-center">Total</th>
+                                <th class="text-center">Create Date</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach(var o in Model){
                             <tr>
-                                  <td><a asp-action="Details" asp-route-id="@o.ID">Order @(count)</a></td>
-                                <td>@o.totalPrice</td>
-                                </tr>
-                                count++;
+                                <td class ="text-center"><a asp-action="Details" asp-route-id="@o.ID">Order @(count)</a></td>
+                                <td class="text-center">$@o.totalPrice</td>
+                                <td class="text-center">@o.createdDate</td>
+                            </tr>
+                            count++;
                             }
                         </tbody>
                     </table>

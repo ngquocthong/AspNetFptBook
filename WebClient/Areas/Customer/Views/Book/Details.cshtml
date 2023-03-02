@@ -1,34 +1,35 @@
 ﻿@using BusinessObjects;
 @model Book
+<style>
+    .zoomed-image img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+</style>
 <main class="page product-page">
     <section class="clean-block clean-product dark">
         <div class="container">
             <div class="block-content">
+                <div class="block-heading">
+                </div>
                 <div class="product-info">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="gallery">
                                 <div id="product-preview" class="vanilla-zoom">
-                                    <div class="zoomed-image">
-                                        <img  src="https://localhost:7186/api/Book/image/@Model.ID" />
-                                    </div>
-                                    <div class="sidebar">
-                                        <img class="img-fluid d-block small-preview" src="https://localhost:7186/api/Book/image/@Model.ID" /><img class="img-fluid d-block small-preview"
-                                                                                     src="assets/img/tech/image1.jpg" /><img class="img-fluid d-block small-preview"
-                                                                                                                             src="assets/img/tech/image1.jpg" />
-                                    </div>
+                                    <img src="https://localhost:7186/api/Book/image/@Model.ID" style="width: 545px;height: 527.663px;" />
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-6">
                             <div class="info">
                                 <h3>@Model.book_name</h3>
                                 <div class="rating">
-                                    <img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star-half-empty.svg" /><img src="assets/img/star-empty.svg" />
+   
                                 </div>
                                 <div class="price">
-                                    <h3>@Model.book_price</h3>
+                                    <h3>$@(Model.book_price)</h3>
                                 </div>
                                 <a id="addToCartBtn" asp-controller="Cart" asp-action="AddToCart"  asp-route-id="@Model.ID" class="btn btn-primary" type="button">
                                     Add to Cart
@@ -36,13 +37,7 @@
 
                                 <div class="summary">
                                     <p> 
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Donec augue nunc, pretium at augue at, convallis
-                                        pellentesque ipsum. Vestibulum diam risus, sagittis at
-                                        fringilla at, pulvinar vel risus. Vestibulum dignissim
-                                        eu nulla eu imperdiet. Morbi mollis tellus a nunc
-                                        vestibulum consequat. Quisque tristique elit et nibh
-                                        dapibus sodales. Nam sollicitudin a urna sed iaculis.
+                                        @Model.book_description
                                     </p>
                                 </div>
                             </div>
