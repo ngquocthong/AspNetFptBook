@@ -25,24 +25,26 @@
                         <div class="col-md-6">
                             <div class="info">
                                 <h2>@Model.book_name</h3>
-                                <div class="rating">
-   
+                                <div class="info">
+                                    <h5> 
+                                       Author: @Model.book_author
+                                    </h5>
                                 </div>
                                 <div class="price">
                                     <h3>Price: $@(Model.book_price)</h3>
                                 </div>
-                                <a id="addToCartBtn" asp-controller="Cart" asp-action="AddToCart"  asp-route-id="@Model.ID" class="btn btn-primary" type="button">
-                                    Add to Cart
-                                </a>
-                                <div class="price">
+                                <div class="text">
                                     <h4>Available: @(Model.quantity) book(s)</h4>
                                 </div>
-
                                 <div class="summary">
                                     <h5> 
                                         @Model.book_description
                                     </h5>
                                 </div>
+                                <br/>
+                                <a id="addToCartBtn" asp-controller="Cart" asp-action="AddToCart"  asp-route-id="@Model.ID" class="btn btn-primary" type="button">
+                                    Add to Cart
+                                </a>
                             </div>
                         </div>
                     </div>
