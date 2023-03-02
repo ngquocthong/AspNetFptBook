@@ -72,7 +72,7 @@
                             <td>@u.Address</td>
                                     <td>
                                         <a asp-action="Edit" asp-route-id="@u.Id">Edit</a>
-                                       @* <a asp-action="Delete" asp-route-id="@kh.cus_id" onclick="return confirm('chac chua');">Delete</a>*@
+                                        <a asp-action="Delete" asp-route-id="@u.Id" onclick="return confirm('The data related to it will. Are you sure?');">Delete</a>
                                     </td>
                         </tr>
                         }

@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Core.Types;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Text.Json;
+using WebClient.Areas.SendMail.Models;
 using WebClient.Data;
 using ApplicationDbContext = WebClient.Data.ApplicationDbContext;
 
@@ -12,11 +15,17 @@ namespace WebClient.Areas.Admin.Controllers
     [Area("Admin")]
     public class MUserController : Controller
     {
+        private readonly HttpClient client = null;
+        private string api;
         // GET: MUser
         private readonly ApplicationDbContext _db;
         public MUserController(ApplicationDbContext db)
         {
             _db = db;
+            client = new HttpClient();
+            var contentType = new MediaTypeWithQualityHeaderValue("application/json");
+            client.DefaultRequestHeaders.Accept.Add(contentType);
+            this.api = "https://localhost:7186/api/Orders";
         }
 
         public ActionResult Index()
@@ -111,11 +120,31 @@ namespace WebClient.Areas.Admin.Controllers
         }
 
         // GET: MUser/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(string id)
         {
-            return View();
-        }
+            var c = _db.Users.Find(id);
 
+            if (c == null)
+            {
+                return NotFound();
+
+            }
+            HttpResponseMessage response = await client.GetAsync(api);
+            string data = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            List<Order> list = JsonSerializer.Deserialize<List<Order>>(data, options);
+            list = list.Where(o => o.cus_id == id).ToList();
+            foreach(var o in list)
+            {
+                HttpResponseMessage respon1 = await client.DeleteAsync(api + "/" + o.ID);
+
+            }
+            var message = await MailUtils.SendMail("thongnqgcc200003@fpt.edu.vn", c.Email, "FPT Book: Your account is deleted", "Your account has been suspended for policy violation", "thongnqgcc200003@fpt.edu.vn", "Tkcuatui1107.");
+            _db.Users.Remove(c);
+            _db.SaveChanges();
+            return View("Index");
+        }
+                
         // POST: MUser/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

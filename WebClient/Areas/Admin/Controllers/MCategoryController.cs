@@ -110,7 +110,7 @@ namespace WebClient.Areas.Admin.Controllers
 			string data = await respon.Content.ReadAsStringAsync();
 			var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 			Category c = JsonSerializer.Deserialize<Category>(data, options);
-			var message = await MailUtils.SendMail("thongnqgcc200003@fpt.edu.vn", c.email_request, "Denying Category", $"After consideration, we sorry to say that, {c.cate_name} has been denied by Admin. Sorry!", "thongnqgcc200003@fpt.edu.vn", "Tkcuatui1107.");
+			var message = await MailUtils.SendMail("thongnqgcc200003@fpt.edu.vn", c.email_request, "FPT Book: Denying Category", $"After consideration, we sorry to say that, {c.cate_name} has been denied by Admin. Sorry!", "thongnqgcc200003@fpt.edu.vn", "Tkcuatui1107.");
 			string catejson = JsonSerializer.Serialize<Category>(c);
 			HttpResponseMessage respon1 = await client.DeleteAsync(api + "/" + id);
             return RedirectToAction("Index");
@@ -128,7 +128,7 @@ namespace WebClient.Areas.Admin.Controllers
             var c = list.Where(cate=> cate.ID == id).FirstOrDefault();
           
             c.accept = true;
-			var message = await MailUtils.SendMail("thongnqgcc200003@fpt.edu.vn", c.email_request, "Accepting Category", $"{c.cate_name} has been added to the system. Thank you for your submission!", "thongnqgcc200003@fpt.edu.vn", "Tkcuatui1107.");
+			var message = await MailUtils.SendMail("thongnqgcc200003@fpt.edu.vn", c.email_request, "FPT Book: Accepting Category", $"{c.cate_name} has been added to the system. Thank you for your submission!", "thongnqgcc200003@fpt.edu.vn", "Tkcuatui1107.");
 			string catejson = JsonSerializer.Serialize<Category>(c);
             var content = new StringContent(catejson, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PutAsync(api + "/" + id, content);

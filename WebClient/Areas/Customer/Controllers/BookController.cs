@@ -54,7 +54,7 @@ namespace WebClient.Areas.Customer.Controllers
             {
                 return View(new List<Book>());
             }
-		}
+        }
 
         // GET: BookController/Details/5
         public async Task<ActionResult> Details(int id)
@@ -132,24 +132,50 @@ namespace WebClient.Areas.Customer.Controllers
                 return View();
             }
         }
-        public  async Task<ActionResult> Search(string word)
+        public async Task<ActionResult> Search(string word)
         {
             try
             {
                 HttpResponseMessage response = await client.GetAsync(api);
-                if(response.IsSuccessStatusCode) { 
-			    var data = response.Content.ReadAsStringAsync().Result;
-			    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-				List<Book> obj = JsonSerializer.Deserialize<List<Book>>(data, options);
-				List<Book> filteredbook = obj.Where(b => b.book_name.ToLower().Contains(word.Trim().ToLower())).ToList();
-				return View("Index", filteredbook);
+                if (response.IsSuccessStatusCode) {
+                    var data = response.Content.ReadAsStringAsync().Result;
+                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                    List<Book> obj = JsonSerializer.Deserialize<List<Book>>(data, options);
+                    List<Book> filteredbook = obj.Where(b => b.book_name.ToLower().Contains(word.Trim().ToLower())).ToList();
+                    return View("Index", filteredbook);
                 }
-			}
-			catch (JsonException ex)
+            }
+            catch (JsonException ex)
             {
                 return View();
-            } 
+            }
             return Ok();
+        }
+        public async Task<ActionResult> BookInCate(int cate_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(api);
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = response.Content.ReadAsStringAsync().Result;
+                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                    List<Book> obj = JsonSerializer.Deserialize<List<Book>>(data, options);
+                    if (cate_id != 0)
+                    {
+                        List<Book> filteredbook = obj.Where(b => b.cate_id == cate_id).ToList();
+                        if (filteredbook.Count == 0) TempData["Message"] = "There's no book in this category";
+                        return View("Index", filteredbook);
+                    }
+                    else return Redirect("/");
+                }
+            }
+            catch (JsonException ex)
+            {
+                TempData["Message"] = "There's no book in this category";
+                return View("Index");
+            }
+            return View("Index");
         }
     }
 }
