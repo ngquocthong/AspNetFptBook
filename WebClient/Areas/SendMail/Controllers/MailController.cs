@@ -13,7 +13,7 @@ namespace WebClient.Areas.SendMail.Controllers
 		}
 		public async Task<IActionResult> SendMail()
 		{
-			var message = await MailUtils.SendMail("thongnqgcc200003@fpt.edu.vn", "thongnguyennqt@gmail.com", "Forgot Password!", "Hello", "thongnqgcc200003@fpt.edu.vn", "Tkcuatui1107.");
+			var message = await MailUtils.SendMail("thongnqgcc200003@abc.edu.vn", "thongnguyen@gmail.com", "Forgot Password!", "Hello", "thongnqgcc@abc.edu.vn", "Tkcu107.");
 			return Content(message);
 		}
 	}
